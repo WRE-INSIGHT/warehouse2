@@ -46,7 +46,23 @@
   <PropertyGroup>
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icons8_full_warehouse.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ComponentFactory.Krypton.Toolkit, Version=4.4.0.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Krypton\ComponentFactory.Krypton.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework">
+      <HintPath>..\packages\MetroModernUI.1.3.5.0\lib\net35\MetroFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework.Design">
+      <HintPath>..\..\..\WAREHOUSEinventoryREPO\packages\MetroModernUI.1.3.5.0\lib\net40\MetroFramework.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework.Fonts">
+      <HintPath>..\packages\MetroModernUI.1.3.5.0\lib\net35\MetroFramework.Fonts.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -79,6 +95,33 @@
       <DependentUpon>Form1.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="GlobalMod.vb" />
+    <Compile Include="Inventory\Forms\WarehouseInvFrm.Designer.vb">
+      <DependentUpon>WarehouseInvFrm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Inventory\Forms\WarehouseInvFrm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Inventory\Forms\WarehouseItemFrm.Designer.vb">
+      <DependentUpon>WarehouseItemFrm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Inventory\Forms\WarehouseItemFrm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Inventory\Modules\WarehouseInvMod.vb" />
+    <Compile Include="Login\Forms\LoginFrm.Designer.vb">
+      <DependentUpon>LoginFrm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Login\Forms\LoginFrm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login\Modules\LoginMod.vb" />
+    <Compile Include="Main\Forms\MainFrm.Designer.vb">
+      <DependentUpon>MainFrm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Main\Forms\MainFrm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -96,6 +139,21 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Inventory\Forms\WarehouseInvFrm.resx">
+      <DependentUpon>WarehouseInvFrm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Inventory\Forms\WarehouseItemFrm.resx">
+      <DependentUpon>WarehouseItemFrm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login\Forms\LoginFrm.resx">
+      <DependentUpon>LoginFrm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main\Forms\MainFrm.resx">
+      <DependentUpon>MainFrm.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
@@ -114,6 +172,28 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="icons8_full_warehouse.ico" />
+    <Content Include="Resources\add_48px.png" />
+    <Content Include="Resources\checkmark_48px.png" />
+    <Content Include="Resources\delete_sign_48px.png" />
+    <Content Include="Resources\edit_48px.png" />
+    <Content Include="Resources\icons8_full_warehouse.ico" />
+    <Content Include="Resources\icons8_full_warehouse_64.png" />
+    <Content Include="Resources\icons8_view_details.ico" />
+    <Content Include="Resources\icons8_view_details_16.png" />
+    <Content Include="Resources\icons8_warehouse_1.ico" />
+    <Content Include="Resources\icons8_warehouse_1_16.png" />
+    <Content Include="Resources\icons8_warehouse_1_64.png" />
+    <Content Include="Resources\K&amp;M_logo_official_2018-1.png" />
+    <Content Include="Resources\loading_image2.gif" />
+    <Content Include="Resources\save_48px.png" />
+    <Content Include="Resources\search_filled_100px.png" />
+    <Content Include="Resources\shutdown_48px.png" />
+    <Content Include="Resources\stocks_48px.png" />
+    <Content Include="Resources\user_male_circle_48px.png" />
+    <Content Include="Resources\warehouse_1_48px.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
