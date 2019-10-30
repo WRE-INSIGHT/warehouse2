@@ -95,12 +95,6 @@
     <Compile Include="Inventory\Forms\WarehouseInvFrm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Inventory\Forms\WarehouseItemFrm.Designer.vb">
-      <DependentUpon>WarehouseItemFrm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Inventory\Forms\WarehouseItemFrm.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Inventory\Modules\WarehouseInvMod.vb" />
     <Compile Include="Login\Forms\LoginFrm.Designer.vb">
       <DependentUpon>LoginFrm.vb</DependentUpon>
@@ -134,9 +128,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Inventory\Forms\WarehouseInvFrm.resx">
       <DependentUpon>WarehouseInvFrm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Inventory\Forms\WarehouseItemFrm.resx">
-      <DependentUpon>WarehouseItemFrm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login\Forms\LoginFrm.resx">
       <DependentUpon>LoginFrm.vb</DependentUpon>

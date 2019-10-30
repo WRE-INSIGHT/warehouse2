@@ -18,8 +18,9 @@ Public Class WarehouseInvFrm
     Dim todo, todo_mode, searchstring, stock_cols,
         supplier, costhead, typecolor, articleno, desc, unit, monetary, location_inv, header As String
     Dim ufactor, unitprice As Decimal
-    Dim cbox_obj As Object
+    Dim cbox_obj, qtyadd As Object
     Dim ctr_todo, stockno, qty, min, CboxselIndex As Integer
+    Dim stockno_list As New ArrayList
     Private Sub Reset_here()
         DGV_Warehouse_Inventory.Enabled = True
         Loading_PB.Visible = False
@@ -100,6 +101,15 @@ Public Class WarehouseInvFrm
                     Warehouse_Inv_STP("warehouse_inv_stp", todo,,, supplier, costhead, typecolor, articleno, desc,
                                       unit, monetary, location_inv, header, qty, min, ufactor, unitprice, stockno)
 
+                Case "TransDelInv"
+                    For i = 0 To stockno_list.Count - 1
+                        Warehouse_Inv_STP("warehouse_inv_stp", todo,,,,,,,,,,,,,,,, stockno_list(i))
+                    Next
+
+                Case "TransAddQtyInv"
+                    For i = 0 To stockno_list.Count - 1
+                        Warehouse_Inv_STP("warehouse_inv_stp", todo,,,,,,,,,,,, qtyadd,,,, stockno_list(i))
+                    Next
             End Select
         Catch ex As SqlException
             BGW.CancelAsync()
@@ -128,6 +138,7 @@ Public Class WarehouseInvFrm
                         DGV_Properties(DGV_Warehouse_Inventory, "DGV_Warehouse_Inventory")
                         AddHandler DGV_Warehouse_Inventory.RowPostPaint, AddressOf dgv_rowpostpaint
                         AddHandler DGV_Warehouse_Inventory.DataError, AddressOf dgv_dataerror
+                        AddHandler DGV_Warehouse_Inventory.KeyDown, AddressOf dgv_keydown
                         'AddHandler DGV_Warehouse_Inventory.CellMouseClick, AddressOf dgv_cellmouseclick
 
                         Frm_Split.Panel1.Controls.Add(DGV_Warehouse_Inventory)
@@ -200,7 +211,7 @@ Public Class WarehouseInvFrm
                             End If
 
                         Case "TransAddInv"
-                            KMDIPrompts(Me, "Success", Nothing, Nothing, Nothing, True)
+                            KMDIPrompts(Me, "Success", Nothing, Nothing, Nothing, True,,, False)
                             Search_Tbox.CustomButton.PerformClick()
 
                             If todo_mode <> "" Then
@@ -210,7 +221,7 @@ Public Class WarehouseInvFrm
                             End If
 
                         Case "TransUpdInv"
-                            KMDIPrompts(Me, "Success", Nothing, Nothing, Nothing, True)
+                            KMDIPrompts(Me, "Success", Nothing, Nothing, Nothing, True,,, False)
                             Search_Tbox.CustomButton.PerformClick()
                             stockno = Nothing
                             Mode_Lbl.Text = "New"
@@ -229,6 +240,17 @@ Public Class WarehouseInvFrm
                             Else
                                 Reset_here()
                             End If
+
+                        Case "TransDelInv"
+                            KMDIPrompts(Me, "Success", Nothing, Nothing, Nothing, True,,, False)
+                            stockno_list.Clear()
+                            Search_Tbox.CustomButton.PerformClick()
+
+                        Case "TransAddQtyInv"
+                            KMDIPrompts(Me, "Success", Nothing, Nothing, Nothing, True,,, False)
+                            stockno_list.Clear()
+                            Search_Tbox.CustomButton.PerformClick()
+
                     End Select
 
                     Select Case todo_mode
@@ -259,22 +281,42 @@ Public Class WarehouseInvFrm
 
     End Sub
 
-    'Private Sub dgv_cellmouseclick(sender As Object, e As DataGridViewCellMouseEventArgs)
-    '    Try
-    '        If e.Button = MouseButtons.Right AndAlso BGW.IsBusy <> True Then
-    '            sender.Rows(e.RowIndex).Selected = True
-    '            If DGV_Warehouse_Inventory.SelectedRows.Count > 1 Then
-    '                UpdateToolStripMenuItem.Visible = False
-    '            Else
-    '                UpdateToolStripMenuItem.Visible = True
-    '            End If
-    '            Inv_Cmenu.Show()
-    '            Inv_Cmenu.Location = New Point(MousePosition.X, MousePosition.Y)
-    '        End If
-    '    Catch ex As Exception
-    '        KMDIPrompts(Me, "DotNetError", ex.Message, ex.StackTrace, Nothing, True)
-    '    End Try
-    'End Sub
+    Private Sub dgv_keydown(sender As Object, e As KeyEventArgs)
+        Try
+            If e.KeyCode = Keys.Delete Then
+                KMDIPrompts(Me, "Question", "Are you sure you want to Delete?", Nothing, Nothing, True,,, False)
+                If QuestionPromptAnswer = 6 Then
+                    Dim items As DataGridViewSelectedRowCollection = DGV_Warehouse_Inventory.SelectedRows
+                    For Each item As DataGridViewRow In items
+                        stockno_list.Add(item.Cells("STOCKNO").Value)
+                    Next
+                    todo = "TransDelInv"
+                    Start_BGW()
+                End If
+
+            ElseIf e.KeyCode = Keys.F3 Then
+                qtyadd = InputBox("Please input quantity too be added", "Add quantity", 1)
+
+                If IsNumeric(qtyadd) Then
+                    Dim items As DataGridViewSelectedRowCollection = DGV_Warehouse_Inventory.SelectedRows
+                    For Each item As DataGridViewRow In items
+                        stockno_list.Add(item.Cells("STOCKNO").Value)
+                    Next
+
+                    todo = "TransAddQtyInv"
+                    Start_BGW()
+
+                ElseIf ReferenceEquals(qtyadd, String.Empty) Then
+
+                Else
+                    KMDIPrompts(Me, "DotNetError", "Must be a valid number.", Environment.StackTrace, Nothing, True, True, "Must be a valid number.")
+                End If
+
+            End If
+        Catch ex As Exception
+            KMDIPrompts(Me, "DotNetError", ex.Message, ex.StackTrace, Nothing, True)
+        End Try
+    End Sub
 
     Private Sub WarehouseInvFrm_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         MainFrm.InventoryToolStripMenuItem.Checked = False
@@ -284,7 +326,7 @@ Public Class WarehouseInvFrm
         'Dim invItem As Form = WarehouseItemFrm
         'invItem.MdiParent = MainFrm
         'invItem.Show()
-        WarehouseItemFrm.ShowDialog()
+        'WarehouseItemFrm.ShowDialog()
     End Sub
 
     Private Sub Tbox_Leave(sender As Object, e As EventArgs) Handles UnitPrice_Tbox.Leave, UFactor_Tbox.Leave, Qty_Tbox.Leave, Min_Tbox.Leave
@@ -330,8 +372,6 @@ Public Class WarehouseInvFrm
                 Else
                     KMDIPrompts(Me, "UserWarning",,,, True, True, "Select one(1) item only.", False)
                 End If
-
-            ElseIf e.KeyCode = Keys.F3 Then
 
             ElseIf e.KeyCode = Keys.F4 Then
                 For Each ctrl In Frm_Split.Panel2.Controls
