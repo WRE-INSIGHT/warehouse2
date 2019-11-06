@@ -27,6 +27,7 @@ Partial Class MainFrm
         Me.SystemToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.InventoryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SaveToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AccountabilityToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AccountsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LogoutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Main_MenuStrip.SuspendLayout()
@@ -46,7 +47,7 @@ Partial Class MainFrm
         '
         'SystemToolStripMenuItem
         '
-        Me.SystemToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.InventoryToolStripMenuItem})
+        Me.SystemToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.InventoryToolStripMenuItem, Me.AccountabilityToolStripMenuItem})
         Me.SystemToolStripMenuItem.Name = "SystemToolStripMenuItem"
         Me.SystemToolStripMenuItem.Size = New System.Drawing.Size(57, 20)
         Me.SystemToolStripMenuItem.Text = "System"
@@ -58,13 +59,21 @@ Partial Class MainFrm
         Me.InventoryToolStripMenuItem.Name = "InventoryToolStripMenuItem"
         Me.InventoryToolStripMenuItem.Size = New System.Drawing.Size(186, 22)
         Me.InventoryToolStripMenuItem.Text = "Warehouse Inventory"
+        Me.InventoryToolStripMenuItem.Visible = False
         '
         'SaveToolStripMenuItem
         '
         Me.SaveToolStripMenuItem.Image = Global.warehouse2.My.Resources.Resources.save_48px
         Me.SaveToolStripMenuItem.Name = "SaveToolStripMenuItem"
-        Me.SaveToolStripMenuItem.Size = New System.Drawing.Size(98, 22)
+        Me.SaveToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.SaveToolStripMenuItem.Text = "Save"
+        '
+        'AccountabilityToolStripMenuItem
+        '
+        Me.AccountabilityToolStripMenuItem.Image = Global.warehouse2.My.Resources.Resources.user_folder_48px
+        Me.AccountabilityToolStripMenuItem.Name = "AccountabilityToolStripMenuItem"
+        Me.AccountabilityToolStripMenuItem.Size = New System.Drawing.Size(186, 22)
+        Me.AccountabilityToolStripMenuItem.Text = "Accountability"
         '
         'AccountsToolStripMenuItem
         '
@@ -107,4 +116,5 @@ Partial Class MainFrm
     Friend WithEvents LogoutToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents InventoryToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SaveToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents AccountabilityToolStripMenuItem As ToolStripMenuItem
 End Class

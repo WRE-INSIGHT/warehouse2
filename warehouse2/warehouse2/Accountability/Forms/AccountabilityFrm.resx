@@ -117,44 +117,38 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="edit_48px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\edit_48px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="resource.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAMpJREFUOE/N
+        0j/rQVEcx/GLpBgk9BvNSDaPwWSx2GQ3/J6BWAwmk8EgMZF/xcBzU97f8026Hee4ZfGuV32OurfbvQJP
+        acR1Rq+IKU5YYoMdmvhYFVfUzemVPMkYI3NylMINOXN63wBtnXY9dHQ6S+Ki026NjE5vM/zpDCcvK0pD
+        lHWGm6Og05t8mazOcC3863QmF+512sVwRMWc7OQPtULDnBzlcYZ8Efmsz2qQm9/Rlx98JdCFvNQtDpig
+        BLk40k18/dZNFjq/KggeA2odMdIp9vcAAAAASUVORK5CYII=
+</value>
   </data>
-  <data name="search_filled_100px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\search_filled_100px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="loading_image2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\loading_image2.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="add_48px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\add_48px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="warehouse_1_48px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\warehouse_1_48px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="K&amp;M_logo_official_2018-1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\K&amp;M_logo_official_2018-1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="user_male_circle_48px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\user_male_circle_48px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="shutdown_48px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\shutdown_48px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="delete_sign_48px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\delete_sign_48px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="save_48px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\save_48px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="stocks_48px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\stocks_48px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="checkmark_48px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\checkmark_48px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="user_folder_48px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\user_folder_48px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAMAQAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAABAQEAEWlpaQVpaWkRaWlpEWlpaRFpaWkRaWlpEWlpaRFpaWkRaWlpEWlpaRFpa
+        WkRaWlpBQEBABAAAAAAAAAAAW1tbhFtbW/9bW1v/W1tb/1tbW/9bW1v/W1tb/1tbW/9bW1v/W1tb/1tb
+        W/9bW1v/W1tb/1paWoIAAAAAAAAAAFxcXKpbW1v/W1tb/1tbW/9bW1vSW1tbu1tbW7tbW1u7W1tbu1tb
+        W9JbW1v/W1tb/1tbW/9cXFyqAAAAAAAAAABcXFyqW1tb/1tbW/9bW1v/WlpadAAAAAAAAAAAAAAAAAAA
+        AABcXFxvW1tb/1tbW/9bW1v/XFxcqgAAAAAAAAAAXFxcqltbW/9bW1v/W1tb/1tbW/tbW1udWlpaY1pa
+        WmNaWlqeW1tb+1tbW/9bW1v/W1tb/1xcXKoAAAAAAAAAAFxcXKpbW1v/W1tb/1tbW/9bW1v/W1tb+1tb
+        W3hbW1t5W1tb/FtbW/9bW1v/W1tb/1tbW/9cXFyqAAAAAAAAAABcXFyqW1tb/1tbW/9bW1v/W1tb/1pa
+        WroAAAAAAAAAAFtbW7tbW1v/W1tb/1tbW/9bW1v/XFxcqgAAAAAAAAAAXFxcqltbW/9bW1v/W1tb/1tb
+        W/9bW1vpWVlZKF1dXSlcXFzqW1tb/1tbW/9bW1v/W1tb/1xcXKoAAAAAAAAAAFxcXKpbW1v/W1tb/1tb
+        W/9bW1v/W1tb/1tbW/9bW1v/W1tb/1tbW/9bW1v/W1tb/1tbW/9bW1uoAAAAAAAAAABcXFyqW1tb/1tb
+        W/9bW1v/W1tb/1tbW/9bW1v/W1tb/1tbW/9bW1v/W1tb/1tbW/9bW1vwXFxcUAAAAAAAAAAAW1tbg1tb
+        W/9bW1v/W1tb/1tbW/9bW1v/WlpadwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEBA
+        QARbW1tGWlpaVVpaWlVaWlpVWlpaRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAA//8AAP//AAD//wAAgAEAAIABAACH4QAAgYEAAIGBAACBgQAAgYEAAIABAACAAwAAgf8AAP//
+        AAD//wAA//8AAA==
+</value>
   </data>
 </root>

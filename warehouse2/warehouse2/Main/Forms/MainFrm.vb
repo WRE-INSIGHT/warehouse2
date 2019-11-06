@@ -32,4 +32,13 @@
     Private Sub SaveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveToolStripMenuItem.Click
         WarehouseInvFrm.save()
     End Sub
+
+    Private Sub AccountabilityToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AccountabilityToolStripMenuItem.Click
+        Dim acct As Form = AccountabilityFrm
+        acct.MdiParent = Me
+        acct.WindowState = FormWindowState.Maximized
+        acct.Show()
+        AccountabilityFrm.frm_Split.SplitterDistance = 478
+
+    End Sub
 End Class

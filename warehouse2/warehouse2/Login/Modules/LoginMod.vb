@@ -6,7 +6,7 @@ Module LoginMod
     Public transaction As SqlTransaction
 
     Public KMDISystemsConnectionType As String = Nothing
-    Public sqlconnString As String = "Data Source='192.168.1.21,49107';Network Library=DBMSSOCN;Initial Catalog='warehousedb';User ID='kmdiadmin';Password='kmdiadmin';"
+    Public sqlconnString As String = "Data Source='192.168.1.21,49107';Network Library=DBMSSOCN;Initial Catalog='finaltrans';User ID='kmdiadmin';Password='kmdiadmin';"
 
     Public user_id As Integer
     Public sql_Transaction_result, user_fullname, user_nick, user_accttype As String
@@ -27,10 +27,10 @@ Module LoginMod
 
                 Using read As SqlDataReader = sqlCommand.ExecuteReader
                     While read.Read
-                        user_id = read.Item("user_id")
-                        user_accttype = read.Item("user_accttype").ToString
-                        user_nick = read.Item("user_nickname").ToString
-                        user_fullname = read.Item("user_fullname").ToString
+                        user_id = read.Item("ID")
+                        user_accttype = read.Item("ACCTTYPE").ToString
+                        user_nick = read.Item("NICKNAME").ToString
+                        user_fullname = read.Item("FULLNAME").ToString
                     End While
                 End Using
                 transaction.Commit()

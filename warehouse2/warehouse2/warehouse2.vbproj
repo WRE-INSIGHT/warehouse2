@@ -88,6 +88,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Accountability\Forms\AccountabilityFrm.Designer.vb">
+      <DependentUpon>AccountabilityFrm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Accountability\Forms\AccountabilityFrm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="GlobalMod.vb" />
     <Compile Include="Inventory\Forms\WarehouseInvFrm.Designer.vb">
       <DependentUpon>WarehouseInvFrm.vb</DependentUpon>
@@ -126,6 +132,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Accountability\Forms\AccountabilityFrm.resx">
+      <DependentUpon>AccountabilityFrm.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Inventory\Forms\WarehouseInvFrm.resx">
       <DependentUpon>WarehouseInvFrm.vb</DependentUpon>
     </EmbeddedResource>
@@ -173,9 +182,11 @@
     <Content Include="Resources\search_filled_100px.png" />
     <Content Include="Resources\shutdown_48px.png" />
     <Content Include="Resources\stocks_48px.png" />
+    <None Include="Resources\user_folder_48px.png" />
     <Content Include="Resources\user_male_circle_48px.png" />
     <Content Include="Resources\warehouse_1_48px.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
