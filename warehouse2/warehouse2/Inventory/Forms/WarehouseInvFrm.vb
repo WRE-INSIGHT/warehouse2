@@ -172,7 +172,7 @@ Public Class WarehouseInvFrm
                                 .AllowUserToResizeRows = False
                                 .AllowUserToOrderColumns = False
                                 .Select()
-                                .Columns("Row_Status").Visible = False
+                                '.Columns("Row_Status").Visible = False
                                 .Columns("STOCKNO").Visible = False
                                 '.Columns("QTY").DefaultCellStyle.Format = "N2"
                                 '.Columns("MINIMUM").DefaultCellStyle.Format = "N2"

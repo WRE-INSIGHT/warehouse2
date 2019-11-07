@@ -25,11 +25,12 @@ Partial Class AccountabilityFrm
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(AccountabilityFrm))
         Me.frm_Split = New System.Windows.Forms.SplitContainer()
         Me.Fields_Pnl = New System.Windows.Forms.Panel()
-        Me.MetroTextBox5 = New MetroFramework.Controls.MetroTextBox()
+        Me.MetroLabel12 = New MetroFramework.Controls.MetroLabel()
+        Me.DateIssued_DTP = New MetroFramework.Controls.MetroDateTime()
+        Me.Remarks_Tbox = New MetroFramework.Controls.MetroTextBox()
         Me.MetroLabel11 = New MetroFramework.Controls.MetroLabel()
         Me.MetroLabel10 = New MetroFramework.Controls.MetroLabel()
-        Me.ComboBox5 = New System.Windows.Forms.ComboBox()
-        Me.UnitPrice_Tbox = New MetroFramework.Controls.MetroTextBox()
+        Me.ReceivedBy_Tbox = New System.Windows.Forms.ComboBox()
         Me.MetroLabel9 = New MetroFramework.Controls.MetroLabel()
         Me.Unit_Tbox = New MetroFramework.Controls.MetroTextBox()
         Me.MetroLabel8 = New MetroFramework.Controls.MetroLabel()
@@ -37,6 +38,7 @@ Partial Class AccountabilityFrm
         Me.MetroLabel6 = New MetroFramework.Controls.MetroLabel()
         Me.Desc_Cbox = New System.Windows.Forms.ComboBox()
         Me.Item_Pnl = New System.Windows.Forms.Panel()
+        Me.Loading2_PB = New System.Windows.Forms.PictureBox()
         Me.Search_Tbox = New MetroFramework.Controls.MetroTextBox()
         Me.CtrlNo_Tbox = New MetroFramework.Controls.MetroTextBox()
         Me.MetroLabel5 = New MetroFramework.Controls.MetroLabel()
@@ -50,7 +52,8 @@ Partial Class AccountabilityFrm
         Me.Get_Btn = New MetroFramework.Controls.MetroButton()
         Me.MetroLabel1 = New MetroFramework.Controls.MetroLabel()
         Me.EmpID_Cbox = New System.Windows.Forms.ComboBox()
-        Me.Qty_Num = New System.Windows.Forms.NumericUpDown()
+        Me.Quantity_Num = New System.Windows.Forms.NumericUpDown()
+        Me.UnitPrice_Num = New System.Windows.Forms.NumericUpDown()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Btn_Pnl = New System.Windows.Forms.Panel()
         Me.Refresh_Btn = New System.Windows.Forms.Button()
@@ -59,13 +62,19 @@ Partial Class AccountabilityFrm
         Me.Edit_Btn = New System.Windows.Forms.Button()
         Me.Save_Btn = New System.Windows.Forms.Button()
         Me.Mode_Lbl = New MetroFramework.Controls.MetroLabel()
+        Me.Loading_PB = New System.Windows.Forms.PictureBox()
         CType(Me.frm_Split, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.frm_Split.Panel1.SuspendLayout()
+        Me.frm_Split.Panel2.SuspendLayout()
         Me.frm_Split.SuspendLayout()
         Me.Fields_Pnl.SuspendLayout()
-        CType(Me.Qty_Num, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Item_Pnl.SuspendLayout()
+        CType(Me.Loading2_PB, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.Quantity_Num, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.UnitPrice_Num, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.Btn_Pnl.SuspendLayout()
+        CType(Me.Loading_PB, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'frm_Split
@@ -82,19 +91,22 @@ Partial Class AccountabilityFrm
         '
         'frm_Split.Panel2
         '
-        Me.frm_Split.Panel2.AccessibleName = ""
-        Me.frm_Split.Size = New System.Drawing.Size(1008, 621)
+        Me.frm_Split.Panel2.AccessibleName = "asdasd"
+        Me.frm_Split.Panel2.BackColor = System.Drawing.SystemColors.Control
+        Me.frm_Split.Panel2.Controls.Add(Me.Loading_PB)
+        Me.frm_Split.Size = New System.Drawing.Size(1008, 661)
         Me.frm_Split.SplitterDistance = 496
         Me.frm_Split.TabIndex = 0
         '
         'Fields_Pnl
         '
         Me.Fields_Pnl.BackColor = System.Drawing.Color.DarkGray
-        Me.Fields_Pnl.Controls.Add(Me.MetroTextBox5)
+        Me.Fields_Pnl.Controls.Add(Me.MetroLabel12)
+        Me.Fields_Pnl.Controls.Add(Me.DateIssued_DTP)
+        Me.Fields_Pnl.Controls.Add(Me.Remarks_Tbox)
         Me.Fields_Pnl.Controls.Add(Me.MetroLabel11)
         Me.Fields_Pnl.Controls.Add(Me.MetroLabel10)
-        Me.Fields_Pnl.Controls.Add(Me.ComboBox5)
-        Me.Fields_Pnl.Controls.Add(Me.UnitPrice_Tbox)
+        Me.Fields_Pnl.Controls.Add(Me.ReceivedBy_Tbox)
         Me.Fields_Pnl.Controls.Add(Me.MetroLabel9)
         Me.Fields_Pnl.Controls.Add(Me.Unit_Tbox)
         Me.Fields_Pnl.Controls.Add(Me.MetroLabel8)
@@ -115,44 +127,64 @@ Partial Class AccountabilityFrm
         Me.Fields_Pnl.Controls.Add(Me.Get_Btn)
         Me.Fields_Pnl.Controls.Add(Me.MetroLabel1)
         Me.Fields_Pnl.Controls.Add(Me.EmpID_Cbox)
-        Me.Fields_Pnl.Controls.Add(Me.Qty_Num)
+        Me.Fields_Pnl.Controls.Add(Me.Quantity_Num)
+        Me.Fields_Pnl.Controls.Add(Me.UnitPrice_Num)
         Me.Fields_Pnl.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Fields_Pnl.Location = New System.Drawing.Point(0, 80)
         Me.Fields_Pnl.Name = "Fields_Pnl"
-        Me.Fields_Pnl.Size = New System.Drawing.Size(496, 541)
-        Me.Fields_Pnl.TabIndex = 1
+        Me.Fields_Pnl.Size = New System.Drawing.Size(496, 581)
+        Me.Fields_Pnl.TabIndex = 0
         '
-        'MetroTextBox5
+        'MetroLabel12
         '
-        Me.MetroTextBox5.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.MetroLabel12.AutoSize = True
+        Me.MetroLabel12.FontSize = MetroFramework.MetroLabelSize.Tall
+        Me.MetroLabel12.Location = New System.Drawing.Point(3, 531)
+        Me.MetroLabel12.Name = "MetroLabel12"
+        Me.MetroLabel12.Size = New System.Drawing.Size(99, 25)
+        Me.MetroLabel12.TabIndex = 846
+        Me.MetroLabel12.Text = "Date Issued"
+        Me.MetroLabel12.UseCustomBackColor = True
+        '
+        'DateIssued_DTP
+        '
+        Me.DateIssued_DTP.Location = New System.Drawing.Point(117, 527)
+        Me.DateIssued_DTP.MinimumSize = New System.Drawing.Size(4, 29)
+        Me.DateIssued_DTP.Name = "DateIssued_DTP"
+        Me.DateIssued_DTP.Size = New System.Drawing.Size(228, 29)
+        Me.DateIssued_DTP.TabIndex = 845
+        '
+        'Remarks_Tbox
+        '
+        Me.Remarks_Tbox.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         '
         '
         '
-        Me.MetroTextBox5.CustomButton.Image = Nothing
-        Me.MetroTextBox5.CustomButton.Location = New System.Drawing.Point(335, 1)
-        Me.MetroTextBox5.CustomButton.Name = ""
-        Me.MetroTextBox5.CustomButton.Size = New System.Drawing.Size(23, 23)
-        Me.MetroTextBox5.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
-        Me.MetroTextBox5.CustomButton.TabIndex = 1
-        Me.MetroTextBox5.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
-        Me.MetroTextBox5.CustomButton.UseSelectable = True
-        Me.MetroTextBox5.CustomButton.Visible = False
-        Me.MetroTextBox5.FontSize = MetroFramework.MetroTextBoxSize.Medium
-        Me.MetroTextBox5.Lines = New String(-1) {}
-        Me.MetroTextBox5.Location = New System.Drawing.Point(117, 502)
-        Me.MetroTextBox5.MaxLength = 32767
-        Me.MetroTextBox5.Name = "MetroTextBox5"
-        Me.MetroTextBox5.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.MetroTextBox5.ScrollBars = System.Windows.Forms.ScrollBars.None
-        Me.MetroTextBox5.SelectedText = ""
-        Me.MetroTextBox5.SelectionLength = 0
-        Me.MetroTextBox5.SelectionStart = 0
-        Me.MetroTextBox5.Size = New System.Drawing.Size(359, 25)
-        Me.MetroTextBox5.TabIndex = 844
-        Me.MetroTextBox5.UseSelectable = True
-        Me.MetroTextBox5.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer))
-        Me.MetroTextBox5.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
+        Me.Remarks_Tbox.CustomButton.Image = Nothing
+        Me.Remarks_Tbox.CustomButton.Location = New System.Drawing.Point(335, 1)
+        Me.Remarks_Tbox.CustomButton.Name = ""
+        Me.Remarks_Tbox.CustomButton.Size = New System.Drawing.Size(23, 23)
+        Me.Remarks_Tbox.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
+        Me.Remarks_Tbox.CustomButton.TabIndex = 1
+        Me.Remarks_Tbox.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
+        Me.Remarks_Tbox.CustomButton.UseSelectable = True
+        Me.Remarks_Tbox.CustomButton.Visible = False
+        Me.Remarks_Tbox.FontSize = MetroFramework.MetroTextBoxSize.Medium
+        Me.Remarks_Tbox.Lines = New String(-1) {}
+        Me.Remarks_Tbox.Location = New System.Drawing.Point(117, 500)
+        Me.Remarks_Tbox.MaxLength = 32767
+        Me.Remarks_Tbox.Name = "Remarks_Tbox"
+        Me.Remarks_Tbox.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.Remarks_Tbox.ScrollBars = System.Windows.Forms.ScrollBars.None
+        Me.Remarks_Tbox.SelectedText = ""
+        Me.Remarks_Tbox.SelectionLength = 0
+        Me.Remarks_Tbox.SelectionStart = 0
+        Me.Remarks_Tbox.Size = New System.Drawing.Size(359, 25)
+        Me.Remarks_Tbox.TabIndex = 844
+        Me.Remarks_Tbox.UseSelectable = True
+        Me.Remarks_Tbox.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer))
+        Me.Remarks_Tbox.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
         '
         'MetroLabel11
         '
@@ -169,64 +201,32 @@ Partial Class AccountabilityFrm
         '
         Me.MetroLabel10.AutoSize = True
         Me.MetroLabel10.FontSize = MetroFramework.MetroLabelSize.Tall
-        Me.MetroLabel10.Location = New System.Drawing.Point(10, 471)
+        Me.MetroLabel10.Location = New System.Drawing.Point(0, 473)
         Me.MetroLabel10.Name = "MetroLabel10"
-        Me.MetroLabel10.Size = New System.Drawing.Size(92, 25)
+        Me.MetroLabel10.Size = New System.Drawing.Size(102, 25)
         Me.MetroLabel10.TabIndex = 841
-        Me.MetroLabel10.Text = "Receive by"
+        Me.MetroLabel10.Text = "Received by"
         Me.MetroLabel10.UseCustomBackColor = True
         '
-        'ComboBox5
+        'ReceivedBy_Tbox
         '
-        Me.ComboBox5.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.ReceivedBy_Tbox.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ComboBox5.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-        Me.ComboBox5.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.ComboBox5.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ComboBox5.FormattingEnabled = True
-        Me.ComboBox5.Location = New System.Drawing.Point(117, 471)
-        Me.ComboBox5.Name = "ComboBox5"
-        Me.ComboBox5.Size = New System.Drawing.Size(359, 25)
-        Me.ComboBox5.TabIndex = 842
-        Me.ComboBox5.Tag = "SUPPLIER"
-        '
-        'UnitPrice_Tbox
-        '
-        Me.UnitPrice_Tbox.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        '
-        '
-        '
-        Me.UnitPrice_Tbox.CustomButton.Image = Nothing
-        Me.UnitPrice_Tbox.CustomButton.Location = New System.Drawing.Point(335, 1)
-        Me.UnitPrice_Tbox.CustomButton.Name = ""
-        Me.UnitPrice_Tbox.CustomButton.Size = New System.Drawing.Size(23, 23)
-        Me.UnitPrice_Tbox.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
-        Me.UnitPrice_Tbox.CustomButton.TabIndex = 1
-        Me.UnitPrice_Tbox.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
-        Me.UnitPrice_Tbox.CustomButton.UseSelectable = True
-        Me.UnitPrice_Tbox.CustomButton.Visible = False
-        Me.UnitPrice_Tbox.FontSize = MetroFramework.MetroTextBoxSize.Medium
-        Me.UnitPrice_Tbox.Lines = New String(-1) {}
-        Me.UnitPrice_Tbox.Location = New System.Drawing.Point(117, 440)
-        Me.UnitPrice_Tbox.MaxLength = 32767
-        Me.UnitPrice_Tbox.Name = "UnitPrice_Tbox"
-        Me.UnitPrice_Tbox.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.UnitPrice_Tbox.ScrollBars = System.Windows.Forms.ScrollBars.None
-        Me.UnitPrice_Tbox.SelectedText = ""
-        Me.UnitPrice_Tbox.SelectionLength = 0
-        Me.UnitPrice_Tbox.SelectionStart = 0
-        Me.UnitPrice_Tbox.Size = New System.Drawing.Size(359, 25)
-        Me.UnitPrice_Tbox.TabIndex = 840
-        Me.UnitPrice_Tbox.UseSelectable = True
-        Me.UnitPrice_Tbox.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer))
-        Me.UnitPrice_Tbox.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
+        Me.ReceivedBy_Tbox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        Me.ReceivedBy_Tbox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.ReceivedBy_Tbox.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ReceivedBy_Tbox.FormattingEnabled = True
+        Me.ReceivedBy_Tbox.Location = New System.Drawing.Point(117, 473)
+        Me.ReceivedBy_Tbox.Name = "ReceivedBy_Tbox"
+        Me.ReceivedBy_Tbox.Size = New System.Drawing.Size(359, 25)
+        Me.ReceivedBy_Tbox.TabIndex = 842
+        Me.ReceivedBy_Tbox.Tag = "SUPPLIER"
         '
         'MetroLabel9
         '
         Me.MetroLabel9.AutoSize = True
         Me.MetroLabel9.FontSize = MetroFramework.MetroLabelSize.Tall
-        Me.MetroLabel9.Location = New System.Drawing.Point(17, 440)
+        Me.MetroLabel9.Location = New System.Drawing.Point(17, 442)
         Me.MetroLabel9.Name = "MetroLabel9"
         Me.MetroLabel9.Size = New System.Drawing.Size(85, 25)
         Me.MetroLabel9.TabIndex = 839
@@ -251,7 +251,7 @@ Partial Class AccountabilityFrm
         Me.Unit_Tbox.CustomButton.Visible = False
         Me.Unit_Tbox.FontSize = MetroFramework.MetroTextBoxSize.Medium
         Me.Unit_Tbox.Lines = New String(-1) {}
-        Me.Unit_Tbox.Location = New System.Drawing.Point(117, 409)
+        Me.Unit_Tbox.Location = New System.Drawing.Point(117, 410)
         Me.Unit_Tbox.MaxLength = 32767
         Me.Unit_Tbox.Name = "Unit_Tbox"
         Me.Unit_Tbox.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
@@ -280,7 +280,7 @@ Partial Class AccountabilityFrm
         '
         Me.MetroLabel7.AutoSize = True
         Me.MetroLabel7.FontSize = MetroFramework.MetroLabelSize.Tall
-        Me.MetroLabel7.Location = New System.Drawing.Point(25, 378)
+        Me.MetroLabel7.Location = New System.Drawing.Point(25, 379)
         Me.MetroLabel7.Name = "MetroLabel7"
         Me.MetroLabel7.Size = New System.Drawing.Size(77, 25)
         Me.MetroLabel7.TabIndex = 835
@@ -316,10 +316,26 @@ Partial Class AccountabilityFrm
         '
         Me.Item_Pnl.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Item_Pnl.BackColor = System.Drawing.Color.White
+        Me.Item_Pnl.Controls.Add(Me.Loading2_PB)
         Me.Item_Pnl.Location = New System.Drawing.Point(12, 212)
         Me.Item_Pnl.Name = "Item_Pnl"
         Me.Item_Pnl.Size = New System.Drawing.Size(459, 123)
         Me.Item_Pnl.TabIndex = 0
+        '
+        'Loading2_PB
+        '
+        Me.Loading2_PB.BackColor = System.Drawing.Color.Transparent
+        Me.Loading2_PB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.Loading2_PB.Image = Global.warehouse2.My.Resources.Resources.loading_trans
+        Me.Loading2_PB.ImageLocation = ""
+        Me.Loading2_PB.Location = New System.Drawing.Point(202, 34)
+        Me.Loading2_PB.Name = "Loading2_PB"
+        Me.Loading2_PB.Size = New System.Drawing.Size(55, 55)
+        Me.Loading2_PB.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.Loading2_PB.TabIndex = 21
+        Me.Loading2_PB.TabStop = False
+        Me.Loading2_PB.Visible = False
         '
         'Search_Tbox
         '
@@ -366,17 +382,19 @@ Partial Class AccountabilityFrm
         '
         '
         '
+        Me.CtrlNo_Tbox.CustomButton.Font = New System.Drawing.Font("Segoe UI", 15.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CtrlNo_Tbox.CustomButton.Image = Nothing
-        Me.CtrlNo_Tbox.CustomButton.Location = New System.Drawing.Point(351, 1)
+        Me.CtrlNo_Tbox.CustomButton.Location = New System.Drawing.Point(334, 1)
         Me.CtrlNo_Tbox.CustomButton.Name = ""
-        Me.CtrlNo_Tbox.CustomButton.Size = New System.Drawing.Size(23, 23)
-        Me.CtrlNo_Tbox.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
+        Me.CtrlNo_Tbox.CustomButton.Size = New System.Drawing.Size(33, 33)
+        Me.CtrlNo_Tbox.CustomButton.Style = MetroFramework.MetroColorStyle.Silver
         Me.CtrlNo_Tbox.CustomButton.TabIndex = 1
+        Me.CtrlNo_Tbox.CustomButton.Text = "G"
         Me.CtrlNo_Tbox.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
         Me.CtrlNo_Tbox.CustomButton.UseSelectable = True
-        Me.CtrlNo_Tbox.CustomButton.Visible = False
-        Me.CtrlNo_Tbox.FontSize = MetroFramework.MetroTextBoxSize.Medium
-        Me.CtrlNo_Tbox.Lines = New String() {"19-19245"}
+        Me.CtrlNo_Tbox.CustomButton.UseStyleColors = True
+        Me.CtrlNo_Tbox.FontSize = MetroFramework.MetroTextBoxSize.Tall
+        Me.CtrlNo_Tbox.Lines = New String() {"19-19246"}
         Me.CtrlNo_Tbox.Location = New System.Drawing.Point(113, 6)
         Me.CtrlNo_Tbox.MaxLength = 32767
         Me.CtrlNo_Tbox.Name = "CtrlNo_Tbox"
@@ -385,10 +403,13 @@ Partial Class AccountabilityFrm
         Me.CtrlNo_Tbox.SelectedText = ""
         Me.CtrlNo_Tbox.SelectionLength = 0
         Me.CtrlNo_Tbox.SelectionStart = 0
-        Me.CtrlNo_Tbox.Size = New System.Drawing.Size(375, 25)
+        Me.CtrlNo_Tbox.ShowButton = True
+        Me.CtrlNo_Tbox.Size = New System.Drawing.Size(368, 35)
+        Me.CtrlNo_Tbox.Style = MetroFramework.MetroColorStyle.Silver
         Me.CtrlNo_Tbox.TabIndex = 0
-        Me.CtrlNo_Tbox.Text = "19-19245"
+        Me.CtrlNo_Tbox.Text = "19-19246"
         Me.CtrlNo_Tbox.UseSelectable = True
+        Me.CtrlNo_Tbox.UseStyleColors = True
         Me.CtrlNo_Tbox.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer))
         Me.CtrlNo_Tbox.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
         '
@@ -396,7 +417,7 @@ Partial Class AccountabilityFrm
         '
         Me.MetroLabel5.AutoSize = True
         Me.MetroLabel5.FontSize = MetroFramework.MetroLabelSize.Tall
-        Me.MetroLabel5.Location = New System.Drawing.Point(9, 6)
+        Me.MetroLabel5.Location = New System.Drawing.Point(2, 11)
         Me.MetroLabel5.Name = "MetroLabel5"
         Me.MetroLabel5.Size = New System.Drawing.Size(100, 25)
         Me.MetroLabel5.TabIndex = 10
@@ -523,17 +544,30 @@ Partial Class AccountabilityFrm
         Me.EmpID_Cbox.TabIndex = 1
         Me.EmpID_Cbox.Tag = "SUPPLIER"
         '
-        'Qty_Num
+        'Quantity_Num
         '
-        Me.Qty_Num.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.Quantity_Num.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Qty_Num.DecimalPlaces = 4
-        Me.Qty_Num.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Qty_Num.Location = New System.Drawing.Point(117, 378)
-        Me.Qty_Num.Name = "Qty_Num"
-        Me.Qty_Num.Size = New System.Drawing.Size(359, 25)
-        Me.Qty_Num.TabIndex = 836
-        Me.Qty_Num.ThousandsSeparator = True
+        Me.Quantity_Num.DecimalPlaces = 4
+        Me.Quantity_Num.Font = New System.Drawing.Font("Segoe UI", 15.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Quantity_Num.Location = New System.Drawing.Point(117, 374)
+        Me.Quantity_Num.Name = "Quantity_Num"
+        Me.Quantity_Num.Size = New System.Drawing.Size(359, 34)
+        Me.Quantity_Num.TabIndex = 836
+        Me.Quantity_Num.ThousandsSeparator = True
+        '
+        'UnitPrice_Num
+        '
+        Me.UnitPrice_Num.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.UnitPrice_Num.DecimalPlaces = 4
+        Me.UnitPrice_Num.Font = New System.Drawing.Font("Segoe UI", 15.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.UnitPrice_Num.Location = New System.Drawing.Point(117, 437)
+        Me.UnitPrice_Num.Maximum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.UnitPrice_Num.Name = "UnitPrice_Num"
+        Me.UnitPrice_Num.Size = New System.Drawing.Size(359, 34)
+        Me.UnitPrice_Num.TabIndex = 840
+        Me.UnitPrice_Num.ThousandsSeparator = True
         '
         'Panel1
         '
@@ -544,7 +578,7 @@ Partial Class AccountabilityFrm
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(496, 80)
-        Me.Panel1.TabIndex = 0
+        Me.Panel1.TabIndex = 1
         '
         'Btn_Pnl
         '
@@ -570,7 +604,7 @@ Partial Class AccountabilityFrm
         Me.Refresh_Btn.Location = New System.Drawing.Point(400, 0)
         Me.Refresh_Btn.Name = "Refresh_Btn"
         Me.Refresh_Btn.Size = New System.Drawing.Size(100, 35)
-        Me.Refresh_Btn.TabIndex = 4
+        Me.Refresh_Btn.TabIndex = 849
         Me.Refresh_Btn.Text = "Refresh (F5)"
         Me.Refresh_Btn.UseVisualStyleBackColor = False
         '
@@ -585,7 +619,7 @@ Partial Class AccountabilityFrm
         Me.Clear_Btn.Location = New System.Drawing.Point(300, 0)
         Me.Clear_Btn.Name = "Clear_Btn"
         Me.Clear_Btn.Size = New System.Drawing.Size(100, 35)
-        Me.Clear_Btn.TabIndex = 3
+        Me.Clear_Btn.TabIndex = 848
         Me.Clear_Btn.Text = "Clear (F4)"
         Me.Clear_Btn.UseVisualStyleBackColor = False
         '
@@ -600,7 +634,7 @@ Partial Class AccountabilityFrm
         Me.Delete_Btn.Location = New System.Drawing.Point(200, 0)
         Me.Delete_Btn.Name = "Delete_Btn"
         Me.Delete_Btn.Size = New System.Drawing.Size(100, 35)
-        Me.Delete_Btn.TabIndex = 2
+        Me.Delete_Btn.TabIndex = 847
         Me.Delete_Btn.Text = "Delete (F3)"
         Me.Delete_Btn.UseVisualStyleBackColor = False
         '
@@ -615,7 +649,7 @@ Partial Class AccountabilityFrm
         Me.Edit_Btn.Location = New System.Drawing.Point(100, 0)
         Me.Edit_Btn.Name = "Edit_Btn"
         Me.Edit_Btn.Size = New System.Drawing.Size(100, 35)
-        Me.Edit_Btn.TabIndex = 1
+        Me.Edit_Btn.TabIndex = 846
         Me.Edit_Btn.Text = "Edit (F2)"
         Me.Edit_Btn.UseVisualStyleBackColor = False
         '
@@ -630,7 +664,7 @@ Partial Class AccountabilityFrm
         Me.Save_Btn.Location = New System.Drawing.Point(0, 0)
         Me.Save_Btn.Name = "Save_Btn"
         Me.Save_Btn.Size = New System.Drawing.Size(100, 35)
-        Me.Save_Btn.TabIndex = 0
+        Me.Save_Btn.TabIndex = 845
         Me.Save_Btn.Text = "Save (F1)"
         Me.Save_Btn.UseVisualStyleBackColor = False
         '
@@ -649,23 +683,42 @@ Partial Class AccountabilityFrm
         Me.Mode_Lbl.UseCustomBackColor = True
         Me.Mode_Lbl.UseCustomForeColor = True
         '
+        'Loading_PB
+        '
+        Me.Loading_PB.BackColor = System.Drawing.Color.Transparent
+        Me.Loading_PB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.Loading_PB.Image = Global.warehouse2.My.Resources.Resources.loading_trans
+        Me.Loading_PB.ImageLocation = ""
+        Me.Loading_PB.Location = New System.Drawing.Point(218, 283)
+        Me.Loading_PB.Name = "Loading_PB"
+        Me.Loading_PB.Size = New System.Drawing.Size(55, 55)
+        Me.Loading_PB.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.Loading_PB.TabIndex = 20
+        Me.Loading_PB.TabStop = False
+        Me.Loading_PB.Visible = False
+        '
         'AccountabilityFrm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1008, 621)
+        Me.ClientSize = New System.Drawing.Size(1008, 661)
         Me.Controls.Add(Me.frm_Split)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "AccountabilityFrm"
         Me.Text = "Accountability"
         Me.frm_Split.Panel1.ResumeLayout(False)
+        Me.frm_Split.Panel2.ResumeLayout(False)
         CType(Me.frm_Split, System.ComponentModel.ISupportInitialize).EndInit()
         Me.frm_Split.ResumeLayout(False)
         Me.Fields_Pnl.ResumeLayout(False)
         Me.Fields_Pnl.PerformLayout()
-        CType(Me.Qty_Num, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Item_Pnl.ResumeLayout(False)
+        CType(Me.Loading2_PB, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.Quantity_Num, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.UnitPrice_Num, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.Btn_Pnl.ResumeLayout(False)
+        CType(Me.Loading_PB, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -691,19 +744,23 @@ Partial Class AccountabilityFrm
     Friend WithEvents MetroLabel6 As MetroFramework.Controls.MetroLabel
     Friend WithEvents Desc_Cbox As ComboBox
     Friend WithEvents MetroLabel7 As MetroFramework.Controls.MetroLabel
-    Friend WithEvents UnitPrice_Tbox As MetroFramework.Controls.MetroTextBox
     Friend WithEvents MetroLabel9 As MetroFramework.Controls.MetroLabel
     Friend WithEvents Unit_Tbox As MetroFramework.Controls.MetroTextBox
     Friend WithEvents MetroLabel8 As MetroFramework.Controls.MetroLabel
-    Friend WithEvents MetroTextBox5 As MetroFramework.Controls.MetroTextBox
+    Friend WithEvents Remarks_Tbox As MetroFramework.Controls.MetroTextBox
     Friend WithEvents MetroLabel11 As MetroFramework.Controls.MetroLabel
     Friend WithEvents MetroLabel10 As MetroFramework.Controls.MetroLabel
-    Friend WithEvents ComboBox5 As ComboBox
-    Friend WithEvents Qty_Num As NumericUpDown
+    Friend WithEvents ReceivedBy_Tbox As ComboBox
+    Friend WithEvents Quantity_Num As NumericUpDown
     Friend WithEvents Btn_Pnl As Panel
     Friend WithEvents Clear_Btn As Button
     Friend WithEvents Delete_Btn As Button
     Friend WithEvents Edit_Btn As Button
     Friend WithEvents Save_Btn As Button
     Friend WithEvents Refresh_Btn As Button
+    Friend WithEvents Loading_PB As PictureBox
+    Friend WithEvents Loading2_PB As PictureBox
+    Friend WithEvents UnitPrice_Num As NumericUpDown
+    Friend WithEvents MetroLabel12 As MetroFramework.Controls.MetroLabel
+    Friend WithEvents DateIssued_DTP As MetroFramework.Controls.MetroDateTime
 End Class
