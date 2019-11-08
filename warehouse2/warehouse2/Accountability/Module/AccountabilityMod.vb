@@ -3,7 +3,21 @@ Module AccountabilityMod
 
     Public Sub Accountability_Inv_STP(ByVal StoredProcedureName As String,
                                       ByVal dsTbl_Command As String,
-                                      Optional SearchString As String = "")
+                                      Optional SearchString As String = "",
+                                      Optional control_no As String = "",
+                                      Optional emp_id As String = "",
+                                      Optional emp_name As String = "",
+                                      Optional emp_position As String = "",
+                                      Optional emp_dept As String = "",
+                                      Optional stk_desc As String = "",
+                                      Optional stk_qty As Decimal = 0.00D,
+                                      Optional stk_unit As String = "",
+                                      Optional date_issued As Date = #01-01-1997#,
+                                      Optional stk_unitprice As Decimal = 0.00D,
+                                      Optional stk_receivedby_id As String = "",
+                                      Optional stk_receivedby As String = "",
+                                      Optional stk_remarks As String = "",
+                                      Optional date_returned As String = "")
         sqlDataAdapter = New SqlDataAdapter
         sqlBindingSource = New BindingSource
         sqlDataSet = New DataSet
@@ -19,33 +33,30 @@ Module AccountabilityMod
                 sqlCommand.CommandText = StoredProcedureName
                 sqlCommand.CommandType = CommandType.StoredProcedure
                 sqlCommand.Parameters.Add("@todo", SqlDbType.VarChar).Value = dsTbl_Command
-                'sqlCommand.Parameters.Add("@Cols", SqlDbType.VarChar).Value = cols
                 sqlCommand.Parameters.Add("@search", SqlDbType.VarChar).Value = SearchString
 
-                'sqlCommand.Parameters.Add("@supplier", SqlDbType.VarChar).Value = supplier
-                'sqlCommand.Parameters.Add("@costhead", SqlDbType.VarChar).Value = costhead
-                'sqlCommand.Parameters.Add("@typecolor", SqlDbType.VarChar).Value = typecolor
-                'sqlCommand.Parameters.Add("@articleno", SqlDbType.VarChar).Value = articleno
-                'sqlCommand.Parameters.Add("@desc", SqlDbType.VarChar).Value = desc
-                'sqlCommand.Parameters.Add("@unit", SqlDbType.VarChar).Value = unit
-                'sqlCommand.Parameters.Add("@monetary", SqlDbType.VarChar).Value = monetary
-                'sqlCommand.Parameters.Add("@location_inv", SqlDbType.VarChar).Value = location_inv
-                'sqlCommand.Parameters.Add("@header", SqlDbType.VarChar).Value = header
-                'sqlCommand.Parameters.Add("@inputted", SqlDbType.VarChar).Value = user_fullname
+                sqlCommand.Parameters.Add("@control_no", SqlDbType.VarChar).Value = control_no
+                sqlCommand.Parameters.Add("@emp_id", SqlDbType.VarChar).Value = emp_id
+                sqlCommand.Parameters.Add("@emp_name", SqlDbType.VarChar).Value = emp_name
+                sqlCommand.Parameters.Add("@emp_position", SqlDbType.VarChar).Value = emp_position
+                sqlCommand.Parameters.Add("@emp_dept", SqlDbType.VarChar).Value = emp_dept
+                sqlCommand.Parameters.Add("@stk_desc", SqlDbType.VarChar).Value = stk_desc
+                sqlCommand.Parameters.Add("@stk_unit", SqlDbType.VarChar).Value = stk_unit
+                sqlCommand.Parameters.Add("@stk_receivedby_id", SqlDbType.VarChar).Value = stk_receivedby_id
+                sqlCommand.Parameters.Add("@stk_receivedby", SqlDbType.VarChar).Value = stk_receivedby
+                sqlCommand.Parameters.Add("@stk_remarks", SqlDbType.VarChar).Value = stk_remarks
+                sqlCommand.Parameters.Add("@inputtedby", SqlDbType.VarChar).Value = user_fullname
 
-                'sqlCommand.Parameters.Add("@qty", SqlDbType.Int).Value = qty
-                'sqlCommand.Parameters.Add("@min", SqlDbType.Int).Value = min
-                'sqlCommand.Parameters.Add("@ufactor", SqlDbType.Decimal).Value = ufactor
-                'sqlCommand.Parameters.Add("@unitprice", SqlDbType.Decimal).Value = unitprice
-
-                'sqlCommand.Parameters.Add("@stockno", SqlDbType.Int).Value = stockno
-
+                sqlCommand.Parameters.Add("@stk_qty", SqlDbType.Decimal).Value = stk_qty
+                sqlCommand.Parameters.Add("@stk_unitprice", SqlDbType.Decimal).Value = stk_unitprice
+                sqlCommand.Parameters.Add("@date_issued", SqlDbType.Date).Value = date_issued
+                sqlCommand.Parameters.Add("@date_returned", SqlDbType.VarChar).Value = date_returned
                 sqlCommand.ExecuteNonQuery()
                 transaction.Commit()
 
                 sql_Transaction_result = "Committed"
 
-                If dsTbl_Command.Contains("Trans") = False And
+                If dsTbl_Command.Contains("trans") = False And
                     dsTbl_Command.Contains("Print") = False Then
 
                     sqlDataAdapter.SelectCommand = sqlCommand

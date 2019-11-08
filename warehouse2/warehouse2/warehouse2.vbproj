@@ -178,7 +178,6 @@
     <Content Include="Resources\icons8_warehouse_1_16.png" />
     <Content Include="Resources\icons8_warehouse_1_64.png" />
     <Content Include="Resources\K&amp;M_logo_official_2018-1.png" />
-    <None Include="Resources\loading4.gif" />
     <Content Include="Resources\loading_image2.gif" />
     <None Include="Resources\loading_trans.gif" />
     <Content Include="Resources\save_48px.png" />
