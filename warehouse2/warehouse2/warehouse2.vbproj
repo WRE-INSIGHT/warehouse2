@@ -94,6 +94,12 @@
     <Compile Include="Accountability\Forms\AccountabilityFrm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Accountability\Forms\ReturnFrm.Designer.vb">
+      <DependentUpon>ReturnFrm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Accountability\Forms\ReturnFrm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Accountability\Module\AccountabilityMod.vb" />
     <Compile Include="GlobalMod.vb" />
     <Compile Include="Inventory\Forms\WarehouseInvFrm.Designer.vb">
@@ -136,6 +142,9 @@
     <EmbeddedResource Include="Accountability\Forms\AccountabilityFrm.resx">
       <DependentUpon>AccountabilityFrm.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Accountability\Forms\ReturnFrm.resx">
+      <DependentUpon>ReturnFrm.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Inventory\Forms\WarehouseInvFrm.resx">
       <DependentUpon>WarehouseInvFrm.vb</DependentUpon>
     </EmbeddedResource>
@@ -167,6 +176,7 @@
   <ItemGroup>
     <Content Include="icons8_full_warehouse.ico" />
     <Content Include="Resources\add_48px.png" />
+    <None Include="Resources\bearish_48px.png" />
     <Content Include="Resources\checkmark_48px.png" />
     <Content Include="Resources\delete_sign_48px.png" />
     <Content Include="Resources\edit_48px.png" />
@@ -180,11 +190,13 @@
     <Content Include="Resources\K&amp;M_logo_official_2018-1.png" />
     <Content Include="Resources\loading_image2.gif" />
     <None Include="Resources\loading_trans.gif" />
+    <None Include="Resources\return_48px.png" />
     <Content Include="Resources\save_48px.png" />
     <Content Include="Resources\search_filled_100px.png" />
     <Content Include="Resources\shutdown_48px.png" />
     <Content Include="Resources\stocks_48px.png" />
     <None Include="Resources\user_folder_48px.png" />
+    <None Include="Resources\transfer_between_users_48px.png" />
     <Content Include="Resources\user_male_circle_48px.png" />
     <Content Include="Resources\warehouse_1_48px.png" />
   </ItemGroup>

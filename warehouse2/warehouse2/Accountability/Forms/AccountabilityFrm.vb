@@ -10,15 +10,18 @@ Public Class AccountabilityFrm
     Dim dgv_acct_bs As New BindingSource
     Dim dgv_inv_bs As New BindingSource
     Dim cbox_bs As New BindingSource
+    Dim acctblty_id_list As New ArrayList
 
     Dim deptfilter_str As String = ""
-    Dim todo, todo_mode, search_acct, search_inv, search, current_mode_string, cbox_cols,
+    Dim search_acct, search_inv, search, current_mode_string, cbox_cols,
         ctrl_no, emp_id, emp_name, emp_pos, emp_dept, stk_desc, stk_unit, receivedby_id, receivedby, remarks As String
     Dim ctr_todo, kmdi_emp_id, stockno, acctblty_id As Integer
     Dim current_mode_color As Color
     Dim btn_clicking As Object
     Dim stk_qty, stk_unitprice As Decimal
-    Dim date_issued, date_returned As Date
+    Dim date_issued As Date
+
+    Public todo, todo_mode, date_returned As String
     Private Sub Reset_here()
         DGV_Accountability.Enabled = True
         DGV_Search_Inventory.Enabled = True
@@ -28,6 +31,7 @@ Public Class AccountabilityFrm
         ctr_todo = 0
         sql_Transaction_result = ""
         'kmdi_emp_id = 0
+
 
         Mode_Lbl.Text = current_mode_string
         Mode_Lbl.ForeColor = current_mode_color
@@ -40,11 +44,12 @@ Public Class AccountabilityFrm
         Quantity_Num.Value = 0
         Unit_Tbox.Clear()
         UnitPrice_Num.Value = 0
+        acctblty_id_list.Clear()
 
         Mode_Lbl.Text = "New"
         Mode_Lbl.ForeColor = Color.DarkSlateGray
     End Sub
-    Private Sub Start_BGW()
+    Public Sub Start_BGW()
         Try
             If BGW.IsBusy <> True Then
                 DGV_Accountability.Enabled = False
@@ -109,6 +114,10 @@ Public Class AccountabilityFrm
                     Accountability_Inv_STP("warehouse_acctblty_stp", todo, "%" & search_acct & "%")
                     BGW.ReportProgress(0)
 
+                Case "load_acctblty_byEmpID"
+                    Accountability_Inv_STP("warehouse_acctblty_stp", todo, search_acct)
+                    BGW.ReportProgress(0)
+
                 Case "load_search_inv"
                     Accountability_Inv_STP("warehouse_acctblty_stp", todo, "%" & search_inv & "%")
                     BGW.ReportProgress(0)
@@ -134,6 +143,22 @@ Public Class AccountabilityFrm
                 Case "transEditAcct"
                     Accountability_Inv_STP("warehouse_acctblty_stp", todo,, acctblty_id, ctrl_no, emp_id, emp_name, emp_pos, emp_dept, stockno, stk_desc, stk_qty,
                                                                     stk_unit, date_issued, stk_unitprice, receivedby_id, receivedby, remarks)
+
+                Case "transDelAcct"
+                    For i = 0 To acctblty_id_list.Count - 1
+                        BGW.ReportProgress(acctblty_id_list(i))
+                    Next
+
+                Case "transRemarksAcct"
+                    For i = 0 To acctblty_id_list.Count - 1
+                        BGW.ReportProgress(acctblty_id_list(i))
+                    Next
+
+                Case "transReturnAcct"
+                    For i = 0 To acctblty_id_list.Count - 1
+                        BGW.ReportProgress(acctblty_id_list(i))
+                    Next
+
             End Select
         Catch ex As SqlException
             BGW.CancelAsync()
@@ -157,13 +182,14 @@ Public Class AccountabilityFrm
     Private Sub BGW_ProgressChanged(sender As Object, e As ProgressChangedEventArgs)
         Try
             Select Case todo
-                Case "load_acctblty"
+                Case "load_acctblty", "load_acctblty_byEmpID"
                     If Not frm_Split.Panel2.Controls.Contains(DGV_Accountability) Then
                         DGV_Properties(DGV_Accountability, "DGV_Accountability")
                         AddHandler DGV_Accountability.RowPostPaint, AddressOf dgv_rowpostpaint
                         AddHandler DGV_Accountability.DataError, AddressOf dgv_dataerror
                         AddHandler DGV_Accountability.CellFormatting, AddressOf dgv_cellformatting
                         AddHandler DGV_Accountability.KeyDown, AddressOf dgv_keydown
+                        AddHandler DGV_Accountability.CellMouseClick, AddressOf dgv_cellmouseclick
 
                         frm_Split.Panel2.Controls.Add(DGV_Accountability)
                     End If
@@ -182,6 +208,15 @@ Public Class AccountabilityFrm
                     cbox_bs.DataSource = sqlDataSet
                     cbox_bs.DataMember = todo
 
+                Case "transDelAcct"
+                    Accountability_Inv_STP("warehouse_acctblty_stp", todo,, e.ProgressPercentage)
+
+                Case "transRemarksAcct"
+                    Accountability_Inv_STP("warehouse_acctblty_stp", todo,, e.ProgressPercentage,,,,,,,,,,,,,, remarks)
+
+                Case "transReturnAcct"
+                    Accountability_Inv_STP("warehouse_acctblty_stp", todo,, e.ProgressPercentage,,,,,,,,,,,,,,, date_returned)
+
             End Select
         Catch ex As Exception
             Reset_here()
@@ -198,7 +233,7 @@ Public Class AccountabilityFrm
             Else
                 If sql_Transaction_result = "Committed" Then
                     Select Case todo
-                        Case "load_acctblty"
+                        Case "load_acctblty", "load_acctblty_byEmpID"
                             dgv_acct_bs.DataSource = sqlDataSet
                             dgv_acct_bs.DataMember = todo
                             With DGV_Accountability
@@ -315,16 +350,33 @@ Public Class AccountabilityFrm
                             End If
 
                         Case "get_empfilter"
+                            RemoveHandler EmpFilter_Cbox.SelectedIndexChanged, AddressOf EmpFilter_Cbox_SelectedIndexChanged
+
                             EmpFilter_Cbox.DataSource = cbox_bs
                             EmpFilter_Cbox.DisplayMember = "emp_name"
+                            EmpFilter_Cbox.ValueMember = "emp_id"
                             EmpFilter_Cbox.SelectedIndex = -1
                             Reset_here()
+
+                            AddHandler EmpFilter_Cbox.SelectedIndexChanged, AddressOf EmpFilter_Cbox_SelectedIndexChanged
 
                         Case "transSaveAcct"
                             KMDIPrompts(Me, "Success", Nothing, Nothing, Nothing, True,,, False)
                             ctr_todo += 1
 
                         Case "transEditAcct"
+                            KMDIPrompts(Me, "Success", Nothing, Nothing, Nothing, True,,, False)
+                            ctr_todo += 1
+
+                        Case "transDelAcct"
+                            KMDIPrompts(Me, "Success", Nothing, Nothing, Nothing, True,,, False)
+                            ctr_todo += 1
+
+                        Case "transRemarksAcct"
+                            KMDIPrompts(Me, "Success", Nothing, Nothing, Nothing, True,,, False)
+                            ctr_todo += 1
+
+                        Case "transReturnAcct"
                             KMDIPrompts(Me, "Success", Nothing, Nothing, Nothing, True,,, False)
                             ctr_todo += 1
 
@@ -357,7 +409,7 @@ Public Class AccountabilityFrm
                                     Start_BGW()
                                 Case 2
                                     Reset_here()
-
+                                    itemsclear()
                             End Select
 
                         Case "after_trans"
@@ -387,6 +439,17 @@ Public Class AccountabilityFrm
         End Try
     End Sub
 
+    Private Sub dgv_cellmouseclick(sender As Object, e As DataGridViewCellMouseEventArgs)
+        Try
+            If e.RowIndex <> -1 And e.Button = MouseButtons.Right Then
+                sender.Rows(e.RowIndex).Selected = True
+                Acctblty_Cmenu.Show(MousePosition.X, MousePosition.Y)
+            End If
+        Catch ex As Exception
+            KMDIPrompts(Me, "DotNetError", ex.Message, ex.StackTrace, Nothing, True)
+        End Try
+    End Sub
+
     Private Sub dgv_keydown(sender As Object, e As KeyEventArgs)
         Try
             If e.KeyCode = Keys.F2 Then
@@ -413,6 +476,17 @@ Public Class AccountabilityFrm
                     Mode_Lbl.ForeColor = Color.Maroon
 
                 End With
+            ElseIf e.KeyCode = Keys.F3 Then
+                KMDIPrompts(Me, "Question", "Are you sure you want to Delete?", Nothing, Nothing, True,,, False)
+                If QuestionPromptAnswer = 6 Then
+                    Dim items As DataGridViewSelectedRowCollection = DGV_Accountability.SelectedRows
+                    For Each item As DataGridViewRow In items
+                        acctblty_id_list.Add(item.Cells("acctblty_id").Value)
+                    Next
+                    todo_mode = "after_trans"
+                    todo = "transDelAcct"
+                    Start_BGW()
+                End If
             End If
         Catch ex As Exception
             KMDIPrompts(Me, "DotNetError", ex.Message, ex.StackTrace, Nothing, True)
@@ -421,7 +495,27 @@ Public Class AccountabilityFrm
 
     Private Sub dgv_cellformatting(sender As Object, e As DataGridViewCellFormattingEventArgs)
         Try
-            DGV_Accountability.Item("Control No.", e.RowIndex).Style.Font = New Font("Segoe UI", 10.0!, FontStyle.Bold)
+            With DGV_Accountability
+                .Item("Control No.", e.RowIndex).Style.Font = New Font("Segoe UI", 10.0!, FontStyle.Bold)
+                If .Item("Date Returned", e.RowIndex).Value.ToString <> "" Then
+                    .Item("Control No.", e.RowIndex).Style.ForeColor = ReturnLegend_Pnl.BackColor
+                    .Item("Control No.", e.RowIndex).Style.SelectionForeColor = ReturnLegend_Pnl.BackColor
+                Else
+                    If .Item("Remarks", e.RowIndex).Value.ToString.Contains("Lost") Then
+                        .Item("Control No.", e.RowIndex).Style.ForeColor = LostLegend_Pnl.BackColor
+                        .Item("Control No.", e.RowIndex).Style.SelectionForeColor = LostLegend_Pnl.BackColor
+
+                    ElseIf .Item("Remarks", e.RowIndex).Value.ToString.Contains("Transferred") Then
+                        .Item("Control No.", e.RowIndex).Style.ForeColor = TransferLegend_Pnl.BackColor
+                        .Item("Control No.", e.RowIndex).Style.SelectionForeColor = TransferLegend_Pnl.BackColor
+
+                    Else
+                        .Item("Control No.", e.RowIndex).Style.ForeColor = Color.Black
+                        .Item("Control No.", e.RowIndex).Style.SelectionForeColor = Color.Black
+
+                    End If
+                End If
+            End With
         Catch ex As Exception
             KMDIPrompts(Me, "DotNetError", ex.Message, ex.StackTrace, Nothing, True)
         End Try
@@ -443,6 +537,18 @@ Public Class AccountabilityFrm
         Catch ex As Exception
             KMDIPrompts(Me, "DotNetError", ex.Message, ex.StackTrace, Nothing, True)
         End Try
+    End Sub
+
+    Private Sub SearchAcct_Tbox_ButtonClick(sender As Object, e As EventArgs) Handles SearchAcct_Tbox.ButtonClick
+        search_acct = Trim(SearchAcct_Tbox.Text)
+        todo = "load_acctblty"
+        Start_BGW()
+    End Sub
+
+    Private Sub SearchAcct_Tbox_KeyDown(sender As Object, e As KeyEventArgs) Handles SearchAcct_Tbox.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            SearchAcct_Tbox.CustomButton.PerformClick()
+        End If
     End Sub
 
     Private Sub dgv_dataerror(sender As Object, e As DataGridViewDataErrorEventArgs)
@@ -502,11 +608,14 @@ Public Class AccountabilityFrm
         UnitPrice_Num.Value = 0
         CtrlNo_Tbox.CustomButton.PerformClick()
         DeptFilter_Cbox.SelectedIndex = -1
+        EmpFilter_Cbox.Text = ""
+        itemsclear()
     End Sub
 
     Private Sub Refresh_Btn_Click(sender As Object, e As EventArgs) Handles Refresh_Btn.Click
         Loading_PB.BringToFront()
         search_acct = ""
+        EmpFilter_Cbox.Text = ""
 
         todo_mode = "refresh"
         todo = "load_acctblty"
@@ -587,6 +696,46 @@ Public Class AccountabilityFrm
 
         deptfilter_str = DeptFilter_Cbox.Text
         todo = "get_empfilter"
+        Start_BGW()
+    End Sub
+
+    Private Sub EmpFilter_Cbox_SelectedIndexChanged(sender As Object, e As EventArgs)
+        current_mode_string = Mode_Lbl.Text
+        current_mode_color = Mode_Lbl.ForeColor
+        Mode_Lbl.Text = "Getting requests of employee."
+
+        search_acct = EmpFilter_Cbox.SelectedValue.ToString
+        todo = "load_acctblty_byEmpID"
+        Start_BGW()
+    End Sub
+
+    Private Sub ReturnToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReturnToolStripMenuItem.Click
+        Dim items As DataGridViewSelectedRowCollection = DGV_Accountability.SelectedRows
+        For Each item As DataGridViewRow In items
+            acctblty_id_list.Add(item.Cells("acctblty_id").Value)
+        Next
+        ReturnFrm.ShowDialog()
+    End Sub
+
+    Private Sub LostToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LostToolStripMenuItem.Click
+        Dim items As DataGridViewSelectedRowCollection = DGV_Accountability.SelectedRows
+        For Each item As DataGridViewRow In items
+            acctblty_id_list.Add(item.Cells("acctblty_id").Value)
+        Next
+        remarks = LostToolStripMenuItem.Text
+        todo_mode = "after_trans"
+        todo = "transRemarksAcct"
+        Start_BGW()
+    End Sub
+
+    Private Sub TransferToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TransferToolStripMenuItem.Click
+        Dim items As DataGridViewSelectedRowCollection = DGV_Accountability.SelectedRows
+        For Each item As DataGridViewRow In items
+            acctblty_id_list.Add(item.Cells("acctblty_id").Value)
+        Next
+        remarks = TransferToolStripMenuItem.Tag
+        todo_mode = "after_trans"
+        todo = "transRemarksAcct"
         Start_BGW()
     End Sub
 
