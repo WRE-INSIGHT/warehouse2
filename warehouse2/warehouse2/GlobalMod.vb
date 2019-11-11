@@ -129,7 +129,7 @@ Module GlobalMod
             .Dock = DockStyle.Fill
             .Select()
             .DefaultCellStyle.BackColor = Color.White
-            .RowsDefaultCellStyle.Font = New Font("Segoe UI", 12.0!, FontStyle.Regular)
+            .RowsDefaultCellStyle.Font = New Font("Segoe UI", 10.0!, FontStyle.Regular)
             .AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke
             .AllowUserToOrderColumns = True
             .AllowUserToResizeColumns = True

@@ -182,7 +182,7 @@ Partial Class AccountabilityFrm
         'DateIssued_DTP
         '
         Me.DateIssued_DTP.Location = New System.Drawing.Point(117, 527)
-        Me.DateIssued_DTP.MinimumSize = New System.Drawing.Size(4, 29)
+        Me.DateIssued_DTP.MinimumSize = New System.Drawing.Size(0, 29)
         Me.DateIssued_DTP.Name = "DateIssued_DTP"
         Me.DateIssued_DTP.Size = New System.Drawing.Size(228, 29)
         Me.DateIssued_DTP.TabIndex = 846

@@ -4,11 +4,13 @@ Module AccountabilityMod
     Public Sub Accountability_Inv_STP(ByVal StoredProcedureName As String,
                                       ByVal dsTbl_Command As String,
                                       Optional SearchString As String = "",
+                                      Optional acctblty_id As Integer = 0,
                                       Optional control_no As String = "",
                                       Optional emp_id As String = "",
                                       Optional emp_name As String = "",
                                       Optional emp_position As String = "",
                                       Optional emp_dept As String = "",
+                                      Optional stk_no As Integer = 0,
                                       Optional stk_desc As String = "",
                                       Optional stk_qty As Decimal = 0.00D,
                                       Optional stk_unit As String = "",
@@ -51,6 +53,9 @@ Module AccountabilityMod
                 sqlCommand.Parameters.Add("@stk_unitprice", SqlDbType.Decimal).Value = stk_unitprice
                 sqlCommand.Parameters.Add("@date_issued", SqlDbType.Date).Value = date_issued
                 sqlCommand.Parameters.Add("@date_returned", SqlDbType.VarChar).Value = date_returned
+
+                sqlCommand.Parameters.Add("@stk_no", SqlDbType.Int).Value = stk_no
+                sqlCommand.Parameters.Add("@acctblty_id", SqlDbType.Int).Value = acctblty_id
                 sqlCommand.ExecuteNonQuery()
                 transaction.Commit()
 

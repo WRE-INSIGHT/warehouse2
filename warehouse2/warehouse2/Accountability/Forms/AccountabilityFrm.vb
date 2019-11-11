@@ -14,7 +14,7 @@ Public Class AccountabilityFrm
     Dim deptfilter_str As String = ""
     Dim todo, todo_mode, search_acct, search_inv, search, current_mode_string, cbox_cols,
         ctrl_no, emp_id, emp_name, emp_pos, emp_dept, stk_desc, stk_unit, receivedby_id, receivedby, remarks As String
-    Dim ctr_todo, kmdi_emp_id, stockno As Integer
+    Dim ctr_todo, kmdi_emp_id, stockno, acctblty_id As Integer
     Dim current_mode_color As Color
     Dim btn_clicking As Object
     Dim stk_qty, stk_unitprice As Decimal
@@ -28,10 +28,21 @@ Public Class AccountabilityFrm
         ctr_todo = 0
         sql_Transaction_result = ""
         'kmdi_emp_id = 0
-        stockno = 0
 
         Mode_Lbl.Text = current_mode_string
         Mode_Lbl.ForeColor = current_mode_color
+    End Sub
+
+    Sub itemsclear()
+        acctblty_id = 0
+        stockno = 0
+        Desc_Cbox.SelectedIndex = -1
+        Quantity_Num.Value = 0
+        Unit_Tbox.Clear()
+        UnitPrice_Num.Value = 0
+
+        Mode_Lbl.Text = "New"
+        Mode_Lbl.ForeColor = Color.DarkSlateGray
     End Sub
     Private Sub Start_BGW()
         Try
@@ -117,9 +128,12 @@ Public Class AccountabilityFrm
                     BGW.ReportProgress(0)
 
                 Case "transSaveAcct"
-                    Accountability_Inv_STP("warehouse_acctblty_stp", todo,, ctrl_no, emp_id, emp_name, emp_pos, emp_dept, stk_desc, stk_qty,
-                                                                      stk_unit, date_issued, stk_unitprice, receivedby_id, receivedby, remarks)
+                    Accountability_Inv_STP("warehouse_acctblty_stp", todo,,, ctrl_no, emp_id, emp_name, emp_pos, emp_dept, stockno, stk_desc, stk_qty,
+                                                                     stk_unit, date_issued, stk_unitprice, receivedby_id, receivedby, remarks)
 
+                Case "transEditAcct"
+                    Accountability_Inv_STP("warehouse_acctblty_stp", todo,, acctblty_id, ctrl_no, emp_id, emp_name, emp_pos, emp_dept, stockno, stk_desc, stk_qty,
+                                                                    stk_unit, date_issued, stk_unitprice, receivedby_id, receivedby, remarks)
             End Select
         Catch ex As SqlException
             BGW.CancelAsync()
@@ -149,6 +163,7 @@ Public Class AccountabilityFrm
                         AddHandler DGV_Accountability.RowPostPaint, AddressOf dgv_rowpostpaint
                         AddHandler DGV_Accountability.DataError, AddressOf dgv_dataerror
                         AddHandler DGV_Accountability.CellFormatting, AddressOf dgv_cellformatting
+                        AddHandler DGV_Accountability.KeyDown, AddressOf dgv_keydown
 
                         frm_Split.Panel2.Controls.Add(DGV_Accountability)
                     End If
@@ -175,14 +190,6 @@ Public Class AccountabilityFrm
         End Try
     End Sub
 
-    Private Sub dgv_cellformatting(sender As Object, e As DataGridViewCellFormattingEventArgs)
-        Try
-            DGV_Accountability.Item("Control No.", e.RowIndex).Style.Font.Style.Bold = True
-        Catch ex As Exception
-            KMDIPrompts(Me, "DotNetError", ex.Message, ex.StackTrace, Nothing, True)
-        End Try
-    End Sub
-
     Private Sub BGW_RunWorkerCompleted(sender As Object, e As RunWorkerCompletedEventArgs)
         Try
             If e.Error IsNot Nothing Or e.Cancelled = True Then
@@ -201,10 +208,10 @@ Public Class AccountabilityFrm
                                 .StateCommon.Background.Color1 = SystemColors.Control
                                 .Columns("acctblty_id").Visible = False
                                 .Columns("stk_recievedby_id").Visible = False
+                                .Columns("stk_no").Visible = False
                                 .Columns("Quantity").DefaultCellStyle.Format = "N2"
                                 .Columns("Date Issued").DefaultCellStyle.Format = "MMM. dd, yyyy"
                                 .Columns("Total Amount").DefaultCellStyle.Format = "N2"
-                                .RowsDefaultCellStyle.Font = New Font("Segoe UI", 10.0!, FontStyle.Regular)
                                 .AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke
                                 .AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
                                 .AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
@@ -231,7 +238,6 @@ Public Class AccountabilityFrm
                                 .Columns("PHYSICAL").DefaultCellStyle.Format = "N2"
                                 .Columns("UNITPRICE").DefaultCellStyle.Format = "N2"
                                 .DefaultCellStyle.BackColor = Color.White
-                                .RowsDefaultCellStyle.Font = New Font("Segoe UI", 10.0!, FontStyle.Regular)
                                 .AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke
                                 .AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
                                 .AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
@@ -318,6 +324,10 @@ Public Class AccountabilityFrm
                             KMDIPrompts(Me, "Success", Nothing, Nothing, Nothing, True,,, False)
                             ctr_todo += 1
 
+                        Case "transEditAcct"
+                            KMDIPrompts(Me, "Success", Nothing, Nothing, Nothing, True,,, False)
+                            ctr_todo += 1
+
                     End Select
 
                     Select Case todo_mode
@@ -364,6 +374,7 @@ Public Class AccountabilityFrm
                                 Case 3
                                     Loading_PB.SendToBack()
                                     Reset_here()
+                                    itemsclear()
 
                             End Select
                     End Select
@@ -373,6 +384,46 @@ Public Class AccountabilityFrm
             Reset_here()
             KMDIPrompts(Me, "DotNetError", ex.Message, ex.StackTrace, Nothing, True)
             Exit Sub
+        End Try
+    End Sub
+
+    Private Sub dgv_keydown(sender As Object, e As KeyEventArgs)
+        Try
+            If e.KeyCode = Keys.F2 Then
+                Dim items As DataGridViewSelectedRowCollection = DGV_Accountability.SelectedRows
+                With items(0)
+                    acctblty_id = .Cells("acctblty_id").Value
+                    stockno = .Cells("stk_no").Value
+                    CtrlNo_Tbox.Text = .Cells("Control No.").Value.ToString
+                    EmpID_Cbox.Text = .Cells("Employee ID").Value.ToString
+                    EmpName_Cbox.Text = .Cells("Name").Value.ToString
+                    Position_Cbox.Text = .Cells("Position").Value.ToString
+                    Dept_Cbox.Text = .Cells("Department").Value.ToString
+                    Desc_Cbox.Text = .Cells("Description").Value.ToString
+                    Quantity_Num.Maximum = Decimal.MaxValue
+                    Quantity_Num.Value = .Cells("Quantity").Value
+                    Unit_Tbox.Text = .Cells("Unit").Value.ToString
+                    UnitPrice_Num.Value = .Cells("Unit Price").Value
+                    RecByID_Cbox.Text = .Cells("stk_recievedby_id").Value.ToString
+                    ReceivedBy_Cbox.Text = .Cells("Received By").Value.ToString
+                    DateIssued_DTP.Value = .Cells("Date Issued").Value.ToString
+                    Remarks_Tbox.Text = .Cells("Remarks").Value.ToString
+
+                    Mode_Lbl.Text = "Update Request - " & .Cells("Control No.").Value.ToString
+                    Mode_Lbl.ForeColor = Color.Maroon
+
+                End With
+            End If
+        Catch ex As Exception
+            KMDIPrompts(Me, "DotNetError", ex.Message, ex.StackTrace, Nothing, True)
+        End Try
+    End Sub
+
+    Private Sub dgv_cellformatting(sender As Object, e As DataGridViewCellFormattingEventArgs)
+        Try
+            DGV_Accountability.Item("Control No.", e.RowIndex).Style.Font = New Font("Segoe UI", 10.0!, FontStyle.Bold)
+        Catch ex As Exception
+            KMDIPrompts(Me, "DotNetError", ex.Message, ex.StackTrace, Nothing, True)
         End Try
     End Sub
 
@@ -403,6 +454,9 @@ Public Class AccountabilityFrm
     End Sub
 
     Private Sub Search_Tbox_ButtonClick(sender As Object, e As EventArgs) Handles Search_Tbox.ButtonClick
+        current_mode_string = Mode_Lbl.Text
+        current_mode_color = Mode_Lbl.ForeColor
+
         Loading2_PB.BringToFront()
         search_inv = Trim(Search_Tbox.Text)
         todo = "load_search_inv"
@@ -427,7 +481,11 @@ Public Class AccountabilityFrm
             Mode_Lbl.Text = "Saving."
 
             todo_mode = "after_trans"
-            todo = "transSaveAcct"
+            If acctblty_id = 0 Then
+                todo = "transSaveAcct"
+            Else
+                todo = "transEditAcct"
+            End If
             Start_BGW()
         Else
             KMDIPrompts(Me, "UserWarning",,,, True, True, "Invalid Quantity", False)
