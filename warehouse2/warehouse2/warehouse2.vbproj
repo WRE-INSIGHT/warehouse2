@@ -116,6 +116,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Login\Modules\LoginMod.vb" />
+    <Compile Include="Main\Forms\ChangeCredentialsFrm.Designer.vb">
+      <DependentUpon>ChangeCredentialsFrm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Main\Forms\ChangeCredentialsFrm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Main\Forms\MainFrm.Designer.vb">
       <DependentUpon>MainFrm.vb</DependentUpon>
     </Compile>
@@ -150,6 +156,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Login\Forms\LoginFrm.resx">
       <DependentUpon>LoginFrm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main\Forms\ChangeCredentialsFrm.resx">
+      <DependentUpon>ChangeCredentialsFrm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main\Forms\MainFrm.resx">
       <DependentUpon>MainFrm.vb</DependentUpon>
@@ -197,6 +206,7 @@
     <Content Include="Resources\stocks_48px.png" />
     <None Include="Resources\user_folder_48px.png" />
     <None Include="Resources\transfer_between_users_48px.png" />
+    <None Include="Resources\user_credentials_48px.png" />
     <Content Include="Resources\user_male_circle_48px.png" />
     <Content Include="Resources\warehouse_1_48px.png" />
   </ItemGroup>

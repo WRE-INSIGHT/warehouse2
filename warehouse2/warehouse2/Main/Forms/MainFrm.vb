@@ -41,4 +41,9 @@
         AccountabilityFrm.frm_Split.SplitterDistance = 478
 
     End Sub
+
+    Private Sub ChangeCredentialsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ChangeCredentialsToolStripMenuItem.Click
+        Dim cred As Form = ChangeCredentialsFrm
+        cred.ShowDialog()
+    End Sub
 End Class

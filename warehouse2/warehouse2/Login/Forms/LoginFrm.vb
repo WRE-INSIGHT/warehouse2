@@ -3,7 +3,6 @@ Imports System.Data.SqlClient
 Imports MetroFramework
 Public Class LoginFrm
     Private BGW As BackgroundWorker = New BackgroundWorker
-    Dim user, pass As String
     Private Sub Reset_here()
         LoginBtn.Enabled = True
         UserNameTbox.Enabled = True

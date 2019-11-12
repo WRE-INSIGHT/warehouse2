@@ -11,6 +11,8 @@ Module LoginMod
     Public user_id As Integer
     Public sql_Transaction_result, user_fullname, user_nick, user_accttype As String
 
+    Public user, pass As String
+
     Public Sub WarehouseSystems_Login(ByVal UserName As String,
                                       ByVal Password As String)
 

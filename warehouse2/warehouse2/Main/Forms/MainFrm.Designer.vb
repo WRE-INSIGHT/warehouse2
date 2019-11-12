@@ -29,6 +29,7 @@ Partial Class MainFrm
         Me.SaveToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AccountabilityToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AccountsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ChangeCredentialsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LogoutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Main_MenuStrip.SuspendLayout()
         Me.SuspendLayout()
@@ -77,10 +78,18 @@ Partial Class MainFrm
         '
         'AccountsToolStripMenuItem
         '
+        Me.AccountsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ChangeCredentialsToolStripMenuItem})
         Me.AccountsToolStripMenuItem.Image = Global.warehouse2.My.Resources.Resources.user_male_circle_48px
         Me.AccountsToolStripMenuItem.Name = "AccountsToolStripMenuItem"
         Me.AccountsToolStripMenuItem.Size = New System.Drawing.Size(85, 20)
         Me.AccountsToolStripMenuItem.Text = "Accounts"
+        '
+        'ChangeCredentialsToolStripMenuItem
+        '
+        Me.ChangeCredentialsToolStripMenuItem.Image = Global.warehouse2.My.Resources.Resources.user_credentials_48px
+        Me.ChangeCredentialsToolStripMenuItem.Name = "ChangeCredentialsToolStripMenuItem"
+        Me.ChangeCredentialsToolStripMenuItem.Size = New System.Drawing.Size(177, 22)
+        Me.ChangeCredentialsToolStripMenuItem.Text = "Change Credentials"
         '
         'LogoutToolStripMenuItem
         '
@@ -117,4 +126,5 @@ Partial Class MainFrm
     Friend WithEvents InventoryToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SaveToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AccountabilityToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ChangeCredentialsToolStripMenuItem As ToolStripMenuItem
 End Class
