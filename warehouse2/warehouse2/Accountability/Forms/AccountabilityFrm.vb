@@ -12,10 +12,11 @@ Public Class AccountabilityFrm
     Dim cbox_bs As New BindingSource
     Dim acctblty_id_list As New ArrayList
 
+    Dim cbox_obj As Object
     Dim deptfilter_str As String = ""
-    Dim search_acct, search_inv, search, current_mode_string, cbox_cols,
+    Dim search_acct, search_inv, search, current_mode_string, cbox_cols, cols,
         ctrl_no, emp_id, emp_name, emp_pos, emp_dept, stk_desc, stk_unit, receivedby_id, receivedby, remarks As String
-    Dim ctr_todo, kmdi_emp_id, stockno, acctblty_id As Integer
+    Dim ctr_todo, kmdi_emp_id, stockno, acctblty_id, CboxselIndex As Integer
     Dim current_mode_color As Color
     Dim btn_clicking As Object
     Dim stk_qty, stk_unitprice As Decimal
@@ -69,8 +70,8 @@ Public Class AccountabilityFrm
         ctrl_no = Trim(CtrlNo_Tbox.Text)
         emp_id = Trim(EmpID_Cbox.Text)
         emp_name = Trim(EmpName_Cbox.Text)
-        emp_pos = Trim(Position_Cbox.Text)
-        emp_dept = Trim(Dept_Cbox.Text)
+        emp_pos = Trim(EmpPosition_Cbox.Text)
+        emp_dept = Trim(EmpDept_Cbox.Text)
         stk_desc = Trim(Desc_Cbox.Text)
         stk_qty = Quantity_Num.Value
         stk_unit = Trim(Unit_Tbox.Text)
@@ -159,6 +160,10 @@ Public Class AccountabilityFrm
                         BGW.ReportProgress(acctblty_id_list(i))
                     Next
 
+                Case "Load_ComboBoxData"
+                    Accountability_Inv_STP("warehouse_acctblty_stp", todo,,,,,,,,,,,,,,,,,, cols)
+                    BGW.ReportProgress(0)
+
             End Select
         Catch ex As SqlException
             BGW.CancelAsync()
@@ -203,7 +208,7 @@ Public Class AccountabilityFrm
                         Item_Pnl.Controls.Add(DGV_Search_Inventory)
                     End If
 
-                Case "get_deptfilter", "get_empfilter"
+                Case "get_deptfilter", "get_empfilter", "Load_ComboBoxData"
                     cbox_bs = New BindingSource
                     cbox_bs.DataSource = sqlDataSet
                     cbox_bs.DataMember = todo
@@ -217,6 +222,10 @@ Public Class AccountabilityFrm
                 Case "transReturnAcct"
                     Accountability_Inv_STP("warehouse_acctblty_stp", todo,, e.ProgressPercentage,,,,,,,,,,,,,,, date_returned)
 
+                    'Case "Load_ComboBoxData"
+                    '    cbox_bs = New BindingSource
+                    '    cbox_bs.DataSource = sqlDataSet
+                    '    cbox_bs.DataMember = todo
             End Select
         Catch ex As Exception
             Reset_here()
@@ -316,8 +325,8 @@ Public Class AccountabilityFrm
                                             'kmdi_emp_id = .Item("KMDI_Emp_ID")
                                             EmpID_Cbox.Text = .Item("Emp_ID")
                                             EmpName_Cbox.Text = .Item("Emp_Name").ToString
-                                            Position_Cbox.Text = .Item("Position").ToString
-                                            Dept_Cbox.Text = .Item("Department_Name").ToString
+                                            EmpPosition_Cbox.Text = .Item("Position").ToString
+                                            EmpDept_Cbox.Text = .Item("Department_Name").ToString
 
                                             If RecByID_Cbox.Text = "" Then
                                                 RecByID_Cbox.Text = .Item("Emp_ID")
@@ -359,6 +368,23 @@ Public Class AccountabilityFrm
                             Reset_here()
 
                             AddHandler EmpFilter_Cbox.SelectedIndexChanged, AddressOf EmpFilter_Cbox_SelectedIndexChanged
+
+                        Case "Load_ComboBoxData"
+                            cbox_obj.DataSource = cbox_bs
+                            cbox_obj.DisplayMember = cols
+
+
+                            If CboxselIndex > cbox_obj.Items.Count - 1 Then
+                                cbox_obj.SelectedIndex = -1
+                            Else
+                                cbox_obj.SelectedIndex = CboxselIndex
+                            End If
+
+                            If todo_mode <> "" Then
+                                ctr_todo += 1
+                            Else
+                                Reset_here()
+                            End If
 
                         Case "transSaveAcct"
                             KMDIPrompts(Me, "Success", Nothing, Nothing, Nothing, True,,, False)
@@ -407,9 +433,12 @@ Public Class AccountabilityFrm
                                 Case 1
                                     todo = "get_deptfilter"
                                     Start_BGW()
+
                                 Case 2
                                     Reset_here()
                                     itemsclear()
+                                    CtrlNo_Tbox.CustomButton.PerformClick()
+
                             End Select
 
                         Case "after_trans"
@@ -460,8 +489,8 @@ Public Class AccountabilityFrm
                     CtrlNo_Tbox.Text = .Cells("Control No.").Value.ToString
                     EmpID_Cbox.Text = .Cells("Employee ID").Value.ToString
                     EmpName_Cbox.Text = .Cells("Name").Value.ToString
-                    Position_Cbox.Text = .Cells("Position").Value.ToString
-                    Dept_Cbox.Text = .Cells("Department").Value.ToString
+                    EmpPosition_Cbox.Text = .Cells("Position").Value.ToString
+                    EmpDept_Cbox.Text = .Cells("Department").Value.ToString
                     Desc_Cbox.Text = .Cells("Description").Value.ToString
                     Quantity_Num.Maximum = Decimal.MaxValue
                     Quantity_Num.Value = .Cells("Quantity").Value
@@ -607,7 +636,7 @@ Public Class AccountabilityFrm
         Quantity_Num.Value = 0
         UnitPrice_Num.Value = 0
         CtrlNo_Tbox.CustomButton.PerformClick()
-        DeptFilter_Cbox.SelectedIndex = -1
+        DeptFilter_Cbox.Text = ""
         EmpFilter_Cbox.Text = ""
         itemsclear()
     End Sub
@@ -651,7 +680,7 @@ Public Class AccountabilityFrm
         If sender Is Get_Btn Then
             search = EmpID_Cbox.Text
             For Each ctrl In Fields_Pnl.Controls
-                If ctrl.Tag = "get" Then
+                If ctrl.Name.Contains("Emp") Then
                     ctrl.Text = ""
                 End If
             Next
@@ -738,5 +767,18 @@ Public Class AccountabilityFrm
         todo = "transRemarksAcct"
         Start_BGW()
     End Sub
+    Private Sub Cbox_MouseDown(sender As Object, e As MouseEventArgs) Handles EmpID_Cbox.MouseDown,
+                                                                              EmpName_Cbox.MouseDown,
+                                                                              EmpPosition_Cbox.MouseDown,
+                                                                              EmpDept_Cbox.MouseDown,
+                                                                              Desc_Cbox.MouseDown,
+                                                                              RecByID_Cbox.MouseDown,
+                                                                              ReceivedBy_Cbox.MouseDown
+        CboxselIndex = sender.SelectedIndex
+        cbox_obj = sender
+        cols = sender.Tag
+        todo = "Load_ComboBoxData"
+        Start_BGW()
 
+    End Sub
 End Class

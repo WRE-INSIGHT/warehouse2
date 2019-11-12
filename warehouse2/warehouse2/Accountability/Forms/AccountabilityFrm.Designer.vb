@@ -47,9 +47,9 @@ Partial Class AccountabilityFrm
         Me.MetroLabel5 = New MetroFramework.Controls.MetroLabel()
         Me.Line_Pnl = New System.Windows.Forms.Panel()
         Me.MetroLabel4 = New MetroFramework.Controls.MetroLabel()
-        Me.Dept_Cbox = New System.Windows.Forms.ComboBox()
+        Me.EmpDept_Cbox = New System.Windows.Forms.ComboBox()
         Me.MetroLabel3 = New MetroFramework.Controls.MetroLabel()
-        Me.Position_Cbox = New System.Windows.Forms.ComboBox()
+        Me.EmpPosition_Cbox = New System.Windows.Forms.ComboBox()
         Me.MetroLabel2 = New MetroFramework.Controls.MetroLabel()
         Me.EmpName_Cbox = New System.Windows.Forms.ComboBox()
         Me.Get_Btn = New MetroFramework.Controls.MetroButton()
@@ -146,9 +146,9 @@ Partial Class AccountabilityFrm
         Me.Fields_Pnl.Controls.Add(Me.MetroLabel5)
         Me.Fields_Pnl.Controls.Add(Me.Line_Pnl)
         Me.Fields_Pnl.Controls.Add(Me.MetroLabel4)
-        Me.Fields_Pnl.Controls.Add(Me.Dept_Cbox)
+        Me.Fields_Pnl.Controls.Add(Me.EmpDept_Cbox)
         Me.Fields_Pnl.Controls.Add(Me.MetroLabel3)
-        Me.Fields_Pnl.Controls.Add(Me.Position_Cbox)
+        Me.Fields_Pnl.Controls.Add(Me.EmpPosition_Cbox)
         Me.Fields_Pnl.Controls.Add(Me.MetroLabel2)
         Me.Fields_Pnl.Controls.Add(Me.EmpName_Cbox)
         Me.Fields_Pnl.Controls.Add(Me.Get_Btn)
@@ -181,7 +181,7 @@ Partial Class AccountabilityFrm
         Me.RecByID_Cbox.Name = "RecByID_Cbox"
         Me.RecByID_Cbox.Size = New System.Drawing.Size(106, 25)
         Me.RecByID_Cbox.TabIndex = 842
-        Me.RecByID_Cbox.Tag = ""
+        Me.RecByID_Cbox.Tag = "emp_id"
         '
         'MetroLabel12
         '
@@ -268,7 +268,7 @@ Partial Class AccountabilityFrm
         Me.ReceivedBy_Cbox.Name = "ReceivedBy_Cbox"
         Me.ReceivedBy_Cbox.Size = New System.Drawing.Size(168, 25)
         Me.ReceivedBy_Cbox.TabIndex = 844
-        Me.ReceivedBy_Cbox.Tag = ""
+        Me.ReceivedBy_Cbox.Tag = "emp_name"
         '
         'MetroLabel9
         '
@@ -358,7 +358,7 @@ Partial Class AccountabilityFrm
         Me.Desc_Cbox.Name = "Desc_Cbox"
         Me.Desc_Cbox.Size = New System.Drawing.Size(332, 25)
         Me.Desc_Cbox.TabIndex = 834
-        Me.Desc_Cbox.Tag = ""
+        Me.Desc_Cbox.Tag = "stk_desc"
         '
         'Item_Pnl
         '
@@ -491,19 +491,19 @@ Partial Class AccountabilityFrm
         Me.MetroLabel4.Text = "Department"
         Me.MetroLabel4.UseCustomBackColor = True
         '
-        'Dept_Cbox
+        'EmpDept_Cbox
         '
-        Me.Dept_Cbox.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.EmpDept_Cbox.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Dept_Cbox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-        Me.Dept_Cbox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.Dept_Cbox.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Dept_Cbox.FormattingEnabled = True
-        Me.Dept_Cbox.Location = New System.Drawing.Point(113, 140)
-        Me.Dept_Cbox.Name = "Dept_Cbox"
-        Me.Dept_Cbox.Size = New System.Drawing.Size(301, 25)
-        Me.Dept_Cbox.TabIndex = 8
-        Me.Dept_Cbox.Tag = "get"
+        Me.EmpDept_Cbox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        Me.EmpDept_Cbox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.EmpDept_Cbox.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.EmpDept_Cbox.FormattingEnabled = True
+        Me.EmpDept_Cbox.Location = New System.Drawing.Point(113, 140)
+        Me.EmpDept_Cbox.Name = "EmpDept_Cbox"
+        Me.EmpDept_Cbox.Size = New System.Drawing.Size(301, 25)
+        Me.EmpDept_Cbox.TabIndex = 8
+        Me.EmpDept_Cbox.Tag = "emp_dept"
         '
         'MetroLabel3
         '
@@ -516,19 +516,19 @@ Partial Class AccountabilityFrm
         Me.MetroLabel3.Text = "Position"
         Me.MetroLabel3.UseCustomBackColor = True
         '
-        'Position_Cbox
+        'EmpPosition_Cbox
         '
-        Me.Position_Cbox.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.EmpPosition_Cbox.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Position_Cbox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-        Me.Position_Cbox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.Position_Cbox.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Position_Cbox.FormattingEnabled = True
-        Me.Position_Cbox.Location = New System.Drawing.Point(113, 109)
-        Me.Position_Cbox.Name = "Position_Cbox"
-        Me.Position_Cbox.Size = New System.Drawing.Size(301, 25)
-        Me.Position_Cbox.TabIndex = 6
-        Me.Position_Cbox.Tag = "get"
+        Me.EmpPosition_Cbox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        Me.EmpPosition_Cbox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.EmpPosition_Cbox.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.EmpPosition_Cbox.FormattingEnabled = True
+        Me.EmpPosition_Cbox.Location = New System.Drawing.Point(113, 109)
+        Me.EmpPosition_Cbox.Name = "EmpPosition_Cbox"
+        Me.EmpPosition_Cbox.Size = New System.Drawing.Size(301, 25)
+        Me.EmpPosition_Cbox.TabIndex = 6
+        Me.EmpPosition_Cbox.Tag = "emp_position"
         '
         'MetroLabel2
         '
@@ -553,7 +553,7 @@ Partial Class AccountabilityFrm
         Me.EmpName_Cbox.Name = "EmpName_Cbox"
         Me.EmpName_Cbox.Size = New System.Drawing.Size(301, 25)
         Me.EmpName_Cbox.TabIndex = 4
-        Me.EmpName_Cbox.Tag = "get"
+        Me.EmpName_Cbox.Tag = "emp_name"
         '
         'Get_Btn
         '
@@ -588,7 +588,7 @@ Partial Class AccountabilityFrm
         Me.EmpID_Cbox.Name = "EmpID_Cbox"
         Me.EmpID_Cbox.Size = New System.Drawing.Size(301, 25)
         Me.EmpID_Cbox.TabIndex = 1
-        Me.EmpID_Cbox.Tag = "get"
+        Me.EmpID_Cbox.Tag = "emp_id"
         '
         'Quantity_Num
         '
@@ -970,9 +970,9 @@ Partial Class AccountabilityFrm
     Friend WithEvents MetroLabel2 As MetroFramework.Controls.MetroLabel
     Friend WithEvents EmpName_Cbox As ComboBox
     Friend WithEvents MetroLabel3 As MetroFramework.Controls.MetroLabel
-    Friend WithEvents Position_Cbox As ComboBox
+    Friend WithEvents EmpPosition_Cbox As ComboBox
     Friend WithEvents MetroLabel4 As MetroFramework.Controls.MetroLabel
-    Friend WithEvents Dept_Cbox As ComboBox
+    Friend WithEvents EmpDept_Cbox As ComboBox
     Friend WithEvents Line_Pnl As Panel
     Friend WithEvents CtrlNo_Tbox As MetroFramework.Controls.MetroTextBox
     Friend WithEvents MetroLabel5 As MetroFramework.Controls.MetroLabel

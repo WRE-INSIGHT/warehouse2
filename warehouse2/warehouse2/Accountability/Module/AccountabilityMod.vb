@@ -19,7 +19,8 @@ Module AccountabilityMod
                                       Optional stk_receivedby_id As String = "",
                                       Optional stk_receivedby As String = "",
                                       Optional stk_remarks As String = "",
-                                      Optional date_returned As String = "")
+                                      Optional date_returned As String = "",
+                                      Optional cols As String = "")
         sqlDataAdapter = New SqlDataAdapter
         sqlBindingSource = New BindingSource
         sqlDataSet = New DataSet
@@ -48,6 +49,7 @@ Module AccountabilityMod
                 sqlCommand.Parameters.Add("@stk_receivedby", SqlDbType.VarChar).Value = stk_receivedby
                 sqlCommand.Parameters.Add("@stk_remarks", SqlDbType.VarChar).Value = stk_remarks
                 sqlCommand.Parameters.Add("@inputtedby", SqlDbType.VarChar).Value = user_fullname
+                sqlCommand.Parameters.Add("@Cols", SqlDbType.VarChar).Value = cols
 
                 sqlCommand.Parameters.Add("@stk_qty", SqlDbType.Decimal).Value = stk_qty
                 sqlCommand.Parameters.Add("@stk_unitprice", SqlDbType.Decimal).Value = stk_unitprice
