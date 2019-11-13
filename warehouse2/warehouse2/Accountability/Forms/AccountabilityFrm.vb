@@ -100,7 +100,7 @@ Public Class AccountabilityFrm
 
         Loading_PB.BringToFront()
         UnitPrice_Num.Maximum = Decimal.MaxValue
-
+        Quantity_Num.Maximum = Decimal.MaxValue
         search_acct = ""
         search_inv = ""
         todo_mode = "onload"
@@ -556,7 +556,7 @@ Public Class AccountabilityFrm
                 With DGV_Search_Inventory
                     stockno = .Item("STOCKNO", e.RowIndex).Value
                     Desc_Cbox.Text = .Item("DESCRIPTION", e.RowIndex).Value.ToString
-                    Quantity_Num.Maximum = .Item("PHYSICAL", e.RowIndex).Value
+                    'Quantity_Num.Maximum = .Item("PHYSICAL", e.RowIndex).Value
                     Unit_Tbox.Text = .Item("UNIT", e.RowIndex).Value.ToString
                     UnitPrice_Num.Value = .Item("UNITPRICE", e.RowIndex).Value
                 End With
