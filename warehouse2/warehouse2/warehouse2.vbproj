@@ -128,6 +128,7 @@
     <Compile Include="Main\Forms\MainFrm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Main\Modules\MainModule.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
