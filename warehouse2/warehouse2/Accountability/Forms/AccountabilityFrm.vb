@@ -15,14 +15,14 @@ Public Class AccountabilityFrm
     Dim cbox_obj As Object
     Dim deptfilter_str As String = ""
     Dim search_acct, search_inv, search, current_mode_string, cbox_cols, cols,
-        ctrl_no, emp_id, emp_name, emp_pos, emp_dept, stk_desc, stk_unit, receivedby_id, receivedby, remarks As String
+        ctrl_no, emp_id, emp_name, emp_pos, emp_dept, stk_desc, stk_unit, receivedby_id, receivedby As String
     Dim ctr_todo, kmdi_emp_id, stockno, acctblty_id, CboxselIndex As Integer
     Dim current_mode_color As Color
     Dim btn_clicking As Object
     Dim stk_qty, stk_unitprice As Decimal
     Dim date_issued As Date
 
-    Public todo, todo_mode, date_returned As String
+    Public todo, todo_mode, date_returned, remarks As String
     Private Sub Reset_here()
         DGV_Accountability.Enabled = True
         DGV_Search_Inventory.Enabled = True
@@ -41,7 +41,7 @@ Public Class AccountabilityFrm
     Sub itemsclear()
         acctblty_id = 0
         stockno = 0
-        Desc_Cbox.SelectedIndex = -1
+        Desc_Cbox.Text = ""
         Quantity_Num.Value = 0
         Unit_Tbox.Clear()
         UnitPrice_Num.Value = 0
@@ -764,9 +764,10 @@ Public Class AccountabilityFrm
             acctblty_id_list.Add(item.Cells("acctblty_id").Value)
         Next
         remarks = TransferToolStripMenuItem.Tag
-        todo_mode = "after_trans"
-        todo = "transRemarksAcct"
-        Start_BGW()
+        TransferFrm.ShowDialog()
+        'todo_mode = "after_trans"
+        'todo = "transRemarksAcct"
+        'Start_BGW()
     End Sub
     Private Sub Cbox_MouseDown(sender As Object, e As MouseEventArgs) Handles EmpID_Cbox.MouseDown,
                                                                               EmpName_Cbox.MouseDown,
@@ -775,6 +776,8 @@ Public Class AccountabilityFrm
                                                                               Desc_Cbox.MouseDown,
                                                                               RecByID_Cbox.MouseDown,
                                                                               ReceivedBy_Cbox.MouseDown
+        current_mode_string = Mode_Lbl.Text
+        current_mode_color = Mode_Lbl.ForeColor
         CboxselIndex = sender.SelectedIndex
         cbox_obj = sender
         cols = sender.Tag
