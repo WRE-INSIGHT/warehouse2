@@ -52,7 +52,6 @@ Public Class AccountabilityFrm
     End Sub
     Public Sub Start_BGW()
         Try
-
             If BGW.IsBusy <> True Then
                 DGV_Accountability.Enabled = False
                 DGV_Search_Inventory.Enabled = False
