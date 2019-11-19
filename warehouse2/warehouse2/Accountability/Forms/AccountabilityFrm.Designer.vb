@@ -197,7 +197,7 @@ Partial Class AccountabilityFrm
         'DateIssued_DTP
         '
         Me.DateIssued_DTP.Location = New System.Drawing.Point(117, 527)
-        Me.DateIssued_DTP.MinimumSize = New System.Drawing.Size(4, 29)
+        Me.DateIssued_DTP.MinimumSize = New System.Drawing.Size(0, 29)
         Me.DateIssued_DTP.Name = "DateIssued_DTP"
         Me.DateIssued_DTP.Size = New System.Drawing.Size(228, 29)
         Me.DateIssued_DTP.TabIndex = 846
@@ -832,7 +832,8 @@ Partial Class AccountabilityFrm
         '
         'DeptFilter_Cbox
         '
-        Me.DeptFilter_Cbox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.DeptFilter_Cbox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        Me.DeptFilter_Cbox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.DeptFilter_Cbox.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.DeptFilter_Cbox.FormattingEnabled = True
         Me.DeptFilter_Cbox.Location = New System.Drawing.Point(6, 31)
