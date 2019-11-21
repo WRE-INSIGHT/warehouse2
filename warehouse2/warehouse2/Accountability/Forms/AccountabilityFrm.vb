@@ -22,6 +22,11 @@ Public Class AccountabilityFrm
     Dim stk_qty, stk_unitprice As Decimal
     Dim date_issued As Date
 
+
+    Dim return_str As String = "Return",
+        lost_str As String = "Lost",
+        transferred_str As String = "Transfer",
+        all_str As String = ""
     Public todo, todo_mode, date_returned, remarks As String
     Private Sub Reset_here()
         DGV_Accountability.Enabled = True
@@ -32,7 +37,6 @@ Public Class AccountabilityFrm
         ctr_todo = 0
         sql_Transaction_result = ""
         'kmdi_emp_id = 0
-
 
         Mode_Lbl.Text = current_mode_string
         Mode_Lbl.ForeColor = current_mode_color
@@ -113,11 +117,13 @@ Public Class AccountabilityFrm
         Try
             Select Case todo
                 Case "load_acctblty"
-                    Accountability_Inv_STP("warehouse_acctblty_stp", todo, "%" & search_acct & "%")
+                    Accountability_Inv_STP("warehouse_acctblty_stp", todo, "%" & search_acct & "%",,
+                                           return_str, lost_str, transferred_str, all_str)
                     BGW.ReportProgress(0)
 
                 Case "load_acctblty_byEmpID"
-                    Accountability_Inv_STP("warehouse_acctblty_stp", todo, search_acct)
+                    Accountability_Inv_STP("warehouse_acctblty_stp", todo, search_acct,,
+                                           return_str, lost_str, transferred_str, all_str)
                     BGW.ReportProgress(0)
 
                 Case "load_search_inv"
@@ -254,6 +260,7 @@ Public Class AccountabilityFrm
                                 .Columns("acctblty_id").Visible = False
                                 .Columns("stk_recievedby_id").Visible = False
                                 .Columns("stk_no").Visible = False
+                                .Columns("stk_changes").Visible = False
                                 .Columns("Quantity").DefaultCellStyle.Format = "N2"
                                 .Columns("Date Issued").DefaultCellStyle.Format = "MMM. dd, yyyy"
                                 .Columns("Total Amount").DefaultCellStyle.Format = "N2"
@@ -349,7 +356,17 @@ Public Class AccountabilityFrm
 
                             DeptFilter_Cbox.DataSource = cbox_bs
                             DeptFilter_Cbox.DisplayMember = "emp_dept"
-                            DeptFilter_Cbox.SelectedIndex = -1
+
+                            If CboxselIndex <> 0 Then
+                                If CboxselIndex > DeptFilter_Cbox.Items.Count - 1 Then
+                                    DeptFilter_Cbox.SelectedIndex = -1
+                                Else
+                                    DeptFilter_Cbox.SelectedIndex = CboxselIndex
+                                End If
+                            Else
+                                DeptFilter_Cbox.SelectedIndex = -1
+                            End If
+
 
                             AddHandler DeptFilter_Cbox.SelectedIndexChanged, AddressOf DeptFilter_Cbox_SelectedIndexChanged
 
@@ -446,7 +463,13 @@ Public Class AccountabilityFrm
                             Select Case ctr_todo
                                 Case 1
                                     Loading_PB.BringToFront()
-                                    todo = "load_acctblty"
+                                    If DeptFilter_Cbox.Text = "" And EmpFilter_Cbox.Text = "" Then
+                                        search_acct = ""
+                                        todo = "load_acctblty"
+                                    Else
+                                        search_acct = EmpFilter_Cbox.SelectedValue
+                                        todo = "load_acctblty_byEmpID"
+                                    End If
                                     Start_BGW()
 
                                 Case 2
@@ -527,24 +550,40 @@ Public Class AccountabilityFrm
         Try
             With DGV_Accountability
                 .Item("Control No.", e.RowIndex).Style.Font = New Font("Segoe UI", 10.0!, FontStyle.Bold)
-                If .Item("Date Returned", e.RowIndex).Value.ToString <> "" Then
+                If .Item("stk_changes", e.RowIndex).Value.ToString = "Return" Then
                     .Item("Control No.", e.RowIndex).Style.ForeColor = ReturnLegend_Pnl.BackColor
                     .Item("Control No.", e.RowIndex).Style.SelectionForeColor = ReturnLegend_Pnl.BackColor
+
+                ElseIf .Item("stk_changes", e.RowIndex).Value.ToString = "Lost" Then
+                    .Item("Control No.", e.RowIndex).Style.ForeColor = LostLegend_Pnl.BackColor
+                    .Item("Control No.", e.RowIndex).Style.SelectionForeColor = LostLegend_Pnl.BackColor
+
+                ElseIf .Item("stk_changes", e.RowIndex).Value.ToString = "Transfer" Then
+                    .Item("Control No.", e.RowIndex).Style.ForeColor = TransferLegend_Pnl.BackColor
+                    .Item("Control No.", e.RowIndex).Style.SelectionForeColor = TransferLegend_Pnl.BackColor
+
                 Else
-                    If .Item("Remarks", e.RowIndex).Value.ToString.Contains("Lost") Then
-                        .Item("Control No.", e.RowIndex).Style.ForeColor = LostLegend_Pnl.BackColor
-                        .Item("Control No.", e.RowIndex).Style.SelectionForeColor = LostLegend_Pnl.BackColor
-
-                    ElseIf .Item("Remarks", e.RowIndex).Value.ToString.Contains("Transferred") Then
-                        .Item("Control No.", e.RowIndex).Style.ForeColor = TransferLegend_Pnl.BackColor
-                        .Item("Control No.", e.RowIndex).Style.SelectionForeColor = TransferLegend_Pnl.BackColor
-
-                    Else
-                        .Item("Control No.", e.RowIndex).Style.ForeColor = Color.Black
-                        .Item("Control No.", e.RowIndex).Style.SelectionForeColor = Color.Black
-
-                    End If
+                    .Item("Control No.", e.RowIndex).Style.ForeColor = Color.Black
+                    .Item("Control No.", e.RowIndex).Style.SelectionForeColor = Color.Black
                 End If
+                'If .Item("Date Returned", e.RowIndex).Value.ToString <> "" Then
+                '    .Item("Control No.", e.RowIndex).Style.ForeColor = ReturnLegend_Pnl.BackColor
+                '    .Item("Control No.", e.RowIndex).Style.SelectionForeColor = ReturnLegend_Pnl.BackColor
+                'Else
+                '    If .Item("Remarks", e.RowIndex).Value.ToString.Contains("Lost") Then
+                '        .Item("Control No.", e.RowIndex).Style.ForeColor = LostLegend_Pnl.BackColor
+                '        .Item("Control No.", e.RowIndex).Style.SelectionForeColor = LostLegend_Pnl.BackColor
+
+                '    ElseIf .Item("Remarks", e.RowIndex).Value.ToString.Contains("Transferred") Then
+                '        .Item("Control No.", e.RowIndex).Style.ForeColor = TransferLegend_Pnl.BackColor
+                '        .Item("Control No.", e.RowIndex).Style.SelectionForeColor = TransferLegend_Pnl.BackColor
+
+                '    Else
+                '        .Item("Control No.", e.RowIndex).Style.ForeColor = Color.Black
+                '        .Item("Control No.", e.RowIndex).Style.SelectionForeColor = Color.Black
+
+                '    End If
+                'End If
             End With
         Catch ex As Exception
             KMDIPrompts(Me, "DotNetError", ex.Message, ex.StackTrace, Nothing, True)
@@ -573,6 +612,49 @@ Public Class AccountabilityFrm
         search_acct = Trim(SearchAcct_Tbox.Text)
         todo = "load_acctblty"
         Start_BGW()
+    End Sub
+    Private Sub FilterReq_Btn_Click(sender As Object, e As EventArgs) Handles FilterReq_Btn.Click
+        Filter2_Pnl.BringToFront()
+        If Filter2_Pnl.Visible = True Then
+            Filter2_Pnl.Visible = False
+            If Return_Chk.Checked = True Then
+                return_str = "Return"
+            Else
+                return_str = "notReturn"
+            End If
+
+            If Lost_Chk.Checked = True Then
+                lost_str = "Lost"
+            Else
+                lost_str = "notLost"
+            End If
+
+            If Transferred_Chk.Checked = True Then
+                transferred_str = "Transfer"
+            Else
+                transferred_str = "notTransfer"
+            End If
+
+            If All_Chk.Checked = True Then
+                return_str = "Return"
+                lost_str = "Lost"
+                transferred_str = "Transfer"
+                all_str = ""
+            Else
+                all_str = "notall"
+            End If
+
+            If DeptFilter_Cbox.Text = "" And EmpFilter_Cbox.Text = "" Then
+                search_acct = ""
+                todo = "load_acctblty"
+            Else
+                search_acct = EmpFilter_Cbox.SelectedValue
+                todo = "load_acctblty_byEmpID"
+            End If
+            Start_BGW()
+        Else
+            Filter2_Pnl.Visible = True
+        End If
     End Sub
 
     Private Sub SearchAcct_Tbox_KeyDown(sender As Object, e As KeyEventArgs) Handles SearchAcct_Tbox.KeyDown
@@ -722,6 +804,8 @@ Public Class AccountabilityFrm
     Private Sub DeptFilter_Cbox_SelectedIndexChanged(sender As Object, e As EventArgs)
         current_mode_string = Mode_Lbl.Text
         current_mode_color = Mode_Lbl.ForeColor
+
+        CboxselIndex = sender.SelectedIndex
         Mode_Lbl.Text = "Getting lists of employee."
 
         deptfilter_str = DeptFilter_Cbox.Text
@@ -736,6 +820,7 @@ Public Class AccountabilityFrm
 
         search_acct = EmpFilter_Cbox.SelectedValue.ToString
         todo = "load_acctblty_byEmpID"
+        'todo = "load_acctblty"
         Start_BGW()
     End Sub
 

@@ -199,6 +199,7 @@
     <Content Include="Resources\checkmark_48px.png" />
     <Content Include="Resources\delete_sign_48px.png" />
     <Content Include="Resources\edit_48px.png" />
+    <None Include="Resources\filter_48px.png" />
     <Content Include="Resources\icons8_full_warehouse.ico" />
     <Content Include="Resources\icons8_full_warehouse_64.png" />
     <Content Include="Resources\icons8_view_details.ico" />
