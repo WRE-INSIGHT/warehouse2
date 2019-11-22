@@ -41,6 +41,7 @@ Partial Class AccountabilityFrm
         Me.MetroLabel6 = New MetroFramework.Controls.MetroLabel()
         Me.Desc_Cbox = New System.Windows.Forms.ComboBox()
         Me.Item_Pnl = New System.Windows.Forms.Panel()
+        Me.Loading2_PB = New System.Windows.Forms.PictureBox()
         Me.Search_Tbox = New MetroFramework.Controls.MetroTextBox()
         Me.CtrlNo_Tbox = New MetroFramework.Controls.MetroTextBox()
         Me.MetroLabel5 = New MetroFramework.Controls.MetroLabel()
@@ -65,6 +66,7 @@ Partial Class AccountabilityFrm
         Me.Save_Btn = New System.Windows.Forms.Button()
         Me.Mode_Lbl = New MetroFramework.Controls.MetroLabel()
         Me.Filter_Pnl = New System.Windows.Forms.Panel()
+        Me.FilterReq_Btn = New System.Windows.Forms.Button()
         Me.Legends_Pnl = New System.Windows.Forms.Panel()
         Me.MetroLabel17 = New MetroFramework.Controls.MetroLabel()
         Me.TransferLegend_Pnl = New System.Windows.Forms.Panel()
@@ -77,33 +79,31 @@ Partial Class AccountabilityFrm
         Me.DeptFilter_Cbox = New System.Windows.Forms.ComboBox()
         Me.MetroLabel13 = New MetroFramework.Controls.MetroLabel()
         Me.SearchAcct_Tbox = New MetroFramework.Controls.MetroTextBox()
-        Me.Acctblty_Cmenu = New MetroFramework.Controls.MetroContextMenu(Me.components)
-        Me.Loading2_PB = New System.Windows.Forms.PictureBox()
-        Me.FilterReq_Btn = New System.Windows.Forms.Button()
         Me.Loading_PB = New System.Windows.Forms.PictureBox()
+        Me.Acctblty_Cmenu = New MetroFramework.Controls.MetroContextMenu(Me.components)
         Me.ReturnToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LostToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TransferToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Filter2_Pnl = New System.Windows.Forms.Panel()
+        Me.All_Chk = New MetroFramework.Controls.MetroCheckBox()
         Me.Lost_Chk = New MetroFramework.Controls.MetroCheckBox()
         Me.Transferred_Chk = New MetroFramework.Controls.MetroCheckBox()
         Me.Return_Chk = New MetroFramework.Controls.MetroCheckBox()
-        Me.All_Chk = New MetroFramework.Controls.MetroCheckBox()
         CType(Me.frm_Split, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.frm_Split.Panel1.SuspendLayout()
         Me.frm_Split.Panel2.SuspendLayout()
         Me.frm_Split.SuspendLayout()
         Me.Fields_Pnl.SuspendLayout()
         Me.Item_Pnl.SuspendLayout()
+        CType(Me.Loading2_PB, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Quantity_Num, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.UnitPrice_Num, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.Btn_Pnl.SuspendLayout()
         Me.Filter_Pnl.SuspendLayout()
         Me.Legends_Pnl.SuspendLayout()
-        Me.Acctblty_Cmenu.SuspendLayout()
-        CType(Me.Loading2_PB, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Loading_PB, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Acctblty_Cmenu.SuspendLayout()
         Me.Filter2_Pnl.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -204,7 +204,7 @@ Partial Class AccountabilityFrm
         'DateIssued_DTP
         '
         Me.DateIssued_DTP.Location = New System.Drawing.Point(117, 527)
-        Me.DateIssued_DTP.MinimumSize = New System.Drawing.Size(4, 29)
+        Me.DateIssued_DTP.MinimumSize = New System.Drawing.Size(0, 29)
         Me.DateIssued_DTP.Name = "DateIssued_DTP"
         Me.DateIssued_DTP.Size = New System.Drawing.Size(228, 29)
         Me.DateIssued_DTP.TabIndex = 846
@@ -377,6 +377,19 @@ Partial Class AccountabilityFrm
         Me.Item_Pnl.Name = "Item_Pnl"
         Me.Item_Pnl.Size = New System.Drawing.Size(432, 123)
         Me.Item_Pnl.TabIndex = 0
+        '
+        'Loading2_PB
+        '
+        Me.Loading2_PB.BackColor = System.Drawing.Color.Transparent
+        Me.Loading2_PB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.Loading2_PB.Image = Global.warehouse2.My.Resources.Resources.loading_trans
+        Me.Loading2_PB.ImageLocation = ""
+        Me.Loading2_PB.Location = New System.Drawing.Point(202, 34)
+        Me.Loading2_PB.Name = "Loading2_PB"
+        Me.Loading2_PB.Size = New System.Drawing.Size(55, 55)
+        Me.Loading2_PB.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.Loading2_PB.TabIndex = 21
+        Me.Loading2_PB.TabStop = False
         '
         'Search_Tbox
         '
@@ -739,6 +752,22 @@ Partial Class AccountabilityFrm
         Me.Filter_Pnl.Size = New System.Drawing.Size(526, 60)
         Me.Filter_Pnl.TabIndex = 21
         '
+        'FilterReq_Btn
+        '
+        Me.FilterReq_Btn.BackColor = System.Drawing.Color.Transparent
+        Me.FilterReq_Btn.BackgroundImage = Global.warehouse2.My.Resources.Resources.filter_48px
+        Me.FilterReq_Btn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.FilterReq_Btn.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.FilterReq_Btn.FlatAppearance.BorderSize = 0
+        Me.FilterReq_Btn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkGray
+        Me.FilterReq_Btn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray
+        Me.FilterReq_Btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.FilterReq_Btn.Location = New System.Drawing.Point(346, 29)
+        Me.FilterReq_Btn.Name = "FilterReq_Btn"
+        Me.FilterReq_Btn.Size = New System.Drawing.Size(27, 27)
+        Me.FilterReq_Btn.TabIndex = 839
+        Me.FilterReq_Btn.UseVisualStyleBackColor = False
+        '
         'Legends_Pnl
         '
         Me.Legends_Pnl.Controls.Add(Me.MetroLabel17)
@@ -883,41 +912,6 @@ Partial Class AccountabilityFrm
         Me.SearchAcct_Tbox.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer))
         Me.SearchAcct_Tbox.WaterMarkFont = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         '
-        'Acctblty_Cmenu
-        '
-        Me.Acctblty_Cmenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ReturnToolStripMenuItem, Me.LostToolStripMenuItem, Me.TransferToolStripMenuItem})
-        Me.Acctblty_Cmenu.Name = "AcctbltyCmenu"
-        Me.Acctblty_Cmenu.Size = New System.Drawing.Size(116, 70)
-        '
-        'Loading2_PB
-        '
-        Me.Loading2_PB.BackColor = System.Drawing.Color.Transparent
-        Me.Loading2_PB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.Loading2_PB.Image = Global.warehouse2.My.Resources.Resources.loading_trans
-        Me.Loading2_PB.ImageLocation = ""
-        Me.Loading2_PB.Location = New System.Drawing.Point(202, 34)
-        Me.Loading2_PB.Name = "Loading2_PB"
-        Me.Loading2_PB.Size = New System.Drawing.Size(55, 55)
-        Me.Loading2_PB.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.Loading2_PB.TabIndex = 21
-        Me.Loading2_PB.TabStop = False
-        '
-        'FilterReq_Btn
-        '
-        Me.FilterReq_Btn.BackColor = System.Drawing.Color.Transparent
-        Me.FilterReq_Btn.BackgroundImage = Global.warehouse2.My.Resources.Resources.filter_48px
-        Me.FilterReq_Btn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.FilterReq_Btn.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.FilterReq_Btn.FlatAppearance.BorderSize = 0
-        Me.FilterReq_Btn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkGray
-        Me.FilterReq_Btn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray
-        Me.FilterReq_Btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.FilterReq_Btn.Location = New System.Drawing.Point(346, 29)
-        Me.FilterReq_Btn.Name = "FilterReq_Btn"
-        Me.FilterReq_Btn.Size = New System.Drawing.Size(27, 27)
-        Me.FilterReq_Btn.TabIndex = 839
-        Me.FilterReq_Btn.UseVisualStyleBackColor = False
-        '
         'Loading_PB
         '
         Me.Loading_PB.BackColor = System.Drawing.Color.Transparent
@@ -930,6 +924,12 @@ Partial Class AccountabilityFrm
         Me.Loading_PB.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.Loading_PB.TabIndex = 20
         Me.Loading_PB.TabStop = False
+        '
+        'Acctblty_Cmenu
+        '
+        Me.Acctblty_Cmenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ReturnToolStripMenuItem, Me.LostToolStripMenuItem, Me.TransferToolStripMenuItem})
+        Me.Acctblty_Cmenu.Name = "AcctbltyCmenu"
+        Me.Acctblty_Cmenu.Size = New System.Drawing.Size(116, 70)
         '
         'ReturnToolStripMenuItem
         '
@@ -967,6 +967,18 @@ Partial Class AccountabilityFrm
         Me.Filter2_Pnl.TabIndex = 9
         Me.Filter2_Pnl.Visible = False
         '
+        'All_Chk
+        '
+        Me.All_Chk.AutoSize = True
+        Me.All_Chk.Checked = True
+        Me.All_Chk.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.All_Chk.Location = New System.Drawing.Point(11, 6)
+        Me.All_Chk.Name = "All_Chk"
+        Me.All_Chk.Size = New System.Drawing.Size(37, 15)
+        Me.All_Chk.TabIndex = 4
+        Me.All_Chk.Text = "All"
+        Me.All_Chk.UseSelectable = True
+        '
         'Lost_Chk
         '
         Me.Lost_Chk.AutoSize = True
@@ -1003,25 +1015,13 @@ Partial Class AccountabilityFrm
         Me.Return_Chk.Text = "Return"
         Me.Return_Chk.UseSelectable = True
         '
-        'All_Chk
-        '
-        Me.All_Chk.AutoSize = True
-        Me.All_Chk.Checked = True
-        Me.All_Chk.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.All_Chk.Location = New System.Drawing.Point(11, 6)
-        Me.All_Chk.Name = "All_Chk"
-        Me.All_Chk.Size = New System.Drawing.Size(37, 15)
-        Me.All_Chk.TabIndex = 4
-        Me.All_Chk.Text = "All"
-        Me.All_Chk.UseSelectable = True
-        '
         'AccountabilityFrm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1008, 661)
-        Me.Controls.Add(Me.Filter2_Pnl)
         Me.Controls.Add(Me.frm_Split)
+        Me.Controls.Add(Me.Filter2_Pnl)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.KeyPreview = True
         Me.Name = "AccountabilityFrm"
@@ -1033,6 +1033,7 @@ Partial Class AccountabilityFrm
         Me.Fields_Pnl.ResumeLayout(False)
         Me.Fields_Pnl.PerformLayout()
         Me.Item_Pnl.ResumeLayout(False)
+        CType(Me.Loading2_PB, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Quantity_Num, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.UnitPrice_Num, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
@@ -1041,9 +1042,8 @@ Partial Class AccountabilityFrm
         Me.Filter_Pnl.PerformLayout()
         Me.Legends_Pnl.ResumeLayout(False)
         Me.Legends_Pnl.PerformLayout()
-        Me.Acctblty_Cmenu.ResumeLayout(False)
-        CType(Me.Loading2_PB, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Loading_PB, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Acctblty_Cmenu.ResumeLayout(False)
         Me.Filter2_Pnl.ResumeLayout(False)
         Me.Filter2_Pnl.PerformLayout()
         Me.ResumeLayout(False)
