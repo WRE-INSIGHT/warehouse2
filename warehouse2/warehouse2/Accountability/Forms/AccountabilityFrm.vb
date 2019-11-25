@@ -387,6 +387,10 @@ Public Class AccountabilityFrm
 
                             AddHandler EmpFilter_Cbox.SelectedIndexChanged, AddressOf EmpFilter_Cbox_SelectedIndexChanged
 
+                            todo = "load_acctblty"
+                            search_acct = DeptFilter_Cbox.Text
+                            Start_BGW()
+
                         Case "Load_ComboBoxData"
                             cbox_obj.DataSource = cbox_bs
                             cbox_obj.DisplayMember = cols
