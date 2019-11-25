@@ -729,6 +729,7 @@ Public Class AccountabilityFrm
     End Sub
 
     Private Sub Refresh_Btn_Click(sender As Object, e As EventArgs) Handles Refresh_Btn.Click
+        CboxselIndex = 0
         Loading_PB.BringToFront()
         search_acct = ""
         EmpFilter_Cbox.Text = ""
