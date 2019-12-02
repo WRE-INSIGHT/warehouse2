@@ -651,6 +651,15 @@ Public Class AccountabilityFrm
             If DeptFilter_Cbox.Text = "" And EmpFilter_Cbox.Text = "" Then
                 search_acct = ""
                 todo = "load_acctblty"
+
+            ElseIf DeptFilter_Cbox.Text <> "" And EmpFilter_Cbox.Text = "" Then
+                search_acct = DeptFilter_Cbox.Text
+                todo = "load_acctblty"
+
+            ElseIf DeptFilter_Cbox.Text = "" And EmpFilter_Cbox.Text <> "" Then
+                search_acct = EmpFilter_Cbox.Text
+                todo = "load_acctblty"
+
             Else
                 search_acct = EmpFilter_Cbox.SelectedValue
                 todo = "load_acctblty_byEmpID"
