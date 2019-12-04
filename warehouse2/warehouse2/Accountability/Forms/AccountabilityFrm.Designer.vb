@@ -68,6 +68,8 @@ Partial Class AccountabilityFrm
         Me.Filter_Pnl = New System.Windows.Forms.Panel()
         Me.FilterReq_Btn = New System.Windows.Forms.Button()
         Me.Legends_Pnl = New System.Windows.Forms.Panel()
+        Me.MetroLabel18 = New MetroFramework.Controls.MetroLabel()
+        Me.ReturnablesLegend_Pnl = New System.Windows.Forms.Panel()
         Me.MetroLabel17 = New MetroFramework.Controls.MetroLabel()
         Me.TransferLegend_Pnl = New System.Windows.Forms.Panel()
         Me.MetroLabel16 = New MetroFramework.Controls.MetroLabel()
@@ -85,7 +87,7 @@ Partial Class AccountabilityFrm
         Me.LostToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TransferToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Filter2_Pnl = New System.Windows.Forms.Panel()
-        Me.All_Chk = New MetroFramework.Controls.MetroCheckBox()
+        Me.Returnbles_Chk = New MetroFramework.Controls.MetroCheckBox()
         Me.Lost_Chk = New MetroFramework.Controls.MetroCheckBox()
         Me.Transferred_Chk = New MetroFramework.Controls.MetroCheckBox()
         Me.Return_Chk = New MetroFramework.Controls.MetroCheckBox()
@@ -204,7 +206,7 @@ Partial Class AccountabilityFrm
         'DateIssued_DTP
         '
         Me.DateIssued_DTP.Location = New System.Drawing.Point(117, 527)
-        Me.DateIssued_DTP.MinimumSize = New System.Drawing.Size(0, 29)
+        Me.DateIssued_DTP.MinimumSize = New System.Drawing.Size(4, 29)
         Me.DateIssued_DTP.Name = "DateIssued_DTP"
         Me.DateIssued_DTP.Size = New System.Drawing.Size(228, 29)
         Me.DateIssued_DTP.TabIndex = 846
@@ -770,6 +772,8 @@ Partial Class AccountabilityFrm
         '
         'Legends_Pnl
         '
+        Me.Legends_Pnl.Controls.Add(Me.MetroLabel18)
+        Me.Legends_Pnl.Controls.Add(Me.ReturnablesLegend_Pnl)
         Me.Legends_Pnl.Controls.Add(Me.MetroLabel17)
         Me.Legends_Pnl.Controls.Add(Me.TransferLegend_Pnl)
         Me.Legends_Pnl.Controls.Add(Me.MetroLabel16)
@@ -777,24 +781,45 @@ Partial Class AccountabilityFrm
         Me.Legends_Pnl.Controls.Add(Me.MetroLabel15)
         Me.Legends_Pnl.Controls.Add(Me.ReturnLegend_Pnl)
         Me.Legends_Pnl.Dock = System.Windows.Forms.DockStyle.Right
-        Me.Legends_Pnl.Location = New System.Drawing.Point(421, 0)
+        Me.Legends_Pnl.Location = New System.Drawing.Point(409, 0)
         Me.Legends_Pnl.Name = "Legends_Pnl"
-        Me.Legends_Pnl.Size = New System.Drawing.Size(105, 60)
+        Me.Legends_Pnl.Size = New System.Drawing.Size(117, 60)
         Me.Legends_Pnl.TabIndex = 838
+        '
+        'MetroLabel18
+        '
+        Me.MetroLabel18.AutoSize = True
+        Me.MetroLabel18.FontSize = MetroFramework.MetroLabelSize.Small
+        Me.MetroLabel18.FontWeight = MetroFramework.MetroLabelWeight.Bold
+        Me.MetroLabel18.Location = New System.Drawing.Point(26, 44)
+        Me.MetroLabel18.Name = "MetroLabel18"
+        Me.MetroLabel18.Size = New System.Drawing.Size(74, 15)
+        Me.MetroLabel18.TabIndex = 844
+        Me.MetroLabel18.Text = "Returnables"
+        '
+        'ReturnablesLegend_Pnl
+        '
+        Me.ReturnablesLegend_Pnl.BackColor = System.Drawing.Color.Black
+        Me.ReturnablesLegend_Pnl.Location = New System.Drawing.Point(3, 47)
+        Me.ReturnablesLegend_Pnl.Name = "ReturnablesLegend_Pnl"
+        Me.ReturnablesLegend_Pnl.Size = New System.Drawing.Size(20, 10)
+        Me.ReturnablesLegend_Pnl.TabIndex = 845
         '
         'MetroLabel17
         '
         Me.MetroLabel17.AutoSize = True
-        Me.MetroLabel17.Location = New System.Drawing.Point(26, 39)
+        Me.MetroLabel17.FontSize = MetroFramework.MetroLabelSize.Small
+        Me.MetroLabel17.FontWeight = MetroFramework.MetroLabelWeight.Bold
+        Me.MetroLabel17.Location = New System.Drawing.Point(26, 30)
         Me.MetroLabel17.Name = "MetroLabel17"
-        Me.MetroLabel17.Size = New System.Drawing.Size(74, 19)
+        Me.MetroLabel17.Size = New System.Drawing.Size(72, 15)
         Me.MetroLabel17.TabIndex = 842
         Me.MetroLabel17.Text = "Transferred"
         '
         'TransferLegend_Pnl
         '
         Me.TransferLegend_Pnl.BackColor = System.Drawing.Color.DimGray
-        Me.TransferLegend_Pnl.Location = New System.Drawing.Point(3, 43)
+        Me.TransferLegend_Pnl.Location = New System.Drawing.Point(3, 33)
         Me.TransferLegend_Pnl.Name = "TransferLegend_Pnl"
         Me.TransferLegend_Pnl.Size = New System.Drawing.Size(20, 10)
         Me.TransferLegend_Pnl.TabIndex = 843
@@ -802,16 +827,18 @@ Partial Class AccountabilityFrm
         'MetroLabel16
         '
         Me.MetroLabel16.AutoSize = True
-        Me.MetroLabel16.Location = New System.Drawing.Point(26, 20)
+        Me.MetroLabel16.FontSize = MetroFramework.MetroLabelSize.Small
+        Me.MetroLabel16.FontWeight = MetroFramework.MetroLabelWeight.Bold
+        Me.MetroLabel16.Location = New System.Drawing.Point(26, 14)
         Me.MetroLabel16.Name = "MetroLabel16"
-        Me.MetroLabel16.Size = New System.Drawing.Size(32, 19)
+        Me.MetroLabel16.Size = New System.Drawing.Size(30, 15)
         Me.MetroLabel16.TabIndex = 840
         Me.MetroLabel16.Text = "Lost"
         '
         'LostLegend_Pnl
         '
         Me.LostLegend_Pnl.BackColor = System.Drawing.Color.IndianRed
-        Me.LostLegend_Pnl.Location = New System.Drawing.Point(3, 24)
+        Me.LostLegend_Pnl.Location = New System.Drawing.Point(3, 19)
         Me.LostLegend_Pnl.Name = "LostLegend_Pnl"
         Me.LostLegend_Pnl.Size = New System.Drawing.Size(20, 10)
         Me.LostLegend_Pnl.TabIndex = 841
@@ -819,9 +846,11 @@ Partial Class AccountabilityFrm
         'MetroLabel15
         '
         Me.MetroLabel15.AutoSize = True
+        Me.MetroLabel15.FontSize = MetroFramework.MetroLabelSize.Small
+        Me.MetroLabel15.FontWeight = MetroFramework.MetroLabelWeight.Bold
         Me.MetroLabel15.Location = New System.Drawing.Point(26, 1)
         Me.MetroLabel15.Name = "MetroLabel15"
-        Me.MetroLabel15.Size = New System.Drawing.Size(62, 19)
+        Me.MetroLabel15.Size = New System.Drawing.Size(60, 15)
         Me.MetroLabel15.TabIndex = 839
         Me.MetroLabel15.Text = "Returned"
         '
@@ -957,7 +986,7 @@ Partial Class AccountabilityFrm
         '
         Me.Filter2_Pnl.BackColor = System.Drawing.Color.White
         Me.Filter2_Pnl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Filter2_Pnl.Controls.Add(Me.All_Chk)
+        Me.Filter2_Pnl.Controls.Add(Me.Returnbles_Chk)
         Me.Filter2_Pnl.Controls.Add(Me.Lost_Chk)
         Me.Filter2_Pnl.Controls.Add(Me.Transferred_Chk)
         Me.Filter2_Pnl.Controls.Add(Me.Return_Chk)
@@ -967,24 +996,24 @@ Partial Class AccountabilityFrm
         Me.Filter2_Pnl.TabIndex = 9
         Me.Filter2_Pnl.Visible = False
         '
-        'All_Chk
+        'Returnbles_Chk
         '
-        Me.All_Chk.AutoSize = True
-        Me.All_Chk.Checked = True
-        Me.All_Chk.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.All_Chk.Location = New System.Drawing.Point(11, 6)
-        Me.All_Chk.Name = "All_Chk"
-        Me.All_Chk.Size = New System.Drawing.Size(37, 15)
-        Me.All_Chk.TabIndex = 4
-        Me.All_Chk.Text = "All"
-        Me.All_Chk.UseSelectable = True
+        Me.Returnbles_Chk.AutoSize = True
+        Me.Returnbles_Chk.Checked = True
+        Me.Returnbles_Chk.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.Returnbles_Chk.Location = New System.Drawing.Point(9, 51)
+        Me.Returnbles_Chk.Name = "Returnbles_Chk"
+        Me.Returnbles_Chk.Size = New System.Drawing.Size(85, 15)
+        Me.Returnbles_Chk.TabIndex = 4
+        Me.Returnbles_Chk.Text = "Returnables"
+        Me.Returnbles_Chk.UseSelectable = True
         '
         'Lost_Chk
         '
         Me.Lost_Chk.AutoSize = True
         Me.Lost_Chk.Checked = True
         Me.Lost_Chk.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.Lost_Chk.Location = New System.Drawing.Point(11, 36)
+        Me.Lost_Chk.Location = New System.Drawing.Point(9, 22)
         Me.Lost_Chk.Name = "Lost_Chk"
         Me.Lost_Chk.Size = New System.Drawing.Size(45, 15)
         Me.Lost_Chk.TabIndex = 3
@@ -996,7 +1025,7 @@ Partial Class AccountabilityFrm
         Me.Transferred_Chk.AutoSize = True
         Me.Transferred_Chk.Checked = True
         Me.Transferred_Chk.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.Transferred_Chk.Location = New System.Drawing.Point(11, 51)
+        Me.Transferred_Chk.Location = New System.Drawing.Point(9, 37)
         Me.Transferred_Chk.Name = "Transferred_Chk"
         Me.Transferred_Chk.Size = New System.Drawing.Size(81, 15)
         Me.Transferred_Chk.TabIndex = 1
@@ -1008,7 +1037,7 @@ Partial Class AccountabilityFrm
         Me.Return_Chk.AutoSize = True
         Me.Return_Chk.Checked = True
         Me.Return_Chk.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.Return_Chk.Location = New System.Drawing.Point(11, 21)
+        Me.Return_Chk.Location = New System.Drawing.Point(9, 7)
         Me.Return_Chk.Name = "Return_Chk"
         Me.Return_Chk.Size = New System.Drawing.Size(58, 15)
         Me.Return_Chk.TabIndex = 0
@@ -1114,5 +1143,7 @@ Partial Class AccountabilityFrm
     Friend WithEvents Lost_Chk As MetroFramework.Controls.MetroCheckBox
     Friend WithEvents Transferred_Chk As MetroFramework.Controls.MetroCheckBox
     Friend WithEvents Return_Chk As MetroFramework.Controls.MetroCheckBox
-    Friend WithEvents All_Chk As MetroFramework.Controls.MetroCheckBox
+    Friend WithEvents Returnbles_Chk As MetroFramework.Controls.MetroCheckBox
+    Friend WithEvents MetroLabel18 As MetroFramework.Controls.MetroLabel
+    Friend WithEvents ReturnablesLegend_Pnl As Panel
 End Class

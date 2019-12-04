@@ -26,7 +26,7 @@ Public Class AccountabilityFrm
     Dim return_str As String = "Return",
         lost_str As String = "Lost",
         transferred_str As String = "Transfer",
-        all_str As String = ""
+        returnables As String = ""
     Public todo, todo_mode, date_returned, remarks As String
     Private Sub Reset_here()
         DGV_Accountability.Enabled = True
@@ -117,12 +117,12 @@ Public Class AccountabilityFrm
             Select Case todo
                 Case "load_acctblty"
                     Accountability_Inv_STP("warehouse_acctblty_stp", todo, "%" & search_acct & "%",,
-                                           return_str, lost_str, transferred_str, all_str)
+                                           return_str, lost_str, transferred_str, returnables)
                     BGW.ReportProgress(0)
 
                 Case "load_acctblty_byEmpID"
                     Accountability_Inv_STP("warehouse_acctblty_stp", todo, search_acct,,
-                                           return_str, lost_str, transferred_str, all_str)
+                                           return_str, lost_str, transferred_str, returnables)
                     BGW.ReportProgress(0)
 
                 Case "load_search_inv"
@@ -638,13 +638,13 @@ Public Class AccountabilityFrm
                 transferred_str = "notTransfer"
             End If
 
-            If All_Chk.Checked = True Then
-                return_str = "Return"
-                lost_str = "Lost"
-                transferred_str = "Transfer"
-                all_str = ""
+            If Returnbles_Chk.Checked = True Then
+                'return_str = "Return"
+                'lost_str = "Lost"
+                'transferred_str = "Transfer"
+                returnables = ""
             Else
-                all_str = "notall"
+                returnables = "notReturnables"
             End If
 
             If DeptFilter_Cbox.Text = "" And EmpFilter_Cbox.Text = "" Then
