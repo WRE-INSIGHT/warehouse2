@@ -13,6 +13,32 @@
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <PublishUrl>\\kmdisqlserver\KMDIIMAGEFILE2\warehouseSys\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>true</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <InstallUrl>http://121.58.229.248:8083/warehouseSys/</InstallUrl>
+    <ProductName>KMDI Warehouse</ProductName>
+    <PublisherName>KMDI Programming Team</PublisherName>
+    <SuiteName>KMDI Warehouse</SuiteName>
+    <MinimumRequiredVersion>1.0.0.0</MinimumRequiredVersion>
+    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
+    <WebPage>publish.htm</WebPage>
+    <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
+    <TrustUrlParameters>true</TrustUrlParameters>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -49,6 +75,18 @@
   <PropertyGroup>
     <ApplicationIcon>icons8_full_warehouse.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>EFE6F94A89F4E4C6490600C197499BB3EE1ABABF</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>warehouse2_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ComponentFactory.Krypton.Toolkit, Version=4.4.0.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -63,10 +101,13 @@
     <Reference Include="MetroFramework.Fonts">
       <HintPath>..\packages\MetroModernUI.1.3.5.0\lib\net35\MetroFramework.Fonts.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -88,10 +129,21 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Accountability\Datasets\Accountability.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Accountability.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Accountability\Forms\AccountabilityFrm.Designer.vb">
       <DependentUpon>AccountabilityFrm.vb</DependentUpon>
     </Compile>
     <Compile Include="Accountability\Forms\AccountabilityFrm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Accountability\Forms\PrintReturnablesFrm.Designer.vb">
+      <DependentUpon>PrintReturnablesFrm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Accountability\Forms\PrintReturnablesFrm.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Accountability\Forms\ReturnFrm.Designer.vb">
@@ -155,12 +207,16 @@
     <EmbeddedResource Include="Accountability\Forms\AccountabilityFrm.resx">
       <DependentUpon>AccountabilityFrm.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Accountability\Forms\PrintReturnablesFrm.resx">
+      <DependentUpon>PrintReturnablesFrm.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Accountability\Forms\ReturnFrm.resx">
       <DependentUpon>ReturnFrm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Accountability\Forms\TransferFrm.resx">
       <DependentUpon>TransferFrm.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Accountability\Report\Returnables.rdlc" />
     <EmbeddedResource Include="Inventory\Forms\WarehouseInvFrm.resx">
       <DependentUpon>WarehouseInvFrm.vb</DependentUpon>
     </EmbeddedResource>
@@ -181,6 +237,17 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Accountability\Datasets\Accountability.xsc">
+      <DependentUpon>Accountability.xsd</DependentUpon>
+    </None>
+    <None Include="Accountability\Datasets\Accountability.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Accountability.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="Accountability\Datasets\Accountability.xss">
+      <DependentUpon>Accountability.xsd</DependentUpon>
+    </None>
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -191,6 +258,7 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="App.config" />
+    <None Include="warehouse2_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="icons8_full_warehouse.ico" />
@@ -211,6 +279,7 @@
     <Content Include="Resources\loading_image2.gif" />
     <None Include="Resources\loading_trans.gif" />
     <None Include="Resources\return_48px.png" />
+    <None Include="Resources\print_48px.png" />
     <Content Include="Resources\save_48px.png" />
     <Content Include="Resources\search_filled_100px.png" />
     <Content Include="Resources\shutdown_48px.png" />
@@ -220,6 +289,18 @@
     <None Include="Resources\user_credentials_48px.png" />
     <Content Include="Resources\user_male_circle_48px.png" />
     <Content Include="Resources\warehouse_1_48px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

@@ -40,13 +40,16 @@
     End Sub
 
     Private Sub AssignPnlAccept_Btn_Click(sender As Object, e As EventArgs) Handles AssignPnlAccept_Btn.Click
-        With AccountabilityFrm
-            .remarks += " " & EmpID_Cbox.Text & " " & EmpName_Tbox.Text
-            .todo_mode = "after_trans"
-            .todo = "transRemarksAcct"
-            .Start_BGW()
-        End With
-        Close()
+        KMDIPrompts(Me, "Question", "Are you sure?", Nothing, Nothing, True,,, False)
+        If QuestionPromptAnswer = 6 Then
+            With AccountabilityFrm
+                .remarks += " " & EmpID_Cbox.Text & " " & EmpName_Tbox.Text
+                .todo_mode = "after_trans"
+                .todo = "transRemarksAcct"
+                .Start_BGW()
+            End With
+            Close()
+        End If
     End Sub
 
     Private Sub EmpID_Cbox_SelectedIndexChanged(sender As Object, e As EventArgs)

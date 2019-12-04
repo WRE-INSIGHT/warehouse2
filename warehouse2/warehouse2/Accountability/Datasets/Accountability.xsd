@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="Accountability" targetNamespace="http://tempuri.org/Accountability.xsd" xmlns:mstns="http://tempuri.org/Accountability.xsd" xmlns="http://tempuri.org/Accountability.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="Accountability" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="Accountability" msprop:Generator_UserDSName="Accountability">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Returnables" msprop:Generator_TableClassName="ReturnablesDataTable" msprop:Generator_TableVarName="tableReturnables" msprop:Generator_TablePropName="Returnables" msprop:Generator_RowDeletingName="ReturnablesRowDeleting" msprop:Generator_RowChangingName="ReturnablesRowChanging" msprop:Generator_RowEvHandlerName="ReturnablesRowChangeEventHandler" msprop:Generator_RowDeletedName="ReturnablesRowDeleted" msprop:Generator_UserTableName="Returnables" msprop:Generator_RowChangedName="ReturnablesRowChanged" msprop:Generator_RowEvArgName="ReturnablesRowChangeEvent" msprop:Generator_RowClassName="ReturnablesRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="emp_dept" msprop:Generator_ColumnVarNameInTable="columnemp_dept" msprop:Generator_ColumnPropNameInRow="emp_dept" msprop:Generator_ColumnPropNameInTable="emp_deptColumn" msprop:Generator_UserColumnName="emp_dept" type="xs:string" minOccurs="0" />
+              <xs:element name="emp_id" msprop:Generator_ColumnVarNameInTable="columnemp_id" msprop:Generator_ColumnPropNameInRow="emp_id" msprop:Generator_ColumnPropNameInTable="emp_idColumn" msprop:Generator_UserColumnName="emp_id" type="xs:string" minOccurs="0" />
+              <xs:element name="emp_name" msprop:Generator_ColumnVarNameInTable="columnemp_name" msprop:Generator_ColumnPropNameInRow="emp_name" msprop:Generator_ColumnPropNameInTable="emp_nameColumn" msprop:Generator_UserColumnName="emp_name" type="xs:string" minOccurs="0" />
+              <xs:element name="emp_position" msprop:Generator_ColumnVarNameInTable="columnemp_position" msprop:Generator_ColumnPropNameInRow="emp_position" msprop:Generator_ColumnPropNameInTable="emp_positionColumn" msprop:Generator_UserColumnName="emp_position" type="xs:string" minOccurs="0" />
+              <xs:element name="control_no" msprop:Generator_ColumnVarNameInTable="columncontrol_no" msprop:Generator_ColumnPropNameInRow="control_no" msprop:Generator_ColumnPropNameInTable="control_noColumn" msprop:Generator_UserColumnName="control_no" type="xs:string" minOccurs="0" />
+              <xs:element name="stk_desc" msprop:Generator_ColumnVarNameInTable="columnstk_desc" msprop:Generator_ColumnPropNameInRow="stk_desc" msprop:Generator_ColumnPropNameInTable="stk_descColumn" msprop:Generator_UserColumnName="stk_desc" type="xs:string" minOccurs="0" />
+              <xs:element name="stk_qty" msprop:Generator_ColumnVarNameInTable="columnstk_qty" msprop:Generator_ColumnPropNameInRow="stk_qty" msprop:Generator_ColumnPropNameInTable="stk_qtyColumn" msprop:Generator_UserColumnName="stk_qty" type="xs:decimal" minOccurs="0" />
+              <xs:element name="stk_unit" msprop:Generator_ColumnVarNameInTable="columnstk_unit" msprop:Generator_ColumnPropNameInRow="stk_unit" msprop:Generator_ColumnPropNameInTable="stk_unitColumn" msprop:Generator_UserColumnName="stk_unit" type="xs:string" minOccurs="0" />
+              <xs:element name="date_issued" msprop:Generator_ColumnVarNameInTable="columndate_issued" msprop:Generator_ColumnPropNameInRow="date_issued" msprop:Generator_ColumnPropNameInTable="date_issuedColumn" msprop:Generator_UserColumnName="date_issued" type="xs:dateTime" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

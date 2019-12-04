@@ -23,13 +23,16 @@
     End Sub
 
     Private Sub AssignPnlAccept_Btn_Click(sender As Object, e As EventArgs) Handles AssignPnlAccept_Btn.Click
-        With AccountabilityFrm
-            .date_returned = Return_DTP.Value.ToString("MMM. dd, yyyy hh:mm:ss tt")
-            .todo_mode = "after_trans"
-            .todo = "transReturnAcct"
-            .Start_BGW()
-        End With
-        Close()
+        KMDIPrompts(Me, "Question", "Are you sure?", Nothing, Nothing, True,,, False)
+        If QuestionPromptAnswer = 6 Then
+            With AccountabilityFrm
+                .date_returned = Return_DTP.Value.ToString("MMM. dd, yyyy hh:mm:ss tt")
+                .todo_mode = "after_trans"
+                .todo = "transReturnAcct"
+                .Start_BGW()
+            End With
+            Close()
+        End If
     End Sub
 
     Private Sub ReturnFrm_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing

@@ -72,7 +72,7 @@ Public Class AccountabilityFrm
 
     Public Function fieldtrim() As Boolean
         ctrl_no = Trim(CtrlNo_Tbox.Text)
-        emp_id = Trim(EmpID_Cbox.Text)
+        emp_id = Trim(EmpID_Tbox.Text)
         emp_name = Trim(EmpName_Cbox.Text)
         emp_pos = Trim(EmpPosition_Cbox.Text)
         emp_dept = Trim(EmpDept_Cbox.Text)
@@ -80,7 +80,7 @@ Public Class AccountabilityFrm
         stk_qty = Quantity_Num.Value
         stk_unit = Trim(Unit_Tbox.Text)
         stk_unitprice = UnitPrice_Num.Value
-        receivedby_id = Trim(RecByID_Cbox.Text)
+        receivedby_id = Trim(RecByID_Tbox.Text)
         receivedby = Trim(ReceivedBy_Cbox.Text)
         remarks = Trim(Remarks_Tbox.Text)
         date_issued = DateIssued_DTP.Value
@@ -330,18 +330,18 @@ Public Class AccountabilityFrm
                                     With .Rows(0)
                                         If btn_clicking Is Get_Btn Then
                                             'kmdi_emp_id = .Item("KMDI_Emp_ID")
-                                            EmpID_Cbox.Text = .Item("Emp_ID")
+                                            EmpID_Tbox.Text = .Item("Emp_ID")
                                             EmpName_Cbox.Text = .Item("Emp_Name").ToString
                                             EmpPosition_Cbox.Text = .Item("Position").ToString
                                             EmpDept_Cbox.Text = .Item("Department_Name").ToString
 
-                                            If RecByID_Cbox.Text = "" Then
-                                                RecByID_Cbox.Text = .Item("Emp_ID")
+                                            If RecByID_Tbox.Text = "" Then
+                                                RecByID_Tbox.Text = .Item("Emp_ID")
                                                 ReceivedBy_Cbox.Text = .Item("Emp_Name").ToString
                                             End If
 
                                         ElseIf btn_clicking Is Recget_Btn Then
-                                            RecByID_Cbox.Text = .Item("Emp_ID")
+                                            RecByID_Tbox.Text = .Item("Emp_ID")
                                             ReceivedBy_Cbox.Text = .Item("Emp_Name").ToString
 
                                         End If
@@ -514,7 +514,7 @@ Public Class AccountabilityFrm
                     acctblty_id = .Cells("acctblty_id").Value
                     stockno = .Cells("stk_no").Value
                     CtrlNo_Tbox.Text = .Cells("Control No.").Value.ToString
-                    EmpID_Cbox.Text = .Cells("Employee ID").Value.ToString
+                    EmpID_Tbox.Text = .Cells("Employee ID").Value.ToString
                     EmpName_Cbox.Text = .Cells("Name").Value.ToString
                     EmpPosition_Cbox.Text = .Cells("Position").Value.ToString
                     EmpDept_Cbox.Text = .Cells("Department").Value.ToString
@@ -523,7 +523,7 @@ Public Class AccountabilityFrm
                     Quantity_Num.Value = .Cells("Quantity").Value
                     Unit_Tbox.Text = .Cells("Unit").Value.ToString
                     UnitPrice_Num.Value = .Cells("Unit Price").Value
-                    RecByID_Cbox.Text = .Cells("stk_recievedby_id").Value.ToString
+                    RecByID_Tbox.Text = .Cells("stk_recievedby_id").Value.ToString
                     ReceivedBy_Cbox.Text = .Cells("Received By").Value.ToString
                     DateIssued_DTP.Value = .Cells("Date Issued").Value.ToString
                     Remarks_Tbox.Text = .Cells("Remarks").Value.ToString
@@ -588,6 +588,39 @@ Public Class AccountabilityFrm
                 '    End If
                 'End If
             End With
+        Catch ex As Exception
+            KMDIPrompts(Me, "DotNetError", ex.Message, ex.StackTrace, Nothing, True)
+        End Try
+    End Sub
+
+    Private Sub PrintToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PrintToolStripMenuItem.Click
+        Try
+            Dim dt As New DataTable
+            dt.Columns.Add("emp_dept")
+            dt.Columns.Add("emp_id")
+            dt.Columns.Add("emp_name")
+            dt.Columns.Add("emp_position")
+            dt.Columns.Add("control_no")
+            dt.Columns.Add("stk_desc")
+            dt.Columns.Add("stk_qty")
+            dt.Columns.Add("stk_unit")
+            dt.Columns.Add("date_issued")
+            With DGV_Accountability
+                For i = 0 To .Rows.Count - 1
+                    dt.Rows.Add(.Item("Department", i).Value.ToString,
+                                .Item("Employee ID", i).Value.ToString,
+                                .Item("Name", i).Value.ToString,
+                                .Item("Position", i).Value.ToString,
+                                .Item("Control No.", i).Value.ToString,
+                                .Item("Description", i).Value.ToString,
+                                .Item("Quantity", i).Value.ToString,
+                                .Item("Unit", i).Value.ToString,
+                                .Item("Date Issued", i).Value)
+                Next
+            End With
+
+            PrintReturnablesFrm.ReturnablesBindingSource.DataSource = dt.DefaultView
+            PrintReturnablesFrm.Show()
         Catch ex As Exception
             KMDIPrompts(Me, "DotNetError", ex.Message, ex.StackTrace, Nothing, True)
         End Try
@@ -774,15 +807,15 @@ Public Class AccountabilityFrm
         Mode_Lbl.Text = "Getting employee."
 
         If sender Is Get_Btn Then
-            search = EmpID_Cbox.Text
+            search = EmpID_Tbox.Text
             For Each ctrl In Fields_Pnl.Controls
                 If ctrl.Name.Contains("Emp") Then
                     ctrl.Text = ""
                 End If
             Next
         ElseIf sender Is Recget_Btn Then
-            search = RecByID_Cbox.Text
-            RecByID_Cbox.Text = ""
+            search = RecByID_Tbox.Text
+            RecByID_Tbox.Text = ""
             ReceivedBy_Cbox.Text = ""
         End If
 
@@ -804,11 +837,11 @@ Public Class AccountabilityFrm
         Next
     End Sub
 
-    Private Sub EmpID_Cbox_KeyDown(sender As Object, e As KeyEventArgs) Handles EmpID_Cbox.KeyDown, RecByID_Cbox.KeyDown
+    Private Sub EmpID_Cbox_KeyDown(sender As Object, e As KeyEventArgs) Handles EmpID_Tbox.KeyDown, RecByID_Tbox.KeyDown
         If e.KeyCode = Keys.Enter Then
-            If sender Is EmpID_Cbox Then
+            If sender Is EmpID_Tbox Then
                 Get_Btn.PerformClick()
-            ElseIf sender Is RecByID_Cbox Then
+            ElseIf sender Is RecByID_Tbox Then
                 Recget_Btn.PerformClick()
             End If
         End If
@@ -831,9 +864,8 @@ Public Class AccountabilityFrm
         current_mode_color = Mode_Lbl.ForeColor
         Mode_Lbl.Text = "Getting requests of employee."
 
-        search_acct = EmpFilter_Cbox.SelectedValue.ToString
-        todo = "load_acctblty_byEmpID"
-        'todo = "load_acctblty"
+        search_acct = EmpFilter_Cbox.Text
+        todo = "load_acctblty"
         Start_BGW()
     End Sub
 
@@ -846,14 +878,18 @@ Public Class AccountabilityFrm
     End Sub
 
     Private Sub LostToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LostToolStripMenuItem.Click
-        Dim items As DataGridViewSelectedRowCollection = DGV_Accountability.SelectedRows
-        For Each item As DataGridViewRow In items
-            acctblty_id_list.Add(item.Cells("acctblty_id").Value)
-        Next
-        remarks = LostToolStripMenuItem.Text
-        todo_mode = "after_trans"
-        todo = "transRemarksAcct"
-        Start_BGW()
+        KMDIPrompts(Me, "Question", "Are you sure?", Nothing, Nothing, True,,, False)
+        If QuestionPromptAnswer = 6 Then
+            Dim items As DataGridViewSelectedRowCollection = DGV_Accountability.SelectedRows
+            For Each item As DataGridViewRow In items
+                acctblty_id_list.Add(item.Cells("acctblty_id").Value)
+            Next
+            remarks = LostToolStripMenuItem.Text
+            todo_mode = "after_trans"
+            todo = "transRemarksAcct"
+            Start_BGW()
+        End If
+
     End Sub
 
     Private Sub TransferToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TransferToolStripMenuItem.Click
@@ -867,12 +903,10 @@ Public Class AccountabilityFrm
         'todo = "transRemarksAcct"
         'Start_BGW()
     End Sub
-    Private Sub Cbox_MouseDown(sender As Object, e As MouseEventArgs) Handles EmpID_Cbox.MouseDown,
-                                                                              EmpName_Cbox.MouseDown,
+    Private Sub Cbox_MouseDown(sender As Object, e As MouseEventArgs) Handles EmpName_Cbox.MouseDown,
                                                                               EmpPosition_Cbox.MouseDown,
                                                                               EmpDept_Cbox.MouseDown,
                                                                               Desc_Cbox.MouseDown,
-                                                                              RecByID_Cbox.MouseDown,
                                                                               ReceivedBy_Cbox.MouseDown
         current_mode_string = Mode_Lbl.Text
         current_mode_color = Mode_Lbl.ForeColor
