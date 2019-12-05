@@ -517,9 +517,11 @@ Public Class AccountabilityFrm
 
     Private Sub dgv_cellmouseclick(sender As Object, e As DataGridViewCellMouseEventArgs)
         Try
-            If e.RowIndex <> -1 And e.Button = MouseButtons.Right And DGV_Accountability.Item("stk_changes", e.RowIndex).Value.ToString <> "Unauthorized" Then
-                sender.Rows(e.RowIndex).Selected = True
-                Acctblty_Cmenu.Show(MousePosition.X, MousePosition.Y)
+            If e.RowIndex <> -1 And e.Button = MouseButtons.Right Then
+                If DGV_Accountability.Item("stk_changes", e.RowIndex).Value.ToString <> "Unauthorized" Then
+                    sender.Rows(e.RowIndex).Selected = True
+                    Acctblty_Cmenu.Show(MousePosition.X, MousePosition.Y)
+                End If
             End If
         Catch ex As Exception
             KMDIPrompts(Me, "DotNetError", ex.Message, ex.StackTrace, Nothing, True)
