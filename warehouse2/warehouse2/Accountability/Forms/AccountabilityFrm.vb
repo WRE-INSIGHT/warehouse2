@@ -15,17 +15,19 @@ Public Class AccountabilityFrm
     Dim cbox_obj As Object
     Dim deptfilter_str As String = ""
     Dim search_acct, search_inv, search, current_mode_string, cbox_cols, cols,
-        ctrl_no, emp_id, emp_name, emp_pos, emp_dept, stk_desc, stk_unit, receivedby_id, receivedby As String
+        ctrl_no, emp_name, emp_pos, emp_dept, stk_desc, stk_unit, receivedby_id, receivedby As String
     Dim ctr_todo, kmdi_emp_id, stockno, acctblty_id, CboxselIndex As Integer
     Dim current_mode_color As Color
     Dim btn_clicking As Object
     Dim stk_qty, stk_unitprice As Decimal
     Dim date_issued As Date
 
+    Public emp_id As String
 
     Dim return_str As String = "Return",
         lost_str As String = "Lost",
         transferred_str As String = "Transfer",
+        unauthorized_str As String = "Unauthorized",
         returnables As String = ""
     Public todo, todo_mode, date_returned, remarks As String
     Private Sub Reset_here()
@@ -117,12 +119,12 @@ Public Class AccountabilityFrm
             Select Case todo
                 Case "load_acctblty"
                     Accountability_Inv_STP("warehouse_acctblty_stp", todo, "%" & search_acct & "%",,
-                                           return_str, lost_str, transferred_str, returnables)
+                                           return_str, lost_str, transferred_str, returnables, unauthorized_str)
                     BGW.ReportProgress(0)
 
-                Case "load_acctblty_byEmpID"
+                Case "load_acctblty_byEmpName"
                     Accountability_Inv_STP("warehouse_acctblty_stp", todo, search_acct,,
-                                           return_str, lost_str, transferred_str, returnables)
+                                           return_str, lost_str, transferred_str, returnables, unauthorized_str)
                     BGW.ReportProgress(0)
 
                 Case "load_search_inv"
@@ -193,7 +195,7 @@ Public Class AccountabilityFrm
     Private Sub BGW_ProgressChanged(sender As Object, e As ProgressChangedEventArgs)
         Try
             Select Case todo
-                Case "load_acctblty", "load_acctblty_byEmpID"
+                Case "load_acctblty", "load_acctblty_byEmpName"
                     If Not frm_Split.Panel2.Controls.Contains(DGV_Accountability) Then
                         DGV_Properties(DGV_Accountability, "DGV_Accountability")
                         AddHandler DGV_Accountability.RowPostPaint, AddressOf dgv_rowpostpaint
@@ -223,7 +225,24 @@ Public Class AccountabilityFrm
                     Accountability_Inv_STP("warehouse_acctblty_stp", todo,, e.ProgressPercentage)
 
                 Case "transRemarksAcct"
-                    Accountability_Inv_STP("warehouse_acctblty_stp", todo,, e.ProgressPercentage,,,,,,,,,,,,,, remarks)
+                    If remarks.Contains("Transfer") Then
+                        With DGV_Accountability
+                            For i = 0 To .Rows.Count - 1
+                                If .Item("acctblty_id", i).Value = e.ProgressPercentage Then
+                                    Accountability_Inv_STP("warehouse_acctblty_stp", todo,, e.ProgressPercentage,
+                                                           .Item("Control No.", i).Value.ToString, emp_id,,,,
+                                                           .Item("stk_no", i).Value,
+                                                           .Item("Description", i).Value.ToString,
+                                                           .Item("Quantity", i).Value,
+                                                           .Item("Unit", i).Value.ToString,,
+                                                           .Item("Unit Price", i).Value,
+                                                           .Item("Name", i).Value,, remarks)
+                                End If
+                            Next
+                        End With
+                    Else
+                        Accountability_Inv_STP("warehouse_acctblty_stp", todo,, e.ProgressPercentage,,,,,,,,,,,,,, remarks)
+                    End If
 
                 Case "transReturnAcct"
                     Accountability_Inv_STP("warehouse_acctblty_stp", todo,, e.ProgressPercentage,,,,,,,,,,,,,,, date_returned)
@@ -248,7 +267,7 @@ Public Class AccountabilityFrm
             Else
                 If sql_Transaction_result = "Committed" Then
                     Select Case todo
-                        Case "load_acctblty", "load_acctblty_byEmpID"
+                        Case "load_acctblty", "load_acctblty_byEmpName"
                             dgv_acct_bs.DataSource = sqlDataSet
                             dgv_acct_bs.DataMember = todo
                             With DGV_Accountability
@@ -260,6 +279,7 @@ Public Class AccountabilityFrm
                                 .Columns("stk_recievedby_id").Visible = False
                                 .Columns("stk_no").Visible = False
                                 .Columns("stk_changes").Visible = False
+                                .Columns("Employee ID").Visible = False
                                 .Columns("Quantity").DefaultCellStyle.Format = "N2"
                                 .Columns("Date Issued").DefaultCellStyle.Format = "MMM. dd, yyyy"
                                 .Columns("Total Amount").DefaultCellStyle.Format = "N2"
@@ -380,7 +400,7 @@ Public Class AccountabilityFrm
 
                             EmpFilter_Cbox.DataSource = cbox_bs
                             EmpFilter_Cbox.DisplayMember = "emp_name"
-                            EmpFilter_Cbox.ValueMember = "emp_id"
+                            'EmpFilter_Cbox.ValueMember = "emp_id"
                             EmpFilter_Cbox.SelectedIndex = -1
                             Reset_here()
 
@@ -470,8 +490,8 @@ Public Class AccountabilityFrm
                                         search_acct = ""
                                         todo = "load_acctblty"
                                     Else
-                                        search_acct = EmpFilter_Cbox.SelectedValue
-                                        todo = "load_acctblty_byEmpID"
+                                        search_acct = EmpFilter_Cbox.Text
+                                        todo = "load_acctblty_byEmpName"
                                     End If
                                     Start_BGW()
 
@@ -497,7 +517,7 @@ Public Class AccountabilityFrm
 
     Private Sub dgv_cellmouseclick(sender As Object, e As DataGridViewCellMouseEventArgs)
         Try
-            If e.RowIndex <> -1 And e.Button = MouseButtons.Right Then
+            If e.RowIndex <> -1 And e.Button = MouseButtons.Right And DGV_Accountability.Item("stk_changes", e.RowIndex).Value.ToString <> "Unauthorized" Then
                 sender.Rows(e.RowIndex).Selected = True
                 Acctblty_Cmenu.Show(MousePosition.X, MousePosition.Y)
             End If
@@ -553,22 +573,30 @@ Public Class AccountabilityFrm
         Try
             With DGV_Accountability
                 .Item("Control No.", e.RowIndex).Style.Font = New Font("Segoe UI", 10.0!, FontStyle.Bold)
-                If .Item("stk_changes", e.RowIndex).Value.ToString = "Return" Then
-                    .Item("Control No.", e.RowIndex).Style.ForeColor = ReturnLegend_Pnl.BackColor
-                    .Item("Control No.", e.RowIndex).Style.SelectionForeColor = ReturnLegend_Pnl.BackColor
 
-                ElseIf .Item("stk_changes", e.RowIndex).Value.ToString = "Lost" Then
-                    .Item("Control No.", e.RowIndex).Style.ForeColor = LostLegend_Pnl.BackColor
-                    .Item("Control No.", e.RowIndex).Style.SelectionForeColor = LostLegend_Pnl.BackColor
-
-                ElseIf .Item("stk_changes", e.RowIndex).Value.ToString = "Transfer" Then
-                    .Item("Control No.", e.RowIndex).Style.ForeColor = TransferLegend_Pnl.BackColor
-                    .Item("Control No.", e.RowIndex).Style.SelectionForeColor = TransferLegend_Pnl.BackColor
+                If .Item("stk_changes", e.RowIndex).Value.ToString = "Unauthorized" Then
+                    .Item("Control No.", e.RowIndex).Style.ForeColor = UnauthorizedLegend_Pnl.BackColor
+                    .Item("Control No.", e.RowIndex).Style.SelectionForeColor = UnauthorizedLegend_Pnl.BackColor
 
                 Else
-                    .Item("Control No.", e.RowIndex).Style.ForeColor = Color.Black
-                    .Item("Control No.", e.RowIndex).Style.SelectionForeColor = Color.Black
+                    If .Item("stk_changes", e.RowIndex).Value.ToString = "Return" Then
+                        .Item("Control No.", e.RowIndex).Style.ForeColor = ReturnLegend_Pnl.BackColor
+                        .Item("Control No.", e.RowIndex).Style.SelectionForeColor = ReturnLegend_Pnl.BackColor
+
+                    ElseIf .Item("stk_changes", e.RowIndex).Value.ToString = "Lost" Then
+                        .Item("Control No.", e.RowIndex).Style.ForeColor = LostLegend_Pnl.BackColor
+                        .Item("Control No.", e.RowIndex).Style.SelectionForeColor = LostLegend_Pnl.BackColor
+
+                    ElseIf .Item("stk_changes", e.RowIndex).Value.ToString = "Transfer" Then
+                        .Item("Control No.", e.RowIndex).Style.ForeColor = TransferLegend_Pnl.BackColor
+                        .Item("Control No.", e.RowIndex).Style.SelectionForeColor = TransferLegend_Pnl.BackColor
+
+                    Else
+                        .Item("Control No.", e.RowIndex).Style.ForeColor = Color.Black
+                        .Item("Control No.", e.RowIndex).Style.SelectionForeColor = Color.Black
+                    End If
                 End If
+
                 'If .Item("Date Returned", e.RowIndex).Value.ToString <> "" Then
                 '    .Item("Control No.", e.RowIndex).Style.ForeColor = ReturnLegend_Pnl.BackColor
                 '    .Item("Control No.", e.RowIndex).Style.SelectionForeColor = ReturnLegend_Pnl.BackColor
@@ -605,6 +633,7 @@ Public Class AccountabilityFrm
             dt.Columns.Add("stk_qty")
             dt.Columns.Add("stk_unit")
             dt.Columns.Add("date_issued")
+            dt.Columns.Add("stk_changes")
             With DGV_Accountability
                 For i = 0 To .Rows.Count - 1
                     dt.Rows.Add(.Item("Department", i).Value.ToString,
@@ -615,12 +644,60 @@ Public Class AccountabilityFrm
                                 .Item("Description", i).Value.ToString,
                                 .Item("Quantity", i).Value.ToString,
                                 .Item("Unit", i).Value.ToString,
-                                .Item("Date Issued", i).Value)
+                                .Item("Date Issued", i).Value,
+                                .Item("stk_changes", i).Value.ToString)
                 Next
             End With
 
             PrintReturnablesFrm.ReturnablesBindingSource.DataSource = dt.DefaultView
             PrintReturnablesFrm.Show()
+        Catch ex As Exception
+            KMDIPrompts(Me, "DotNetError", ex.Message, ex.StackTrace, Nothing, True)
+        End Try
+    End Sub
+
+    Private Sub Edit_Btn_Click(sender As Object, e As EventArgs) Handles Edit_Btn.Click
+        Try
+            Dim items As DataGridViewSelectedRowCollection = DGV_Accountability.SelectedRows
+            With items(0)
+                acctblty_id = .Cells("acctblty_id").Value
+                stockno = .Cells("stk_no").Value
+                CtrlNo_Tbox.Text = .Cells("Control No.").Value.ToString
+                EmpID_Tbox.Text = .Cells("Employee ID").Value.ToString
+                EmpName_Cbox.Text = .Cells("Name").Value.ToString
+                EmpPosition_Cbox.Text = .Cells("Position").Value.ToString
+                EmpDept_Cbox.Text = .Cells("Department").Value.ToString
+                Desc_Cbox.Text = .Cells("Description").Value.ToString
+                Quantity_Num.Maximum = Decimal.MaxValue
+                Quantity_Num.Value = .Cells("Quantity").Value
+                Unit_Tbox.Text = .Cells("Unit").Value.ToString
+                UnitPrice_Num.Value = .Cells("Unit Price").Value
+                RecByID_Tbox.Text = .Cells("stk_recievedby_id").Value.ToString
+                ReceivedBy_Cbox.Text = .Cells("Received By").Value.ToString
+                DateIssued_DTP.Value = .Cells("Date Issued").Value.ToString
+                Remarks_Tbox.Text = .Cells("Remarks").Value.ToString
+
+                Mode_Lbl.Text = "Update Request - " & .Cells("Control No.").Value.ToString
+                Mode_Lbl.ForeColor = Color.Maroon
+
+            End With
+        Catch ex As Exception
+            KMDIPrompts(Me, "DotNetError", ex.Message, ex.StackTrace, Nothing, True)
+        End Try
+    End Sub
+
+    Private Sub Delete_Btn_Click(sender As Object, e As EventArgs) Handles Delete_Btn.Click
+        Try
+            KMDIPrompts(Me, "Question", "Are you sure you want to Delete?", Nothing, Nothing, True,,, False)
+            If QuestionPromptAnswer = 6 Then
+                Dim items As DataGridViewSelectedRowCollection = DGV_Accountability.SelectedRows
+                For Each item As DataGridViewRow In items
+                    acctblty_id_list.Add(item.Cells("acctblty_id").Value)
+                Next
+                todo_mode = "after_trans"
+                todo = "transDelAcct"
+                Start_BGW()
+            End If
         Catch ex As Exception
             KMDIPrompts(Me, "DotNetError", ex.Message, ex.StackTrace, Nothing, True)
         End Try
@@ -680,6 +757,12 @@ Public Class AccountabilityFrm
                 returnables = "notReturnables"
             End If
 
+            If Unauthorized_Chk.Checked = True Then
+                unauthorized_str = "Unauthorized"
+            Else
+                unauthorized_str = "notUnathorized"
+            End If
+
             If DeptFilter_Cbox.Text = "" And EmpFilter_Cbox.Text = "" Then
                 search_acct = ""
                 todo = "load_acctblty"
@@ -690,11 +773,11 @@ Public Class AccountabilityFrm
 
             ElseIf DeptFilter_Cbox.Text = "" And EmpFilter_Cbox.Text <> "" Then
                 search_acct = EmpFilter_Cbox.Text
-                todo = "load_acctblty"
+                todo = "load_acctblty_byEmpName"
 
             Else
-                search_acct = EmpFilter_Cbox.SelectedValue
-                todo = "load_acctblty_byEmpID"
+                search_acct = EmpFilter_Cbox.Text
+                todo = "load_acctblty_byEmpName"
             End If
             Start_BGW()
         Else
@@ -865,7 +948,8 @@ Public Class AccountabilityFrm
         Mode_Lbl.Text = "Getting requests of employee."
 
         search_acct = EmpFilter_Cbox.Text
-        todo = "load_acctblty"
+        todo_mode = ""
+        todo = "load_acctblty_byEmpName"
         Start_BGW()
     End Sub
 

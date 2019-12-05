@@ -25,8 +25,9 @@ Partial Class TransferFrm
         Me.Header_Pnl = New System.Windows.Forms.Panel()
         Me.AssignPnlAccept_Btn = New System.Windows.Forms.Button()
         Me.AssignPnlExit_Btn = New System.Windows.Forms.Button()
-        Me.EmpID_Cbox = New System.Windows.Forms.ComboBox()
         Me.EmpName_Tbox = New MetroFramework.Controls.MetroTextBox()
+        Me.EmpID_Tbox = New MetroFramework.Controls.MetroTextBox()
+        Me.Recget_Btn = New MetroFramework.Controls.MetroButton()
         Me.Header_Pnl.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -39,7 +40,7 @@ Partial Class TransferFrm
         Me.Header_Pnl.Location = New System.Drawing.Point(0, 0)
         Me.Header_Pnl.Margin = New System.Windows.Forms.Padding(0)
         Me.Header_Pnl.Name = "Header_Pnl"
-        Me.Header_Pnl.Size = New System.Drawing.Size(332, 25)
+        Me.Header_Pnl.Size = New System.Drawing.Size(386, 25)
         Me.Header_Pnl.TabIndex = 4
         '
         'AssignPnlAccept_Btn
@@ -51,7 +52,7 @@ Partial Class TransferFrm
         Me.AssignPnlAccept_Btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.AssignPnlAccept_Btn.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.AssignPnlAccept_Btn.ForeColor = System.Drawing.Color.Green
-        Me.AssignPnlAccept_Btn.Location = New System.Drawing.Point(264, 0)
+        Me.AssignPnlAccept_Btn.Location = New System.Drawing.Point(318, 0)
         Me.AssignPnlAccept_Btn.Name = "AssignPnlAccept_Btn"
         Me.AssignPnlAccept_Btn.Size = New System.Drawing.Size(34, 25)
         Me.AssignPnlAccept_Btn.TabIndex = 2
@@ -67,26 +68,12 @@ Partial Class TransferFrm
         Me.AssignPnlExit_Btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.AssignPnlExit_Btn.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.AssignPnlExit_Btn.ForeColor = System.Drawing.Color.Black
-        Me.AssignPnlExit_Btn.Location = New System.Drawing.Point(298, 0)
+        Me.AssignPnlExit_Btn.Location = New System.Drawing.Point(352, 0)
         Me.AssignPnlExit_Btn.Name = "AssignPnlExit_Btn"
         Me.AssignPnlExit_Btn.Size = New System.Drawing.Size(34, 25)
         Me.AssignPnlExit_Btn.TabIndex = 3
         Me.AssignPnlExit_Btn.Text = "X"
         Me.AssignPnlExit_Btn.UseVisualStyleBackColor = False
-        '
-        'EmpID_Cbox
-        '
-        Me.EmpID_Cbox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-        Me.EmpID_Cbox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.EmpID_Cbox.DropDownHeight = 75
-        Me.EmpID_Cbox.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.EmpID_Cbox.FormattingEnabled = True
-        Me.EmpID_Cbox.IntegralHeight = False
-        Me.EmpID_Cbox.Location = New System.Drawing.Point(12, 34)
-        Me.EmpID_Cbox.Name = "EmpID_Cbox"
-        Me.EmpID_Cbox.Size = New System.Drawing.Size(106, 25)
-        Me.EmpID_Cbox.TabIndex = 845
-        Me.EmpID_Cbox.Tag = "emp_id"
         '
         'EmpName_Tbox
         '
@@ -104,7 +91,7 @@ Partial Class TransferFrm
         Me.EmpName_Tbox.CustomButton.Visible = False
         Me.EmpName_Tbox.FontSize = MetroFramework.MetroTextBoxSize.Medium
         Me.EmpName_Tbox.Lines = New String(-1) {}
-        Me.EmpName_Tbox.Location = New System.Drawing.Point(124, 34)
+        Me.EmpName_Tbox.Location = New System.Drawing.Point(176, 34)
         Me.EmpName_Tbox.MaxLength = 32767
         Me.EmpName_Tbox.Name = "EmpName_Tbox"
         Me.EmpName_Tbox.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
@@ -113,11 +100,51 @@ Partial Class TransferFrm
         Me.EmpName_Tbox.SelectedText = ""
         Me.EmpName_Tbox.SelectionLength = 0
         Me.EmpName_Tbox.SelectionStart = 0
-        Me.EmpName_Tbox.Size = New System.Drawing.Size(196, 25)
+        Me.EmpName_Tbox.Size = New System.Drawing.Size(198, 25)
         Me.EmpName_Tbox.TabIndex = 846
         Me.EmpName_Tbox.UseSelectable = True
         Me.EmpName_Tbox.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer))
         Me.EmpName_Tbox.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
+        '
+        'EmpID_Tbox
+        '
+        '
+        '
+        '
+        Me.EmpID_Tbox.CustomButton.Image = Nothing
+        Me.EmpID_Tbox.CustomButton.Location = New System.Drawing.Point(82, 1)
+        Me.EmpID_Tbox.CustomButton.Name = ""
+        Me.EmpID_Tbox.CustomButton.Size = New System.Drawing.Size(23, 23)
+        Me.EmpID_Tbox.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
+        Me.EmpID_Tbox.CustomButton.TabIndex = 1
+        Me.EmpID_Tbox.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
+        Me.EmpID_Tbox.CustomButton.UseSelectable = True
+        Me.EmpID_Tbox.CustomButton.Visible = False
+        Me.EmpID_Tbox.FontSize = MetroFramework.MetroTextBoxSize.Medium
+        Me.EmpID_Tbox.Lines = New String(-1) {}
+        Me.EmpID_Tbox.Location = New System.Drawing.Point(12, 34)
+        Me.EmpID_Tbox.MaxLength = 32767
+        Me.EmpID_Tbox.Name = "EmpID_Tbox"
+        Me.EmpID_Tbox.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
+        Me.EmpID_Tbox.ScrollBars = System.Windows.Forms.ScrollBars.None
+        Me.EmpID_Tbox.SelectedText = ""
+        Me.EmpID_Tbox.SelectionLength = 0
+        Me.EmpID_Tbox.SelectionStart = 0
+        Me.EmpID_Tbox.Size = New System.Drawing.Size(106, 25)
+        Me.EmpID_Tbox.TabIndex = 849
+        Me.EmpID_Tbox.Tag = "emp_id"
+        Me.EmpID_Tbox.UseSelectable = True
+        Me.EmpID_Tbox.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer))
+        Me.EmpID_Tbox.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
+        '
+        'Recget_Btn
+        '
+        Me.Recget_Btn.Location = New System.Drawing.Point(124, 34)
+        Me.Recget_Btn.Name = "Recget_Btn"
+        Me.Recget_Btn.Size = New System.Drawing.Size(46, 25)
+        Me.Recget_Btn.TabIndex = 850
+        Me.Recget_Btn.Text = "Get"
+        Me.Recget_Btn.UseSelectable = True
         '
         'TransferFrm
         '
@@ -125,11 +152,12 @@ Partial Class TransferFrm
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.CancelButton = Me.AssignPnlExit_Btn
-        Me.ClientSize = New System.Drawing.Size(332, 72)
+        Me.ClientSize = New System.Drawing.Size(386, 72)
         Me.ControlBox = False
+        Me.Controls.Add(Me.Recget_Btn)
         Me.Controls.Add(Me.EmpName_Tbox)
-        Me.Controls.Add(Me.EmpID_Cbox)
         Me.Controls.Add(Me.Header_Pnl)
+        Me.Controls.Add(Me.EmpID_Tbox)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
         Me.Name = "TransferFrm"
@@ -142,6 +170,7 @@ Partial Class TransferFrm
     Friend WithEvents Header_Pnl As Panel
     Friend WithEvents AssignPnlAccept_Btn As Button
     Friend WithEvents AssignPnlExit_Btn As Button
-    Friend WithEvents EmpID_Cbox As ComboBox
     Friend WithEvents EmpName_Tbox As MetroFramework.Controls.MetroTextBox
+    Friend WithEvents EmpID_Tbox As MetroFramework.Controls.MetroTextBox
+    Friend WithEvents Recget_Btn As MetroFramework.Controls.MetroButton
 End Class

@@ -21,39 +21,8 @@
         </Paragraphs>
         <rd:DefaultName>emp_name</rd:DefaultName>
         <Top>1.0287in</Top>
-        <Left>0.12375in</Left>
         <Height>0.25in</Height>
-        <Width>6.69792in</Width>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="emp_id">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>=First(Fields!emp_id.Value, "DataSet1")</Value>
-                <Style />
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>emp_id</rd:DefaultName>
-        <Top>0.84389in</Top>
-        <Left>0.12375in</Left>
-        <Height>0.25in</Height>
-        <Width>6.69792in</Width>
-        <ZIndex>1</ZIndex>
+        <Width>7.9in</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -80,10 +49,9 @@
         </Paragraphs>
         <rd:DefaultName>emp_position</rd:DefaultName>
         <Top>1.21351in</Top>
-        <Left>0.12375in</Left>
         <Height>0.25in</Height>
-        <Width>6.69792in</Width>
-        <ZIndex>2</ZIndex>
+        <Width>7.9in</Width>
+        <ZIndex>1</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -110,10 +78,9 @@
         </Paragraphs>
         <rd:DefaultName>emp_dept</rd:DefaultName>
         <Top>1.38582in</Top>
-        <Left>0.12375in</Left>
         <Height>0.25in</Height>
-        <Width>6.69792in</Width>
-        <ZIndex>3</ZIndex>
+        <Width>7.9in</Width>
+        <ZIndex>2</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -128,22 +95,25 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>0.33159in</Width>
+              <Width>0.29498in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.88993in</Width>
+              <Width>0.83249in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.88994in</Width>
+              <Width>3.77001in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.65034in</Width>
+              <Width>0.6554in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.67118in</Width>
+              <Width>0.56166in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.26493in</Width>
+              <Width>0.84291in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>0.94256in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -342,6 +312,38 @@
                     </Textbox>
                   </CellContents>
                 </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox4">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Status</Value>
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox4</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
               </TablixCells>
             </TablixRow>
             <TablixRow>
@@ -527,12 +529,43 @@
                     </Textbox>
                   </CellContents>
                 </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="stk_changes">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!stk_changes.Value</Value>
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>stk_changes</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
               </TablixCells>
             </TablixRow>
           </TablixRows>
         </TablixBody>
         <TablixColumnHierarchy>
           <TablixMembers>
+            <TablixMember />
             <TablixMember />
             <TablixMember />
             <TablixMember />
@@ -555,10 +588,9 @@
         <RepeatRowHeaders>true</RepeatRowHeaders>
         <DataSetName>DataSet1</DataSetName>
         <Top>1.70526in</Top>
-        <Left>0.12375in</Left>
         <Height>0.59548in</Height>
-        <Width>6.69792in</Width>
-        <ZIndex>4</ZIndex>
+        <Width>7.9in</Width>
+        <ZIndex>3</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -581,10 +613,9 @@
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
         <Top>0.075in</Top>
-        <Left>0.12375in</Left>
         <Height>0.25in</Height>
         <Width>1.97917in</Width>
-        <ZIndex>5</ZIndex>
+        <ZIndex>4</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -611,10 +642,9 @@
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
         <Top>0.25417in</Top>
-        <Left>0.12375in</Left>
         <Height>0.25in</Height>
         <Width>3.34063in</Width>
-        <ZIndex>6</ZIndex>
+        <ZIndex>5</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -644,10 +674,9 @@
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
         <Top>0.50417in</Top>
-        <Left>0.12375in</Left>
         <Height>0.25in</Height>
         <Width>3.34064in</Width>
-        <ZIndex>7</ZIndex>
+        <ZIndex>6</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -662,7 +691,7 @@
     <Height>2.35074in</Height>
     <Style />
   </Body>
-  <Width>6.95709in</Width>
+  <Width>7.9in</Width>
   <Page>
     <LeftMargin>0.5in</LeftMargin>
     <RightMargin>0.1in</RightMargin>
@@ -722,6 +751,10 @@
         <Field Name="date_issued">
           <DataField>date_issued</DataField>
           <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="stk_changes">
+          <DataField>stk_changes</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
       <rd:DataSetInfo>

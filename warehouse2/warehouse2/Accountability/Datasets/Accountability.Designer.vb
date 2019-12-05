@@ -301,6 +301,8 @@ Partial Public Class Accountability
         
         Private columndate_issued As Global.System.Data.DataColumn
         
+        Private columnstk_changes As Global.System.Data.DataColumn
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub New()
@@ -409,6 +411,14 @@ Partial Public Class Accountability
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property stk_changesColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnstk_changes
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -445,9 +455,9 @@ Partial Public Class Accountability
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Overloads Function AddReturnablesRow(ByVal emp_dept As String, ByVal emp_id As String, ByVal emp_name As String, ByVal emp_position As String, ByVal control_no As String, ByVal stk_desc As String, ByVal stk_qty As Decimal, ByVal stk_unit As String, ByVal date_issued As Date) As ReturnablesRow
+        Public Overloads Function AddReturnablesRow(ByVal emp_dept As String, ByVal emp_id As String, ByVal emp_name As String, ByVal emp_position As String, ByVal control_no As String, ByVal stk_desc As String, ByVal stk_qty As Decimal, ByVal stk_unit As String, ByVal date_issued As Date, ByVal stk_changes As String) As ReturnablesRow
             Dim rowReturnablesRow As ReturnablesRow = CType(Me.NewRow,ReturnablesRow)
-            Dim columnValuesArray() As Object = New Object() {emp_dept, emp_id, emp_name, emp_position, control_no, stk_desc, stk_qty, stk_unit, date_issued}
+            Dim columnValuesArray() As Object = New Object() {emp_dept, emp_id, emp_name, emp_position, control_no, stk_desc, stk_qty, stk_unit, date_issued, stk_changes}
             rowReturnablesRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowReturnablesRow)
             Return rowReturnablesRow
@@ -479,6 +489,7 @@ Partial Public Class Accountability
             Me.columnstk_qty = MyBase.Columns("stk_qty")
             Me.columnstk_unit = MyBase.Columns("stk_unit")
             Me.columndate_issued = MyBase.Columns("date_issued")
+            Me.columnstk_changes = MyBase.Columns("stk_changes")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -502,6 +513,8 @@ Partial Public Class Accountability
             MyBase.Columns.Add(Me.columnstk_unit)
             Me.columndate_issued = New Global.System.Data.DataColumn("date_issued", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columndate_issued)
+            Me.columnstk_changes = New Global.System.Data.DataColumn("stk_changes", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnstk_changes)
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -783,6 +796,21 @@ Partial Public Class Accountability
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property stk_changes() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableReturnables.stk_changesColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'stk_changes' in table 'Returnables' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableReturnables.stk_changesColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Function Isemp_deptNull() As Boolean
             Return Me.IsNull(Me.tableReturnables.emp_deptColumn)
         End Function
@@ -887,6 +915,18 @@ Partial Public Class Accountability
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub Setdate_issuedNull()
             Me(Me.tableReturnables.date_issuedColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function Isstk_changesNull() As Boolean
+            Return Me.IsNull(Me.tableReturnables.stk_changesColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub Setstk_changesNull()
+            Me(Me.tableReturnables.stk_changesColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     
