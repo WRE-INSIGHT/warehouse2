@@ -10,6 +10,13 @@ Public Class AccountabilityFrm
     Dim dgv_acct_bs As New BindingSource
     Dim dgv_inv_bs As New BindingSource
     Dim cbox_bs As New BindingSource
+
+    Dim empname_bs As New BindingSource
+    Dim RECIEVEempname_bs As New BindingSource
+    Dim position_bs As New BindingSource
+    Dim dept_bs As New BindingSource
+    Dim stkdesc_bs As New BindingSource
+
     Dim acctblty_id_list As New ArrayList
 
     Dim cbox_obj As Object
@@ -169,8 +176,30 @@ Public Class AccountabilityFrm
                     Next
 
                 Case "Load_ComboBoxData"
-                    Accountability_Inv_STP("warehouse_acctblty_stp", todo,,,,,,,,,,,,,,,,,, cols)
-                    BGW.ReportProgress(0)
+                    Dim str_arr As String() = {"Emp_Name", "Position", "Sub_Department_Name", "stk_desc"}
+                    For i = 0 To str_arr.Count - 1
+                        Accountability_Inv_STP("warehouse_acctblty_stp", todo,,,,,,,,,,,,,,,,,, str_arr(i))
+                        If str_arr(i) = "Emp_Name" Then
+                            empname_bs.DataSource = sqlDataSet
+                            empname_bs.DataMember = todo
+
+                            RECIEVEempname_bs.DataSource = sqlDataSet
+                            RECIEVEempname_bs.DataMember = todo
+
+                        ElseIf str_arr(i) = "Position" Then
+                            position_bs.DataSource = sqlDataSet
+                            position_bs.DataMember = todo
+
+                        ElseIf str_arr(i) = "Sub_Department_Name" Then
+                            dept_bs.DataSource = sqlDataSet
+                            dept_bs.DataMember = todo
+
+                        ElseIf str_arr(i) = "stk_desc" Then
+                            stkdesc_bs.DataSource = sqlDataSet
+                            stkdesc_bs.DataMember = todo
+
+                        End If
+                    Next
 
             End Select
         Catch ex As SqlException
@@ -216,7 +245,7 @@ Public Class AccountabilityFrm
                         Item_Pnl.Controls.Add(DGV_Search_Inventory)
                     End If
 
-                Case "get_deptfilter", "get_empfilter", "Load_ComboBoxData"
+                Case "get_deptfilter", "get_empfilter"
                     cbox_bs = New BindingSource
                     cbox_bs.DataSource = sqlDataSet
                     cbox_bs.DataMember = todo
@@ -248,9 +277,31 @@ Public Class AccountabilityFrm
                     Accountability_Inv_STP("warehouse_acctblty_stp", todo,, e.ProgressPercentage,,,,,,,,,,,,,,, date_returned)
 
                     'Case "Load_ComboBoxData"
+                    '    If e.UserState = "Emp_Name" Then
+                    '        empname_bs.DataSource = sqlDataSet
+                    '        empname_bs.DataMember = todo
+
+                    '    ElseIf e.UserState = "Position" Then
+                    '        position_bs.DataSource = sqlDataSet
+                    '        position_bs.DataMember = todo
+
+                    '    ElseIf e.UserState = "Sub_Department_Name" Then
+                    '        dept_bs.DataSource = sqlDataSet
+                    '        dept_bs.DataMember = todo
+
+                    '    ElseIf e.UserState = "stk_desc" Then
+                    '        stkdesc_bs.DataSource = sqlDataSet
+                    '        stkdesc_bs.DataMember = todo
+
+                    '    End If
+                    'If ctrl.GetType Is GetType(ComboBox) AndAlso ctrl.Tag = e.UserState Then
                     '    cbox_bs = New BindingSource
                     '    cbox_bs.DataSource = sqlDataSet
                     '    cbox_bs.DataMember = todo
+
+                    'ctrl.DataSource = cbox_bs
+                    'ctrl.DisplayMember = ctrl.Tag
+                    'End If
             End Select
         Catch ex As Exception
             Reset_here()
@@ -411,15 +462,34 @@ Public Class AccountabilityFrm
                             Start_BGW()
 
                         Case "Load_ComboBoxData"
-                            cbox_obj.DataSource = cbox_bs
-                            cbox_obj.DisplayMember = cols
+                            'cbox_obj.DataSource = cbox_bs
+                            'cbox_obj.DisplayMember = cols
 
 
-                            If CboxselIndex > cbox_obj.Items.Count - 1 Then
-                                cbox_obj.SelectedIndex = -1
-                            Else
-                                cbox_obj.SelectedIndex = CboxselIndex
-                            End If
+                            'If CboxselIndex > cbox_obj.Items.Count - 1 Then
+                            '    cbox_obj.SelectedIndex = -1
+                            'Else
+                            '    cbox_obj.SelectedIndex = CboxselIndex
+                            'End If
+                            EmpName_Cbox.DataSource = empname_bs
+                            EmpName_Cbox.DisplayMember = "Emp_Name"
+                            EmpName_Cbox.Text = ""
+
+                            EmpPosition_Cbox.DataSource = position_bs
+                            EmpPosition_Cbox.DisplayMember = "Position"
+                            EmpPosition_Cbox.Text = ""
+
+                            EmpDept_Cbox.DataSource = dept_bs
+                            EmpDept_Cbox.DisplayMember = "Sub_Department_Name"
+                            EmpDept_Cbox.Text = ""
+
+                            Desc_Cbox.DataSource = stkdesc_bs
+                            Desc_Cbox.DisplayMember = "stk_desc"
+                            Desc_Cbox.Text = ""
+
+                            ReceivedBy_Cbox.DataSource = RECIEVEempname_bs
+                            ReceivedBy_Cbox.DisplayMember = "Emp_Name"
+                            ReceivedBy_Cbox.Text = ""
 
                             If todo_mode <> "" Then
                                 ctr_todo += 1
@@ -464,7 +534,12 @@ Public Class AccountabilityFrm
                                 Case 3
                                     todo = "get_deptfilter"
                                     Start_BGW()
+
                                 Case 4
+                                    todo = "Load_ComboBoxData"
+                                    Start_BGW()
+
+                                Case 5
                                     Reset_here()
 
                             End Select
@@ -476,6 +551,10 @@ Public Class AccountabilityFrm
                                     Start_BGW()
 
                                 Case 2
+                                    todo = "Load_ComboBoxData"
+                                    Start_BGW()
+
+                                Case 3
                                     Reset_here()
                                     itemsclear()
                                     CtrlNo_Tbox.CustomButton.PerformClick()
@@ -989,18 +1068,19 @@ Public Class AccountabilityFrm
         'todo = "transRemarksAcct"
         'Start_BGW()
     End Sub
-    Private Sub Cbox_MouseDown(sender As Object, e As MouseEventArgs) Handles EmpName_Cbox.MouseDown,
-                                                                              EmpPosition_Cbox.MouseDown,
-                                                                              EmpDept_Cbox.MouseDown,
-                                                                              Desc_Cbox.MouseDown,
-                                                                              ReceivedBy_Cbox.MouseDown
-        current_mode_string = Mode_Lbl.Text
-        current_mode_color = Mode_Lbl.ForeColor
-        CboxselIndex = sender.SelectedIndex
-        cbox_obj = sender
-        cols = sender.Tag
-        todo = "Load_ComboBoxData"
-        Start_BGW()
 
-    End Sub
+    'Private Sub Cbox_MouseDown(sender As Object, e As MouseEventArgs) Handles EmpName_Cbox.MouseDown,
+    '                                                                          EmpPosition_Cbox.MouseDown,
+    '                                                                          EmpDept_Cbox.MouseDown,
+    '                                                                          Desc_Cbox.MouseDown,
+    '                                                                          ReceivedBy_Cbox.MouseDown
+    '    current_mode_string = Mode_Lbl.Text
+    '    current_mode_color = Mode_Lbl.ForeColor
+    '    CboxselIndex = sender.SelectedIndex
+    '    cbox_obj = sender
+    '    cols = sender.Tag
+    '    todo = "Load_ComboBoxData"
+    '    Start_BGW()
+
+    'End Sub
 End Class
