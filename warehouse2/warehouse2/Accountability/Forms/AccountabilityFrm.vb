@@ -176,7 +176,7 @@ Public Class AccountabilityFrm
                     Next
 
                 Case "Load_ComboBoxData"
-                    Dim str_arr As String() = {"Emp_Name", "Position", "Sub_Department_Name", "stk_desc"}
+                    Dim str_arr As String() = {"Emp_Name", "Position", "KMDI_HR_Sub_Departments", "stk_desc"}
                     For i = 0 To str_arr.Count - 1
                         Accountability_Inv_STP("warehouse_acctblty_stp", todo,,,,,,,,,,,,,,,,,, str_arr(i))
                         If str_arr(i) = "Emp_Name" Then
@@ -190,7 +190,7 @@ Public Class AccountabilityFrm
                             position_bs.DataSource = sqlDataSet
                             position_bs.DataMember = todo
 
-                        ElseIf str_arr(i) = "Sub_Department_Name" Then
+                        ElseIf str_arr(i) = "KMDI_HR_Sub_Departments" Then
                             dept_bs.DataSource = sqlDataSet
                             dept_bs.DataMember = todo
 
