@@ -81,7 +81,7 @@ Partial Class TransferFrm
         '
         '
         Me.EmpName_Tbox.CustomButton.Image = Nothing
-        Me.EmpName_Tbox.CustomButton.Location = New System.Drawing.Point(172, 1)
+        Me.EmpName_Tbox.CustomButton.Location = New System.Drawing.Point(174, 1)
         Me.EmpName_Tbox.CustomButton.Name = ""
         Me.EmpName_Tbox.CustomButton.Size = New System.Drawing.Size(23, 23)
         Me.EmpName_Tbox.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
@@ -103,6 +103,7 @@ Partial Class TransferFrm
         Me.EmpName_Tbox.Size = New System.Drawing.Size(198, 25)
         Me.EmpName_Tbox.TabIndex = 846
         Me.EmpName_Tbox.UseSelectable = True
+        Me.EmpName_Tbox.WaterMark = "Employee Name"
         Me.EmpName_Tbox.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer))
         Me.EmpName_Tbox.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
         '
@@ -134,6 +135,7 @@ Partial Class TransferFrm
         Me.EmpID_Tbox.TabIndex = 849
         Me.EmpID_Tbox.Tag = "emp_id"
         Me.EmpID_Tbox.UseSelectable = True
+        Me.EmpID_Tbox.WaterMark = "Employee No."
         Me.EmpID_Tbox.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer))
         Me.EmpID_Tbox.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
         '
