@@ -6,7 +6,7 @@ Module LoginMod
     Public transaction As SqlTransaction
 
     Public KMDISystemsConnectionType As String = Nothing
-    Public sqlconnString As String = "Data Source='192.168.1.21,49107';Network Library=DBMSSOCN;Initial Catalog='finaltrans';User ID='kmdiadmin';Password='kmdiadmin';"
+    Public sqlconnString As String = "Data Source='121.58.229.248,49107';Network Library=DBMSSOCN;Initial Catalog='warehouse2_db_test';User ID='kmdiadmin';Password='kmdiadmin';"
 
     Public user_id As Integer
     Public sql_Transaction_result, user_fullname, user_nick, user_accttype As String

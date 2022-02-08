@@ -54,6 +54,7 @@ Module AccountabilityMod
                 sqlCommand.Parameters.Add("@stk_qty", SqlDbType.Decimal).Value = stk_qty
                 sqlCommand.Parameters.Add("@stk_unitprice", SqlDbType.Decimal).Value = stk_unitprice
                 sqlCommand.Parameters.Add("@date_issued", SqlDbType.Date).Value = date_issued
+
                 sqlCommand.Parameters.Add("@date_returned", SqlDbType.VarChar).Value = date_returned
 
                 sqlCommand.Parameters.Add("@stk_no", SqlDbType.Int).Value = stk_no

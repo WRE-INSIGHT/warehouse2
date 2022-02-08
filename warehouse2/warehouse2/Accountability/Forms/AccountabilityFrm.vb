@@ -27,7 +27,7 @@ Public Class AccountabilityFrm
     Dim current_mode_color As Color
     Dim btn_clicking As Object
     Dim stk_qty, stk_unitprice As Decimal
-    Dim date_issued As Date
+    Dim date_issued As DateTime
 
     Public emp_id As String
 
@@ -653,28 +653,29 @@ Public Class AccountabilityFrm
     Private Sub dgv_cellformatting(sender As Object, e As DataGridViewCellFormattingEventArgs)
         Try
             With DGV_Accountability
-                .Item("Control No.", e.RowIndex).Style.Font = New Font("Segoe UI", 10.0!, FontStyle.Bold)
+                '.Item("Control No.", e.RowIndex).Style.Font = New Font("Segoe UI", 10.0!, FontStyle.Bold)
+                .Item("Name", e.RowIndex).Style.Font = New Font("Segoe UI", 10.0!, FontStyle.Bold)
 
                 If .Item("stk_changes", e.RowIndex).Value.ToString = "Unauthorized" Then
-                    .Item("Control No.", e.RowIndex).Style.ForeColor = UnauthorizedLegend_Pnl.BackColor
-                    .Item("Control No.", e.RowIndex).Style.SelectionForeColor = UnauthorizedLegend_Pnl.BackColor
+                    .Item("Name", e.RowIndex).Style.ForeColor = UnauthorizedLegend_Pnl.BackColor
+                    .Item("Name", e.RowIndex).Style.SelectionForeColor = UnauthorizedLegend_Pnl.BackColor
 
                 Else
                     If .Item("stk_changes", e.RowIndex).Value.ToString = "Return" Then
-                        .Item("Control No.", e.RowIndex).Style.ForeColor = ReturnLegend_Pnl.BackColor
-                        .Item("Control No.", e.RowIndex).Style.SelectionForeColor = ReturnLegend_Pnl.BackColor
+                        .Item("Name", e.RowIndex).Style.ForeColor = ReturnLegend_Pnl.BackColor
+                        .Item("Name", e.RowIndex).Style.SelectionForeColor = ReturnLegend_Pnl.BackColor
 
                     ElseIf .Item("stk_changes", e.RowIndex).Value.ToString = "Lost" Then
-                        .Item("Control No.", e.RowIndex).Style.ForeColor = LostLegend_Pnl.BackColor
-                        .Item("Control No.", e.RowIndex).Style.SelectionForeColor = LostLegend_Pnl.BackColor
+                        .Item("Name", e.RowIndex).Style.ForeColor = LostLegend_Pnl.BackColor
+                        .Item("Name", e.RowIndex).Style.SelectionForeColor = LostLegend_Pnl.BackColor
 
                     ElseIf .Item("stk_changes", e.RowIndex).Value.ToString = "Transfer" Then
-                        .Item("Control No.", e.RowIndex).Style.ForeColor = TransferLegend_Pnl.BackColor
-                        .Item("Control No.", e.RowIndex).Style.SelectionForeColor = TransferLegend_Pnl.BackColor
+                        .Item("Name", e.RowIndex).Style.ForeColor = TransferLegend_Pnl.BackColor
+                        .Item("Name", e.RowIndex).Style.SelectionForeColor = TransferLegend_Pnl.BackColor
 
                     Else
-                        .Item("Control No.", e.RowIndex).Style.ForeColor = Color.Black
-                        .Item("Control No.", e.RowIndex).Style.SelectionForeColor = Color.Black
+                        .Item("Name", e.RowIndex).Style.ForeColor = Color.Black
+                        .Item("Name", e.RowIndex).Style.SelectionForeColor = Color.Black
                     End If
                 End If
 

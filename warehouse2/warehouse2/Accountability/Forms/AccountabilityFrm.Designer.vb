@@ -28,7 +28,6 @@ Partial Class AccountabilityFrm
         Me.Fields_Pnl = New System.Windows.Forms.Panel()
         Me.Recget_Btn = New MetroFramework.Controls.MetroButton()
         Me.MetroLabel12 = New MetroFramework.Controls.MetroLabel()
-        Me.DateIssued_DTP = New MetroFramework.Controls.MetroDateTime()
         Me.Remarks_Tbox = New MetroFramework.Controls.MetroTextBox()
         Me.MetroLabel11 = New MetroFramework.Controls.MetroLabel()
         Me.MetroLabel10 = New MetroFramework.Controls.MetroLabel()
@@ -95,6 +94,7 @@ Partial Class AccountabilityFrm
         Me.Lost_Chk = New MetroFramework.Controls.MetroCheckBox()
         Me.Transferred_Chk = New MetroFramework.Controls.MetroCheckBox()
         Me.Return_Chk = New MetroFramework.Controls.MetroCheckBox()
+        Me.DateIssued_DTP = New System.Windows.Forms.DateTimePicker()
         CType(Me.frm_Split, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.frm_Split.Panel1.SuspendLayout()
         Me.frm_Split.Panel2.SuspendLayout()
@@ -141,7 +141,6 @@ Partial Class AccountabilityFrm
         Me.Fields_Pnl.BackColor = System.Drawing.Color.DarkGray
         Me.Fields_Pnl.Controls.Add(Me.Recget_Btn)
         Me.Fields_Pnl.Controls.Add(Me.MetroLabel12)
-        Me.Fields_Pnl.Controls.Add(Me.DateIssued_DTP)
         Me.Fields_Pnl.Controls.Add(Me.Remarks_Tbox)
         Me.Fields_Pnl.Controls.Add(Me.MetroLabel11)
         Me.Fields_Pnl.Controls.Add(Me.MetroLabel10)
@@ -169,6 +168,7 @@ Partial Class AccountabilityFrm
         Me.Fields_Pnl.Controls.Add(Me.UnitPrice_Num)
         Me.Fields_Pnl.Controls.Add(Me.EmpID_Tbox)
         Me.Fields_Pnl.Controls.Add(Me.RecByID_Tbox)
+        Me.Fields_Pnl.Controls.Add(Me.DateIssued_DTP)
         Me.Fields_Pnl.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Fields_Pnl.Location = New System.Drawing.Point(0, 80)
         Me.Fields_Pnl.Name = "Fields_Pnl"
@@ -195,16 +195,6 @@ Partial Class AccountabilityFrm
         Me.MetroLabel12.Text = "Date Issued"
         Me.MetroLabel12.UseCustomBackColor = True
         '
-        'DateIssued_DTP
-        '
-        Me.DateIssued_DTP.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.DateIssued_DTP.Location = New System.Drawing.Point(117, 610)
-        Me.DateIssued_DTP.MinimumSize = New System.Drawing.Size(0, 29)
-        Me.DateIssued_DTP.Name = "DateIssued_DTP"
-        Me.DateIssued_DTP.Size = New System.Drawing.Size(299, 29)
-        Me.DateIssued_DTP.TabIndex = 846
-        '
         'Remarks_Tbox
         '
         Me.Remarks_Tbox.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
@@ -213,7 +203,7 @@ Partial Class AccountabilityFrm
         '
         '
         Me.Remarks_Tbox.CustomButton.Image = Nothing
-        Me.Remarks_Tbox.CustomButton.Location = New System.Drawing.Point(275, 1)
+        Me.Remarks_Tbox.CustomButton.Location = New System.Drawing.Point(258, 1)
         Me.Remarks_Tbox.CustomButton.Name = ""
         Me.Remarks_Tbox.CustomButton.Size = New System.Drawing.Size(23, 23)
         Me.Remarks_Tbox.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
@@ -231,7 +221,7 @@ Partial Class AccountabilityFrm
         Me.Remarks_Tbox.SelectedText = ""
         Me.Remarks_Tbox.SelectionLength = 0
         Me.Remarks_Tbox.SelectionStart = 0
-        Me.Remarks_Tbox.Size = New System.Drawing.Size(299, 25)
+        Me.Remarks_Tbox.Size = New System.Drawing.Size(282, 25)
         Me.Remarks_Tbox.TabIndex = 845
         Me.Remarks_Tbox.UseSelectable = True
         Me.Remarks_Tbox.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer))
@@ -271,7 +261,7 @@ Partial Class AccountabilityFrm
         Me.ReceivedBy_Cbox.IntegralHeight = False
         Me.ReceivedBy_Cbox.Location = New System.Drawing.Point(281, 556)
         Me.ReceivedBy_Cbox.Name = "ReceivedBy_Cbox"
-        Me.ReceivedBy_Cbox.Size = New System.Drawing.Size(135, 25)
+        Me.ReceivedBy_Cbox.Size = New System.Drawing.Size(118, 25)
         Me.ReceivedBy_Cbox.TabIndex = 844
         Me.ReceivedBy_Cbox.Tag = "Emp_Name"
         '
@@ -294,7 +284,7 @@ Partial Class AccountabilityFrm
         '
         '
         Me.Unit_Tbox.CustomButton.Image = Nothing
-        Me.Unit_Tbox.CustomButton.Location = New System.Drawing.Point(275, 1)
+        Me.Unit_Tbox.CustomButton.Location = New System.Drawing.Point(258, 1)
         Me.Unit_Tbox.CustomButton.Name = ""
         Me.Unit_Tbox.CustomButton.Size = New System.Drawing.Size(23, 23)
         Me.Unit_Tbox.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
@@ -312,7 +302,7 @@ Partial Class AccountabilityFrm
         Me.Unit_Tbox.SelectedText = ""
         Me.Unit_Tbox.SelectionLength = 0
         Me.Unit_Tbox.SelectionStart = 0
-        Me.Unit_Tbox.Size = New System.Drawing.Size(299, 25)
+        Me.Unit_Tbox.Size = New System.Drawing.Size(282, 25)
         Me.Unit_Tbox.TabIndex = 838
         Me.Unit_Tbox.UseSelectable = True
         Me.Unit_Tbox.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer))
@@ -362,7 +352,7 @@ Partial Class AccountabilityFrm
         Me.Desc_Cbox.IntegralHeight = False
         Me.Desc_Cbox.Location = New System.Drawing.Point(117, 430)
         Me.Desc_Cbox.Name = "Desc_Cbox"
-        Me.Desc_Cbox.Size = New System.Drawing.Size(299, 25)
+        Me.Desc_Cbox.Size = New System.Drawing.Size(282, 25)
         Me.Desc_Cbox.TabIndex = 834
         Me.Desc_Cbox.Tag = "stk_desc"
         '
@@ -374,7 +364,7 @@ Partial Class AccountabilityFrm
         Me.Item_Pnl.Controls.Add(Me.Loading2_PB)
         Me.Item_Pnl.Location = New System.Drawing.Point(12, 212)
         Me.Item_Pnl.Name = "Item_Pnl"
-        Me.Item_Pnl.Size = New System.Drawing.Size(404, 215)
+        Me.Item_Pnl.Size = New System.Drawing.Size(387, 215)
         Me.Item_Pnl.TabIndex = 0
         '
         'Loading2_PB
@@ -399,7 +389,7 @@ Partial Class AccountabilityFrm
         '
         Me.Search_Tbox.CustomButton.Font = New System.Drawing.Font("Century Gothic", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Search_Tbox.CustomButton.Image = CType(resources.GetObject("resource.Image"), System.Drawing.Image)
-        Me.Search_Tbox.CustomButton.Location = New System.Drawing.Point(378, 1)
+        Me.Search_Tbox.CustomButton.Location = New System.Drawing.Point(361, 1)
         Me.Search_Tbox.CustomButton.Name = ""
         Me.Search_Tbox.CustomButton.Size = New System.Drawing.Size(25, 25)
         Me.Search_Tbox.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
@@ -419,7 +409,7 @@ Partial Class AccountabilityFrm
         Me.Search_Tbox.SelectionStart = 0
         Me.Search_Tbox.ShowButton = True
         Me.Search_Tbox.ShowClearButton = True
-        Me.Search_Tbox.Size = New System.Drawing.Size(404, 27)
+        Me.Search_Tbox.Size = New System.Drawing.Size(387, 27)
         Me.Search_Tbox.Style = MetroFramework.MetroColorStyle.Silver
         Me.Search_Tbox.TabIndex = 832
         Me.Search_Tbox.UseCustomForeColor = True
@@ -437,7 +427,7 @@ Partial Class AccountabilityFrm
         '
         Me.CtrlNo_Tbox.CustomButton.Font = New System.Drawing.Font("Segoe UI", 15.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CtrlNo_Tbox.CustomButton.Image = Nothing
-        Me.CtrlNo_Tbox.CustomButton.Location = New System.Drawing.Point(269, 1)
+        Me.CtrlNo_Tbox.CustomButton.Location = New System.Drawing.Point(252, 1)
         Me.CtrlNo_Tbox.CustomButton.Name = ""
         Me.CtrlNo_Tbox.CustomButton.Size = New System.Drawing.Size(33, 33)
         Me.CtrlNo_Tbox.CustomButton.Style = MetroFramework.MetroColorStyle.Silver
@@ -457,7 +447,7 @@ Partial Class AccountabilityFrm
         Me.CtrlNo_Tbox.SelectionLength = 0
         Me.CtrlNo_Tbox.SelectionStart = 0
         Me.CtrlNo_Tbox.ShowButton = True
-        Me.CtrlNo_Tbox.Size = New System.Drawing.Size(303, 35)
+        Me.CtrlNo_Tbox.Size = New System.Drawing.Size(286, 35)
         Me.CtrlNo_Tbox.Style = MetroFramework.MetroColorStyle.Silver
         Me.CtrlNo_Tbox.TabIndex = 0
         Me.CtrlNo_Tbox.UseSelectable = True
@@ -483,7 +473,7 @@ Partial Class AccountabilityFrm
         Me.Line_Pnl.BackColor = System.Drawing.Color.FromArgb(CType(CType(34, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(67, Byte), Integer))
         Me.Line_Pnl.Location = New System.Drawing.Point(5, 171)
         Me.Line_Pnl.Name = "Line_Pnl"
-        Me.Line_Pnl.Size = New System.Drawing.Size(411, 2)
+        Me.Line_Pnl.Size = New System.Drawing.Size(394, 2)
         Me.Line_Pnl.TabIndex = 9
         '
         'MetroLabel4
@@ -508,7 +498,7 @@ Partial Class AccountabilityFrm
         Me.EmpDept_Cbox.IntegralHeight = False
         Me.EmpDept_Cbox.Location = New System.Drawing.Point(113, 140)
         Me.EmpDept_Cbox.Name = "EmpDept_Cbox"
-        Me.EmpDept_Cbox.Size = New System.Drawing.Size(253, 25)
+        Me.EmpDept_Cbox.Size = New System.Drawing.Size(236, 25)
         Me.EmpDept_Cbox.TabIndex = 8
         Me.EmpDept_Cbox.Tag = "Sub_Department_Name"
         '
@@ -534,7 +524,7 @@ Partial Class AccountabilityFrm
         Me.EmpPosition_Cbox.IntegralHeight = False
         Me.EmpPosition_Cbox.Location = New System.Drawing.Point(113, 109)
         Me.EmpPosition_Cbox.Name = "EmpPosition_Cbox"
-        Me.EmpPosition_Cbox.Size = New System.Drawing.Size(253, 25)
+        Me.EmpPosition_Cbox.Size = New System.Drawing.Size(236, 25)
         Me.EmpPosition_Cbox.TabIndex = 6
         Me.EmpPosition_Cbox.Tag = "Position"
         '
@@ -560,14 +550,14 @@ Partial Class AccountabilityFrm
         Me.EmpName_Cbox.IntegralHeight = False
         Me.EmpName_Cbox.Location = New System.Drawing.Point(113, 78)
         Me.EmpName_Cbox.Name = "EmpName_Cbox"
-        Me.EmpName_Cbox.Size = New System.Drawing.Size(253, 25)
+        Me.EmpName_Cbox.Size = New System.Drawing.Size(236, 25)
         Me.EmpName_Cbox.TabIndex = 4
         Me.EmpName_Cbox.Tag = "Emp_Name"
         '
         'Get_Btn
         '
         Me.Get_Btn.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Get_Btn.Location = New System.Drawing.Point(370, 47)
+        Me.Get_Btn.Location = New System.Drawing.Point(353, 47)
         Me.Get_Btn.Name = "Get_Btn"
         Me.Get_Btn.Size = New System.Drawing.Size(46, 25)
         Me.Get_Btn.TabIndex = 2
@@ -593,7 +583,7 @@ Partial Class AccountabilityFrm
         Me.Quantity_Num.Font = New System.Drawing.Font("Segoe UI", 15.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Quantity_Num.Location = New System.Drawing.Point(117, 457)
         Me.Quantity_Num.Name = "Quantity_Num"
-        Me.Quantity_Num.Size = New System.Drawing.Size(299, 34)
+        Me.Quantity_Num.Size = New System.Drawing.Size(282, 34)
         Me.Quantity_Num.TabIndex = 836
         Me.Quantity_Num.ThousandsSeparator = True
         '
@@ -606,7 +596,7 @@ Partial Class AccountabilityFrm
         Me.UnitPrice_Num.Location = New System.Drawing.Point(117, 520)
         Me.UnitPrice_Num.Maximum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.UnitPrice_Num.Name = "UnitPrice_Num"
-        Me.UnitPrice_Num.Size = New System.Drawing.Size(299, 34)
+        Me.UnitPrice_Num.Size = New System.Drawing.Size(282, 34)
         Me.UnitPrice_Num.TabIndex = 840
         Me.UnitPrice_Num.ThousandsSeparator = True
         '
@@ -618,7 +608,7 @@ Partial Class AccountabilityFrm
         '
         '
         Me.EmpID_Tbox.CustomButton.Image = Nothing
-        Me.EmpID_Tbox.CustomButton.Location = New System.Drawing.Point(229, 1)
+        Me.EmpID_Tbox.CustomButton.Location = New System.Drawing.Point(212, 1)
         Me.EmpID_Tbox.CustomButton.Name = ""
         Me.EmpID_Tbox.CustomButton.Size = New System.Drawing.Size(23, 23)
         Me.EmpID_Tbox.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
@@ -636,7 +626,7 @@ Partial Class AccountabilityFrm
         Me.EmpID_Tbox.SelectedText = ""
         Me.EmpID_Tbox.SelectionLength = 0
         Me.EmpID_Tbox.SelectionStart = 0
-        Me.EmpID_Tbox.Size = New System.Drawing.Size(253, 25)
+        Me.EmpID_Tbox.Size = New System.Drawing.Size(236, 25)
         Me.EmpID_Tbox.TabIndex = 847
         Me.EmpID_Tbox.UseSelectable = True
         Me.EmpID_Tbox.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer))
@@ -1135,6 +1125,14 @@ Partial Class AccountabilityFrm
         Me.Return_Chk.Text = "Return"
         Me.Return_Chk.UseSelectable = True
         '
+        'DateIssued_DTP
+        '
+        Me.DateIssued_DTP.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DateIssued_DTP.Location = New System.Drawing.Point(117, 610)
+        Me.DateIssued_DTP.Name = "DateIssued_DTP"
+        Me.DateIssued_DTP.Size = New System.Drawing.Size(282, 29)
+        Me.DateIssued_DTP.TabIndex = 849
+        '
         'AccountabilityFrm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1207,7 +1205,6 @@ Partial Class AccountabilityFrm
     Friend WithEvents Loading2_PB As PictureBox
     Friend WithEvents UnitPrice_Num As NumericUpDown
     Friend WithEvents MetroLabel12 As MetroFramework.Controls.MetroLabel
-    Friend WithEvents DateIssued_DTP As MetroFramework.Controls.MetroDateTime
     Friend WithEvents Recget_Btn As MetroFramework.Controls.MetroButton
     Friend WithEvents Filter_Pnl As Panel
     Friend WithEvents Loading_PB As PictureBox
@@ -1241,4 +1238,5 @@ Partial Class AccountabilityFrm
     Friend WithEvents MetroLabel19 As MetroFramework.Controls.MetroLabel
     Friend WithEvents UnauthorizedLegend_Pnl As Panel
     Friend WithEvents Unauthorized_Chk As MetroFramework.Controls.MetroCheckBox
+    Friend WithEvents DateIssued_DTP As DateTimePicker
 End Class
